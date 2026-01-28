@@ -27,14 +27,14 @@
     --primary:#667eea;--secondary:#764ba2;--accent:#f093fb;
     --success:#10b981;--warning:#f59e0b;--danger:#ef4444;--info:#3b82f6;
     --bg-primary:#0f0f23;--bg-secondary:#1a1a2e;--bg-tertiary:#16213e;--bg-card:#1e1e3f;--bg-code:#0d1117;
-    --text-primary:#fff;--text-secondary:#a0aec0;--text-muted:#718096;
+    --text-primary:#fff;--text-secondary:#b4c0d0;--text-muted:#94a3b8;
     --border-color:#2d3748;--shadow-glow:0 0 40px rgba(102,126,234,.3);
     --space-xs:.25rem;--space-sm:.5rem;--space-md:1rem;--space-lg:1.5rem;--space-xl:2rem;--space-2xl:3rem;--space-3xl:4rem;
     --radius-sm:.375rem;--radius-md:.5rem;--radius-lg:.75rem;--radius-xl:1rem;--radius-full:9999px;
     --transition-fast:.15s ease;--transition-base:.25s ease;
     --font-sans:'Inter',system-ui,-apple-system,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,monospace;
 }
-[data-theme="light"]{--bg-primary:#f7fafc;--bg-secondary:#edf2f7;--bg-tertiary:#e2e8f0;--bg-card:#fff;--text-primary:#1a202c;--text-secondary:#4a5568;--text-muted:#718096;--border-color:#e2e8f0}
+[data-theme="light"]{--bg-primary:#f7fafc;--bg-secondary:#edf2f7;--bg-tertiary:#e2e8f0;--bg-card:#fff;--text-primary:#1a202c;--text-secondary:#374151;--text-muted:#4b5563;--border-color:#e2e8f0}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 body{font-family:var(--font-sans);background:var(--bg-primary);color:var(--text-primary);line-height:1.7;min-height:100vh;overflow-x:hidden}
@@ -44,6 +44,7 @@ a{color:inherit;text-decoration:none}
 :focus-visible{outline:2px solid var(--primary);outline-offset:2px}
 .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--primary);color:#fff;padding:var(--space-sm) var(--space-lg);border-radius:var(--radius-md);z-index:9999;transition:top .3s}
 .skip-link:focus{top:var(--space-md)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .bg-pattern{position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.5}
 .bg-pattern::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 20% 80%,rgba(102,126,234,.15) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(118,75,162,.15) 0%,transparent 50%),radial-gradient(circle at 50% 50%,rgba(240,147,251,.1) 0%,transparent 50%);animation:floatBg 20s ease-in-out infinite;will-change:transform;backface-visibility:hidden}
 @keyframes floatBg{0%,100%{transform:translate(0,0)}33%{transform:translate(2%,2%)}66%{transform:translate(-1%,1%)}}
@@ -69,7 +70,7 @@ a{color:inherit;text-decoration:none}
 .search-box{width:100%;max-width:600px;background:var(--bg-card);border-radius:var(--radius-xl);padding:var(--space-lg);border:1px solid var(--border-color)}
 .search-input{width:100%;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:var(--radius-lg);padding:var(--space-md) var(--space-lg);color:var(--text-primary);font-size:1.1rem;font-family:inherit}
 .search-input:focus{outline:none;border-color:var(--primary)}
-.search-hint{margin-top:var(--space-md);color:var(--text-muted);font-size:.875rem;text-align:center}
+.search-hint{margin-top:var(--space-md);color:var(--text-muted);font-size:.875rem;text-align:center} .search-close-btn:focus{position:static;width:auto;height:auto;padding:var(--space-sm) var(--space-md);margin-top:var(--space-md);clip:auto;overflow:visible;white-space:normal;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:var(--radius-md);color:var(--text-primary);cursor:pointer}
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px var(--space-xl) var(--space-3xl);position:relative}
 .hero-content{max-width:900px;text-align:center}
 .hero-badge{display:inline-flex;align-items:center;gap:var(--space-sm);background:linear-gradient(135deg,rgba(102,126,234,.2),rgba(118,75,162,.2));border:1px solid rgba(102,126,234,.3);padding:var(--space-sm) var(--space-lg);border-radius:var(--radius-full);font-size:.875rem;font-weight:500;color:var(--primary);margin-bottom:var(--space-xl);animation:fadeInUp .6s ease}
@@ -218,10 +219,12 @@ code{font-family:var(--font-mono)}
     </style>
 </head>
 <body>
+    <div id="ariaLive" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+    <div id="ariaLiveAssertive" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
     <a href="#main" class="skip-link">Skip to main content</a>
     <div class="reading-progress" id="readingProgress"></div>
     <div class="bg-pattern"></div>
-    <div class="offline-notice" id="offlineNotice">📴 You're offline - Cached content available</div>
+    <div class="offline-notice" id="offlineNotice" role="status" aria-live="polite">📴 You're offline - Cached content available</div>
 
     <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
         <div class="navbar-content">
@@ -252,25 +255,27 @@ code{font-family:var(--font-mono)}
         <a href="#complete-script">📄 Full Script</a>
     </div>
 
-    <div class="search-modal" id="searchModal" role="dialog" aria-label="Search">
-        <div class="search-box">
-            <input type="text" class="search-input" id="searchInput" placeholder="Search tutorial..." aria-label="Search input">
-            <p class="search-hint">Press <span class="kbd">ESC</span> to close</p>
+        <div class="search-modal" id="searchModal" role="dialog" aria-label="Search tutorial" aria-modal="true">
+        <div class="search-box" role="document">
+            <label for="searchInput" class="sr-only">Search tutorial content</label>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search tutorial..." autocomplete="off">
+            <button type="button" class="search-close-btn sr-only" id="searchCloseBtn">Close search</button>
+            <p class="search-hint" id="searchHint">Press <span class="kbd">ESC</span> to close or <span class="kbd">Tab</span> to navigate</p>
         </div>
     </div>
 
-    <div class="progress-container" aria-hidden="true">
-        <div class="progress-track">
-            <div class="progress-step active" data-section="hero"><span class="progress-step-label">Start</span></div>
-            <div class="progress-step" data-section="concepts"><span class="progress-step-label">Concepts</span></div>
-            <div class="progress-step" data-section="modeling"><span class="progress-step-label">Modeling</span></div>
-            <div class="progress-step" data-section="sql-ref"><span class="progress-step-label">SQL Ref</span></div>
-            <div class="progress-step" data-section="setup"><span class="progress-step-label">Setup</span></div>
-            <div class="progress-step" data-section="tables"><span class="progress-step-label">Tables</span></div>
-            <div class="progress-step" data-section="data"><span class="progress-step-label">Data</span></div>
-            <div class="progress-step" data-section="queries"><span class="progress-step-label">Queries</span></div>
+        <nav class="progress-container" aria-label="Tutorial progress">
+        <div class="progress-track" role="list">
+            <div class="progress-step active" data-section="hero" role="listitem" aria-current="step" aria-label="Start - Current section"><span class="progress-step-label">Start</span></div>
+            <div class="progress-step" data-section="concepts" role="listitem" aria-label="Concepts"><span class="progress-step-label">Concepts</span></div>
+            <div class="progress-step" data-section="modeling" role="listitem" aria-label="Modeling"><span class="progress-step-label">Modeling</span></div>
+            <div class="progress-step" data-section="sql-ref" role="listitem" aria-label="SQL Reference"><span class="progress-step-label">SQL Ref</span></div>
+            <div class="progress-step" data-section="setup" role="listitem" aria-label="Setup"><span class="progress-step-label">Setup</span></div>
+            <div class="progress-step" data-section="tables" role="listitem" aria-label="Tables"><span class="progress-step-label">Tables</span></div>
+            <div class="progress-step" data-section="data" role="listitem" aria-label="Data"><span class="progress-step-label">Data</span></div>
+            <div class="progress-step" data-section="queries" role="listitem" aria-label="Queries"><span class="progress-step-label">Queries</span></div>
         </div>
-    </div>
+    </nav>
 
     <section class="hero" id="hero">
         <div class="hero-content">
@@ -289,7 +294,7 @@ code{font-family:var(--font-mono)}
         </div>
     </section>
 
-    <main class="main-content" id="main">
+    <main class="main-content" id="main" tabindex="-1">
 
         <section class="tutorial-section" id="concepts">
             <div class="section-header"><div class="section-number">1</div><h2 class="section-title">Relational Database Fundamentals</h2></div>
@@ -393,13 +398,13 @@ code{font-family:var(--font-mono)}
                 <p style="color:var(--text-secondary);margin-bottom:var(--space-lg)">Normalization = cleaning up messy data. Goal: store each fact ONCE. Why? So you don't have to change the same thing in 50 places when something updates.</p>
 
                 <div class="tabs-container">
-                    <div class="tabs-header" role="tablist">
-                        <button class="tab-btn active" data-tab="nf1" role="tab" aria-selected="true">1NF</button>
-                        <button class="tab-btn" data-tab="nf2" role="tab">2NF</button>
-                        <button class="tab-btn" data-tab="nf3" role="tab">3NF</button>
-                        <button class="tab-btn" data-tab="nfex" role="tab">Example</button>
+                                        <div class="tabs-header" role="tablist" aria-label="Normalization forms">
+                        <button class="tab-btn active" data-tab="nf1" role="tab" aria-selected="true" aria-controls="nf1" tabindex="0" id="tab-nf1">1NF</button>
+                        <button class="tab-btn" data-tab="nf2" role="tab" aria-selected="false" aria-controls="nf2" tabindex="-1" id="tab-nf2">2NF</button>
+                        <button class="tab-btn" data-tab="nf3" role="tab" aria-selected="false" aria-controls="nf3" tabindex="-1" id="tab-nf3">3NF</button>
+                        <button class="tab-btn" data-tab="nfex" role="tab" aria-selected="false" aria-controls="nfex" tabindex="-1" id="tab-nfex">Example</button>
                     </div>
-                    <div class="tab-content active" id="nf1" role="tabpanel">
+                    <div class="tab-content active" id="nf1" role="tabpanel" aria-labelledby="tab-nf1" tabindex="0">
     <h4 style="color:var(--primary);margin-bottom:var(--space-sm)">1st Normal Form — One Thing Per Box</h4>
     <ul style="color:var(--text-secondary);padding-left:var(--space-xl)">
         <li>❌ Bad: "Hobbies: reading, gaming, cooking" in ONE cell</li>
@@ -453,9 +458,9 @@ code{font-family:var(--font-mono)}
             <div class="card">
                 <div class="card-header"><div class="card-icon">📊</div><div><h3 class="card-title">Data Types & Operators</h3><p class="card-subtitle">Building blocks</p></div></div>
                 <div class="tabs-container">
-                    <div class="tabs-header" role="tablist">
-                        <button class="tab-btn active" data-tab="dtypes" role="tab" aria-selected="true">Data Types</button>
-                        <button class="tab-btn" data-tab="dops" role="tab">Operators</button>
+                                        <div class="tabs-header" role="tablist" aria-label="Data types and operators">
+                        <button class="tab-btn active" data-tab="dtypes" role="tab" aria-selected="true" aria-controls="dtypes" tabindex="0" id="tab-dtypes">Data Types</button>
+                        <button class="tab-btn" data-tab="dops" role="tab" aria-selected="false" aria-controls="dops" tabindex="-1" id="tab-dops">Operators</button>
                     </div>
                     <div class="tab-content active" id="dtypes" role="tabpanel">
                         <table class="data-table">
@@ -588,15 +593,15 @@ code{font-family:var(--font-mono)}
             <div class="info-box info-note"><div class="info-box-icon">📌</div><div class="info-box-content"><h4>Build Foundation First!</h4><p>Create tables in order: Parents before Children. Why? Products need Categories to exist first — you can't link to something that doesn't exist yet!</p></div></div>
 
             <div class="tabs-container">
-                <div class="tabs-header" role="tablist">
-                    <button class="tab-btn active" data-tab="tbl1" role="tab" aria-selected="true">Categories</button>
-                    <button class="tab-btn" data-tab="tbl2" role="tab">Warehouses</button>
-                    <button class="tab-btn" data-tab="tbl3" role="tab">Customers</button>
-                    <button class="tab-btn" data-tab="tbl4" role="tab">Employees</button>
-                    <button class="tab-btn" data-tab="tbl5" role="tab">Products</button>
-                    <button class="tab-btn" data-tab="tbl6" role="tab">Orders</button>
-                    <button class="tab-btn" data-tab="tbl7" role="tab">Items</button>
-                    <button class="tab-btn" data-tab="tbl8" role="tab">Inventories</button>
+                                <div class="tabs-header" role="tablist" aria-label="Database tables">
+                    <button class="tab-btn active" data-tab="tbl1" role="tab" aria-selected="true" aria-controls="tbl1" tabindex="0" id="tab-tbl1">Categories</button>
+                    <button class="tab-btn" data-tab="tbl2" role="tab" aria-selected="false" aria-controls="tbl2" tabindex="-1" id="tab-tbl2">Warehouses</button>
+                    <button class="tab-btn" data-tab="tbl3" role="tab" aria-selected="false" aria-controls="tbl3" tabindex="-1" id="tab-tbl3">Customers</button>
+                    <button class="tab-btn" data-tab="tbl4" role="tab" aria-selected="false" aria-controls="tbl4" tabindex="-1" id="tab-tbl4">Employees</button>
+                    <button class="tab-btn" data-tab="tbl5" role="tab" aria-selected="false" aria-controls="tbl5" tabindex="-1" id="tab-tbl5">Products</button>
+                    <button class="tab-btn" data-tab="tbl6" role="tab" aria-selected="false" aria-controls="tbl6" tabindex="-1" id="tab-tbl6">Orders</button>
+                    <button class="tab-btn" data-tab="tbl7" role="tab" aria-selected="false" aria-controls="tbl7" tabindex="-1" id="tab-tbl7">Items</button>
+                    <button class="tab-btn" data-tab="tbl8" role="tab" aria-selected="false" aria-controls="tbl8" tabindex="-1" id="tab-tbl8">Inventories</button>
                 </div>
                 <div class="tab-content active" id="tbl1" role="tabpanel"><div class="card"><div class="card-header"><div class="card-icon">🏷️</div><div><h3 class="card-title">TBL_PRODUCT_CATEGORIES</h3><p class="card-subtitle">Product category groups</p></div></div><div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="keyword">CREATE TABLE</span> <span class="table-name">TBL_PRODUCT_CATEGORIES</span> (
     CATEGORY_ID   <span class="type">BIGINT</span> <span class="keyword">IDENTITY</span>(<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">NOT NULL</span>,
@@ -746,11 +751,11 @@ code{font-family:var(--font-mono)}
             <div class="card">
                 <div class="card-header"><div class="card-icon">🔗</div><div><h3 class="card-title">JOIN Types</h3><p class="card-subtitle">Combine tables</p></div></div>
                 <div class="tabs-container">
-                    <div class="tabs-header" role="tablist">
-                        <button class="tab-btn active" data-tab="jinner" role="tab" aria-selected="true">INNER</button>
-                        <button class="tab-btn" data-tab="jleft" role="tab">LEFT</button>
-                        <button class="tab-btn" data-tab="jright" role="tab">RIGHT</button>
-                        <button class="tab-btn" data-tab="jfull" role="tab">FULL</button>
+                                        <div class="tabs-header" role="tablist" aria-label="SQL JOIN types">
+                        <button class="tab-btn active" data-tab="jinner" role="tab" aria-selected="true" aria-controls="jinner" tabindex="0" id="tab-jinner">INNER</button>
+                        <button class="tab-btn" data-tab="jleft" role="tab" aria-selected="false" aria-controls="jleft" tabindex="-1" id="tab-jleft">LEFT</button>
+                        <button class="tab-btn" data-tab="jright" role="tab" aria-selected="false" aria-controls="jright" tabindex="-1" id="tab-jright">RIGHT</button>
+                        <button class="tab-btn" data-tab="jfull" role="tab" aria-selected="false" aria-controls="jfull" tabindex="-1" id="tab-jfull">FULL</button>
                     </div>
                     <div class="tab-content active" id="jinner" role="tabpanel">
                         <p style="color:var(--text-secondary);margin-bottom:var(--space-md)"><strong>INNER JOIN:</strong> Show me ONLY items that exist in BOTH tables. Like finding friends who are on BOTH your Instagram AND Twitter.</p>
@@ -944,37 +949,53 @@ code{font-family:var(--font-mono)}
     <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
     <div class="keyboard-hint"><span class="kbd">Ctrl</span>+<span class="kbd">K</span> Search <span class="kbd">↑↓</span> Navigate</div>
 
-    <script>
+        <script>
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
 if('serviceWorker'in navigator)'requestIdleCallback'in window?requestIdleCallback(()=>navigator.serviceWorker.register('sw.js').catch(()=>{})):setTimeout(()=>navigator.serviceWorker.register('sw.js').catch(()=>{}),1);
+
+// ARIA Announce helper
+const announce=(msg,priority='polite')=>{const el=$(`#ariaLive${priority==='assertive'?'Assertive':''}`);if(el){el.textContent='';setTimeout(()=>el.textContent=msg,100)}};
 
 const html=document.documentElement,themeToggle=$('#themeToggle'),savedTheme=localStorage.getItem('theme');
 if(savedTheme){html.dataset.theme=savedTheme;themeToggle.textContent=savedTheme==='dark'?'🌙':'☀️'}
 else if(!matchMedia('(prefers-color-scheme:dark)').matches){html.dataset.theme='light';themeToggle.textContent='☀️'}
-themeToggle.onclick=()=>{const t=html.dataset.theme==='light'?'dark':'light';html.dataset.theme=t;localStorage.setItem('theme',t);themeToggle.textContent=t==='dark'?'🌙':'☀️'};
+themeToggle.onclick=()=>{const t=html.dataset.theme==='light'?'dark':'light';html.dataset.theme=t;localStorage.setItem('theme',t);themeToggle.textContent=t==='dark'?'🌙':'☀️';announce(`Theme changed to ${t} mode`)};
 
 const navbar=$('#navbar'),mobileNav=$('#mobileNav'),mobileBtn=$('#mobileMenuBtn');
 addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',scrollY>50);$('#readingProgress').style.width=`${scrollY/(document.body.scrollHeight-innerHeight)*100}%`},{passive:true});
-mobileBtn.onclick=()=>{const a=mobileNav.classList.toggle('active');mobileBtn.setAttribute('aria-expanded',a);mobileBtn.textContent=a?'✕':'☰'};
+mobileBtn.onclick=()=>{const a=mobileNav.classList.toggle('active');mobileBtn.setAttribute('aria-expanded',a);mobileBtn.textContent=a?'✕':'☰';announce(a?'Menu opened':'Menu closed')};
 mobileNav.querySelectorAll('a').forEach(a=>a.onclick=()=>{mobileNav.classList.remove('active');mobileBtn.textContent='☰'});
 
-const searchModal=$('#searchModal'),searchInput=$('#searchInput'),searchToggle=$('#searchToggle');
-searchToggle.onclick=()=>{searchModal.classList.add('active');searchInput.focus()};
-searchModal.onclick=e=>{if(e.target===searchModal)searchModal.classList.remove('active')};
-addEventListener('keydown',e=>{if(e.ctrlKey&&e.key==='k'){e.preventDefault();searchModal.classList.add('active');searchInput.focus()}if(e.key==='Escape')searchModal.classList.remove('active')});
+// Search Modal with Focus Trap
+const searchModal=$('#searchModal'),searchInput=$('#searchInput'),searchToggle=$('#searchToggle'),searchCloseBtn=$('#searchCloseBtn');
+let lastFocusedElement=null;
+const openSearch=()=>{lastFocusedElement=document.activeElement;searchModal.classList.add('active');searchInput.focus();announce('Search dialog opened')};
+const closeSearch=()=>{searchModal.classList.remove('active');if(lastFocusedElement)lastFocusedElement.focus();announce('Search dialog closed')};
+searchToggle.onclick=openSearch;
+if(searchCloseBtn)searchCloseBtn.onclick=closeSearch;
+searchModal.onclick=e=>{if(e.target===searchModal)closeSearch()};
+// Focus trap for search modal
+searchModal.addEventListener('keydown',e=>{if(!searchModal.classList.contains('active'))return;const focusable=searchModal.querySelectorAll('input,button:not(.sr-only),[tabindex]:not([tabindex="-1"])');const first=focusable[0],last=focusable[focusable.length-1]||searchCloseBtn;if(e.key==='Tab'){if(e.shiftKey&&document.activeElement===first){e.preventDefault();(last||searchCloseBtn).focus()}else if(!e.shiftKey&&(document.activeElement===last||document.activeElement===searchCloseBtn)){e.preventDefault();first.focus()}}});
+addEventListener('keydown',e=>{if(e.ctrlKey&&e.key==='k'){e.preventDefault();openSearch()}if(e.key==='Escape'&&searchModal.classList.contains('active'))closeSearch()});
 
-$$('.copy-btn').forEach(b=>b.onclick=async()=>{const c=b.closest('.code-container').querySelector('pre').textContent;try{await navigator.clipboard.writeText(c);const t=b.textContent;b.textContent='✅ Copied!';b.classList.add('copied');setTimeout(()=>{b.textContent=t;b.classList.remove('copied')},2e3)}catch{b.textContent='❌ Failed'}});
+$$('.copy-btn').forEach(b=>b.onclick=async()=>{const c=b.closest('.code-container').querySelector('pre').textContent;try{await navigator.clipboard.writeText(c);const t=b.textContent;b.textContent='✅ Copied!';b.classList.add('copied');b.setAttribute('aria-label','Code copied to clipboard');announce('Code copied to clipboard');setTimeout(()=>{b.textContent=t;b.classList.remove('copied');b.setAttribute('aria-label','Copy code')},2e3)}catch{b.textContent='❌ Failed';announce('Failed to copy code','assertive')}});
 
-$$('.tab-btn').forEach(b=>b.onclick=()=>{const t=b.closest('.tabs-container');t.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));t.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'));b.classList.add('active');t.querySelector(`.tab-content#${b.dataset.tab}`).classList.add('active')});
+// Tab functionality with keyboard support
+const activateTab=(tab,tablist)=>{const tabs=tablist.querySelectorAll('[role="tab"]');const panels=tab.closest('.tabs-container').querySelectorAll('[role="tabpanel"]');tabs.forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false');t.setAttribute('tabindex','-1')});panels.forEach(p=>p.classList.remove('active'));tab.classList.add('active');tab.setAttribute('aria-selected','true');tab.setAttribute('tabindex','0');const panel=tab.closest('.tabs-container').querySelector(`#${tab.dataset.tab}`);if(panel){panel.classList.add('active');announce(`${tab.textContent} tab selected`)}};
+$$('.tabs-header').forEach(tablist=>{tablist.addEventListener('click',e=>{if(e.target.matches('[role="tab"]'))activateTab(e.target,tablist)});tablist.addEventListener('keydown',e=>{if(!e.target.matches('[role="tab"]'))return;const tabs=[...tablist.querySelectorAll('[role="tab"]')];const idx=tabs.indexOf(e.target);let newIdx=idx;if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();newIdx=(idx+1)%tabs.length}else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();newIdx=(idx-1+tabs.length)%tabs.length}else if(e.key==='Home'){e.preventDefault();newIdx=0}else if(e.key==='End'){e.preventDefault();newIdx=tabs.length-1}if(newIdx!==idx){tabs[newIdx].focus();activateTab(tabs[newIdx],tablist)}})});
 
-$$('.accordion-header').forEach(h=>h.onclick=()=>{const i=h.parentElement,w=i.classList.contains('active');i.parentElement.querySelectorAll('.accordion-item').forEach(x=>x.classList.remove('active'));if(!w)i.classList.add('active')});
+$$('.accordion-header').forEach(h=>{const panel=h.nextElementSibling;const id=`accordion-panel-${Math.random().toString(36).substr(2,9)}`;if(panel){panel.id=id;h.setAttribute('aria-controls',id)}h.onclick=()=>{const i=h.parentElement,w=i.classList.contains('active');i.parentElement.querySelectorAll('.accordion-item').forEach(x=>{x.classList.remove('active');x.querySelector('.accordion-header').setAttribute('aria-expanded','false')});if(!w){i.classList.add('active');h.setAttribute('aria-expanded','true');announce(`${h.textContent.trim()} section expanded`)}else{announce(`${h.textContent.trim()} section collapsed`)}}});
 
-const backTop=$('#backToTop');let ticking=false;addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{backTop.classList.toggle('visible',scrollY>500);ticking=false});ticking=true}},{passive:true});backTop.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+const backTop=$('#backToTop');let ticking=false;addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{backTop.classList.toggle('visible',scrollY>500);ticking=false});ticking=true}},{passive:true});backTop.onclick=()=>{scrollTo({top:0,behavior:'smooth'});announce('Scrolled to top')};
 
+// Update progress steps with aria-current
 const secs=['hero','concepts','modeling','sql-ref','setup','tables','data','queries','verify'],steps=$$('.progress-step');
-const updateProg=()=>{const p=scrollY+200;secs.forEach((id,i)=>{const s=$(`#${id}`);if(s&&p>=s.offsetTop&&p<s.offsetTop+s.offsetHeight){steps.forEach((x,j)=>{x.classList.remove('active');x.classList.toggle('completed',j<i)});steps[i]?.classList.add('active')}})};
-addEventListener('scroll',updateProg);
-steps.forEach(s=>s.onclick=()=>$(`#${s.dataset.section}`)?.scrollIntoView({behavior:'smooth'}));
+let currentSection='';
+const updateProgress=()=>{const p=scrollY+200;secs.forEach((id,i)=>{const s=$(`#${id}`);if(s&&p>=s.offsetTop&&p<s.offsetTop+s.offsetHeight){if(currentSection!==id){currentSection=id;steps.forEach((x,j)=>{x.classList.remove('active');x.classList.toggle('completed',j<i);x.removeAttribute('aria-current');x.setAttribute('aria-label',x.querySelector('.progress-step-label').textContent+(j<i?' - Completed':''))});if(steps[i]){steps[i].classList.add('active');steps[i].setAttribute('aria-current','step');steps[i].setAttribute('aria-label',steps[i].querySelector('.progress-step-label').textContent+' - Current section')}}}})};
+addEventListener('scroll',updateProgress,{passive:true});
+steps.forEach(s=>{s.setAttribute('tabindex','0');s.setAttribute('role','button');s.onclick=()=>{const section=$(`#${s.dataset.section}`);if(section){section.scrollIntoView({behavior:'smooth'});announce(`Navigated to ${s.querySelector('.progress-step-label').textContent}`)}};s.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();s.click()}}});
+
+
 
 const offline=$('#offlineNotice'),updateOnline=()=>offline.classList.toggle('visible',!navigator.onLine);
 addEventListener('online',updateOnline);addEventListener('offline',updateOnline);updateOnline();
