@@ -272,10 +272,10 @@ code{font-family:var(--font-mono)}
         <div class="hero-content">
             <div class="hero-badge"><span class="hero-badge-dot"></span>Complete Guide • Theory + Practice</div>
             <h1 class="hero-title">Master <span class="hero-title-gradient">Relational Databases</span> & SQL</h1>
-            <p class="hero-subtitle">From foundational theory to hands-on implementation. Learn database concepts, ER modeling, normalization, and SQL with real-world examples.</p>
+            <p class="hero-subtitle">Start from zero and build real databases step-by-step. No coding experience needed — we'll explain everything like you're learning it for the first time.</p>
             <div class="hero-actions">
-                <a href="#concepts" class="btn btn-primary">🚀 Start Learning</a>
-                <a href="#setup" class="btn btn-secondary">💻 Skip to Tutorial</a>
+                <a href="#concepts" class="btn btn-primary">🚀 Let's Build Something!</a>
+                <a href="#setup" class="btn btn-secondary">💻 Jump to Hands-On Code</a>
             </div>
             <div class="hero-stats">
                 <div class="stat-item"><div class="stat-number">8</div><div class="stat-label">Tables</div></div>
@@ -289,12 +289,12 @@ code{font-family:var(--font-mono)}
 
         <section class="tutorial-section" id="concepts">
             <div class="section-header"><div class="section-number">1</div><h2 class="section-title">Relational Database Fundamentals</h2></div>
-            <p class="section-description">The relational model, introduced by E.F. Codd in 1970, is based on <strong>predicate logic</strong> (verifying statements as true/false) and <strong>set theory</strong> (manipulating groups of data).</p>
+            <p class="section-description">Think of a database like a super-organized filing cabinet. Instead of folders, you have <strong>tables</strong>. Instead of papers, you have <strong>rows of information</strong>. The magic? Everything connects together so you can find anything instantly.</p>
 
             <div class="feature-grid">
-                <div class="feature-card"><div class="feature-icon">📐</div><h3 class="feature-title">Logical Structure</h3><p class="feature-description">Data organized in relations (tables) with rows and columns</p></div>
-                <div class="feature-card"><div class="feature-icon">🔒</div><h3 class="feature-title">Integrity Rules</h3><p class="feature-description">Constraints ensuring data consistency over time</p></div>
-                <div class="feature-card"><div class="feature-icon">⚙️</div><h3 class="feature-title">Operations</h3><p class="feature-description">Commands for querying and manipulating data</p></div>
+                <div class="feature-card"><div class="feature-icon">📐</div><h3 class="feature-title">Organized Like Spreadsheets</h3><p class="feature-description">Data lives in tables (like Excel sheets) with rows (each item) and columns (categories of info)</p></div>
+                <div class="feature-card"><div class="feature-icon">🔒</div><h3 class="feature-title">Built-in Error Prevention</h3><p class="feature-description">Rules that stop bad data from sneaking in — like a bouncer for your information</p></div>
+                <div class="feature-card"><div class="feature-icon">⚙️</div><h3 class="feature-title">Simple Commands</h3><p class="feature-description">Easy-to-read instructions to add, find, change, or remove your data</p></div>
             </div>
 
             <div class="card">
@@ -318,14 +318,14 @@ code{font-family:var(--font-mono)}
 
             <div class="card">
                 <div class="card-header"><div class="card-icon">🔑</div><div><h3 class="card-title">Types of Keys</h3><p class="card-subtitle">Identifying and linking data</p></div></div>
-                <p style="color:var(--text-secondary);margin-bottom:var(--space-lg)"><strong>Functional Dependence:</strong> When knowing attribute A determines attribute B, written as <code class="inline-code">A → B</code></p>
+                <p style="color:var(--text-secondary);margin-bottom:var(--space-lg)"><strong>Simple Rule:</strong> If knowing one piece of info automatically tells you another, they're connected. Example: Knowing a Student ID tells you their name.</p>
                 <table class="data-table">
                     <thead><tr><th>Key Type</th><th>Description</th><th>Example</th></tr></thead>
                     <tbody>
-                        <tr><td><strong>Superkey</strong></td><td>Any combination that uniquely identifies rows</td><td><code>(STU_NUM, STU_LNAME)</code></td></tr>
-                        <tr><td><strong>Candidate Key</strong></td><td>Minimal superkey (no unnecessary attributes)</td><td><code>STU_NUM</code></td></tr>
-                        <tr><td><strong>Primary Key</strong></td><td>Chosen candidate key; cannot be null</td><td><code>STU_NUM</code></td></tr>
-                        <tr><td><strong>Foreign Key</strong></td><td>References primary key in another table</td><td><code>STU_SECT → SECTIONS.STU_SECT</code></td></tr>
+                        <tr><td><strong>Superkey</strong></td><td>Any combo that can find exactly ONE person (even if you used more info than needed)</td><td><code>(STU_NUM, STU_LNAME)</code></td></tr>
+                        <tr><td><strong>Candidate Key</strong></td><td>The shortest possible way to identify someone — no extra info needed</td><td><code>STU_NUM</code></td></tr>
+                        <tr><td><strong>Primary Key</strong></td><td>THE official ID you pick — like a social security number, must always exist</td><td><code>STU_NUM</code></td></tr>
+                        <tr><td><strong>Foreign Key</strong></td><td>A "link" that points to another table's ID — like a hyperlink connecting pages</td><td><code>STU_SECT → SECTIONS.STU_SECT</code></td></tr>
                         <tr><td><strong>Composite Key</strong></td><td>Primary key using multiple columns</td><td><code>(PRODUCT_ID, WAREHOUSE_ID)</code></td></tr>
                         <tr><td><strong>Secondary Key</strong></td><td>Used for data retrieval (not uniqueness)</td><td><code>(STU_LNAME, STU_FNAME)</code></td></tr>
                     </tbody>
@@ -336,13 +336,13 @@ code{font-family:var(--font-mono)}
                 <div class="card-header"><div class="card-icon">🛡️</div><div><h3 class="card-title">Integrity Rules</h3><p class="card-subtitle">Ensuring data quality</p></div></div>
                 <div class="concept-grid">
                     <div class="concept-card" style="border-left-color:var(--success)">
-                        <h4>Entity Integrity</h4>
-                        <p>All primary key entries must be unique and NOT NULL. Ensures every row has a unique identity.</p>
-                    </div>
+    <h4>Rule #1: Everyone Gets an ID</h4>
+    <p>Every row MUST have a unique ID number. No duplicates, no blanks — everyone gets their own "name tag."</p>
+</div>
                     <div class="concept-card" style="border-left-color:var(--info)">
-                        <h4>Referential Integrity</h4>
-                        <p>Foreign key values must match an existing primary key or be NULL. Prevents orphan records.</p>
-                    </div>
+    <h4>Rule #2: No Broken Links</h4>
+    <p>If you reference another table, that thing must actually exist. No pointing to ghosts — prevents "dead ends" in your data.</p>
+</div>
                 </div>
                 <div class="info-box info-tip"><div class="info-box-icon">💡</div><div class="info-box-content"><h4>Flags</h4><p>Use special codes like 'NS' (No Section) instead of NULL to avoid null-handling issues, with a matching dummy record in the referenced table.</p></div></div>
             </div>
@@ -386,7 +386,7 @@ code{font-family:var(--font-mono)}
 
             <div class="card">
                 <div class="card-header"><div class="card-icon">📐</div><div><h3 class="card-title">Normalization</h3><p class="card-subtitle">Eliminating redundancy</p></div></div>
-                <p style="color:var(--text-secondary);margin-bottom:var(--space-lg)">Process of organizing data to reduce redundancy and anomalies (insertion, update, deletion problems).</p>
+                <p style="color:var(--text-secondary);margin-bottom:var(--space-lg)">Normalization = cleaning up messy data. Goal: store each fact ONCE. Why? So you don't have to change the same thing in 50 places when something updates.</p>
 
                 <div class="tabs-container">
                     <div class="tabs-header" role="tablist">
@@ -396,29 +396,29 @@ code{font-family:var(--font-mono)}
                         <button class="tab-btn" data-tab="nfex" role="tab">Example</button>
                     </div>
                     <div class="tab-content active" id="nf1" role="tabpanel">
-                        <h4 style="color:var(--primary);margin-bottom:var(--space-sm)">First Normal Form</h4>
-                        <ul style="color:var(--text-secondary);padding-left:var(--space-xl)">
-                            <li>No repeating groups (multi-valued attributes)</li>
-                            <li>Primary key identified</li>
-                            <li>Each cell contains atomic (single) values</li>
-                        </ul>
-                    </div>
+    <h4 style="color:var(--primary);margin-bottom:var(--space-sm)">1st Normal Form — One Thing Per Box</h4>
+    <ul style="color:var(--text-secondary);padding-left:var(--space-xl)">
+        <li>❌ Bad: "Hobbies: reading, gaming, cooking" in ONE cell</li>
+        <li>✅ Good: Each hobby gets its own row</li>
+        <li>✅ Every table has a unique ID column picked</li>
+    </ul>
+</div>
                     <div class="tab-content" id="nf2" role="tabpanel">
-                        <h4 style="color:var(--primary);margin-bottom:var(--space-sm)">Second Normal Form</h4>
-                        <ul style="color:var(--text-secondary);padding-left:var(--space-xl)">
-                            <li>Must be in 1NF</li>
-                            <li>All non-key attributes fully depend on the entire primary key</li>
-                            <li>No partial dependencies (relevant for composite keys)</li>
-                        </ul>
-                    </div>
+    <h4 style="color:var(--primary);margin-bottom:var(--space-sm)">2nd Normal Form — No Partial Info</h4>
+    <ul style="color:var(--text-secondary);padding-left:var(--space-xl)">
+        <li>✅ Already passed 1NF rules</li>
+        <li>❌ Bad: Storing "Product Name" in an Orders table (it only depends on Product ID, not Order ID)</li>
+        <li>✅ Good: Product details live ONLY in the Products table</li>
+    </ul>
+</div>
                     <div class="tab-content" id="nf3" role="tabpanel">
-                        <h4 style="color:var(--primary);margin-bottom:var(--space-sm)">Third Normal Form</h4>
-                        <ul style="color:var(--text-secondary);padding-left:var(--space-xl)">
-                            <li>Must be in 2NF</li>
-                            <li>No transitive dependencies</li>
-                            <li>Non-key attributes depend only on the primary key</li>
-                        </ul>
-                    </div>
+    <h4 style="color:var(--primary);margin-bottom:var(--space-sm)">3rd Normal Form — No "Middle-Man" Data</h4>
+    <ul style="color:var(--text-secondary);padding-left:var(--space-xl)">
+        <li>✅ Already passed 1NF and 2NF</li>
+        <li>❌ Bad: Storing "Department Name" when you already have "Department ID" (name depends on dept ID, not employee)</li>
+        <li>✅ Good: Look up department name from Department table when needed</li>
+    </ul>
+</div>
                     <div class="tab-content" id="nfex" role="tabpanel">
                         <h4 style="color:var(--primary);margin-bottom:var(--space-sm)">Normalization Example</h4>
                         <p style="color:var(--text-muted);margin-bottom:var(--space-md)"><strong>Unnormalized:</strong> ADVISER: Santos A. | SUBJECT: Math | STUDENTS: John L., Mae R., Mark V.</p>
@@ -444,7 +444,7 @@ code{font-family:var(--font-mono)}
 
         <section class="tutorial-section" id="sql-ref">
             <div class="section-header"><div class="section-number">3</div><h2 class="section-title">SQL Reference</h2></div>
-            <p class="section-description">Structured Query Language (SQL) commands for creating, manipulating, and querying databases.</p>
+            <p class="section-description">SQL is like talking to your database in simple English. You tell it what you want, and it does the work. These are the main "words" you'll use.</p>
 
             <div class="card">
                 <div class="card-header"><div class="card-icon">📊</div><div><h3 class="card-title">Data Types & Operators</h3><p class="card-subtitle">Building blocks</p></div></div>
@@ -553,14 +553,14 @@ code{font-family:var(--font-mono)}
             <div class="section-header"><div class="section-number">4</div><h2 class="section-title">Database Setup</h2></div>
             <p class="section-description">Create a new database from scratch — the foundation for all your tables.</p>
 
-            <div class="info-box info-warning"><div class="info-box-icon">⚠️</div><div class="info-box-content"><h4>Before You Begin</h4><p>Ensure SQL Server Management Studio (SSMS) is installed and connected.</p></div></div>
+            <div class="info-box info-warning"><div class="info-box-icon">⚠️</div><div class="info-box-content"><h4>Before You Begin</h4><p>Make sure you have SQL Server Management Studio (SSMS) open and connected to your server. Don't have it? Download free from Microsoft's website first!</p></div></div>
 
             <ol class="steps-list">
-                <li class="step-item"><h3 class="step-title">Switch to Master Database</h3><div class="step-content"><p>Start in "master" — the control room for creating databases.</p>
+                <li class="step-item"><h3 class="step-title">Go to the Control Room</h3><div class="step-content"><p>The "master" database is like the main office — you need to be here before creating new databases.</p>
                     <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="keyword">USE</span> master;
 <span class="keyword">GO</span></code></pre></div></div>
                 </div></li>
-                <li class="step-item"><h3 class="step-title">Remove Old Database (If Exists)</h3><div class="step-content"><p>Delete any old version to start fresh.</p>
+                <li class="step-item"><h3 class="step-title">Clean Up Old Versions (Safety Step)</h3><div class="step-content"><p>If this database already exists, delete it first. This prevents errors and gives you a clean start.</p>
                     <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="keyword">IF EXISTS</span> (<span class="keyword">SELECT</span> name <span class="keyword">FROM</span> sys.databases <span class="keyword">WHERE</span> name = <span class="string">N'DB_OrderManagement'</span>)
 <span class="keyword">BEGIN</span>
     <span class="keyword">ALTER DATABASE</span> [DB_OrderManagement] <span class="keyword">SET</span> SINGLE_USER <span class="keyword">WITH</span> ROLLBACK IMMEDIATE;
@@ -581,7 +581,7 @@ code{font-family:var(--font-mono)}
             <div class="section-header"><div class="section-number">5</div><h2 class="section-title">Creating Tables</h2></div>
             <p class="section-description">Create 8 tables in order — parent tables first, then child tables with foreign keys.</p>
 
-            <div class="info-box info-note"><div class="info-box-icon">📌</div><div class="info-box-content"><h4>Order Matters!</h4><p>Create parent tables (Categories) before child tables (Products) to satisfy foreign key constraints.</p></div></div>
+            <div class="info-box info-note"><div class="info-box-icon">📌</div><div class="info-box-content"><h4>Build Foundation First!</h4><p>Create tables in order: Parents before Children. Why? Products need Categories to exist first — you can't link to something that doesn't exist yet!</p></div></div>
 
             <div class="tabs-container">
                 <div class="tabs-header" role="tablist">
@@ -712,7 +712,7 @@ code{font-family:var(--font-mono)}
             <p class="section-description">Extract insights from your data using aggregate functions, grouping, and multi-table joins.</p>
 
             <div class="card">
-                <div class="card-header"><div class="card-icon">📊</div><div><h3 class="card-title">Aggregate Functions</h3><p class="card-subtitle">Calculate summaries</p></div></div>
+                <div class="card-header"><div class="card-icon">📊</div><div><h3 class="card-title">Quick Math Functions</h3><p class="card-subtitle">Get totals, averages, counts — the database does the math for you</p></div></div>
                 <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="keyword">SELECT</span> <span class="function">MIN</span>(LIST_PRICE) <span class="keyword">AS</span> Cheapest <span class="keyword">FROM</span> TBL_PRODUCTS;
 <span class="keyword">SELECT</span> <span class="function">MAX</span>(LIST_PRICE) <span class="keyword">AS</span> Expensive <span class="keyword">FROM</span> TBL_PRODUCTS;
 <span class="keyword">SELECT</span> <span class="function">COUNT</span>(*) <span class="keyword">AS</span> TotalOrders <span class="keyword">FROM</span> TBL_ORDERS;
@@ -749,25 +749,25 @@ code{font-family:var(--font-mono)}
                         <button class="tab-btn" data-tab="jfull" role="tab">FULL</button>
                     </div>
                     <div class="tab-content active" id="jinner" role="tabpanel">
-                        <p style="color:var(--text-secondary);margin-bottom:var(--space-md)"><strong>INNER JOIN:</strong> Only matching rows from both tables</p>
+                        <p style="color:var(--text-secondary);margin-bottom:var(--space-md)"><strong>INNER JOIN:</strong> Show me ONLY items that exist in BOTH tables. Like finding friends who are on BOTH your Instagram AND Twitter.</p>
                         <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="keyword">SELECT</span> o.ORDER_ID, c.NAME, o.STATUS, o.ORDER_DATE
 <span class="keyword">FROM</span> TBL_ORDERS o
 <span class="keyword">INNER JOIN</span> TBL_CUSTOMERS c <span class="keyword">ON</span> o.CUSTOMER_ID = c.CUSTOMER_ID;</code></pre></div></div>
                     </div>
                     <div class="tab-content" id="jleft" role="tabpanel">
-                        <p style="color:var(--text-secondary);margin-bottom:var(--space-md)"><strong>LEFT JOIN:</strong> All rows from left table + matches from right (NULL if no match)</p>
+                        <p style="color:var(--text-secondary);margin-bottom:var(--space-md)"><strong>LEFT JOIN:</strong> Show ALL items from the first table. If there's a match in the second table, include it. No match? Leave it blank.</p>
                         <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="keyword">SELECT</span> p.PRODUCT_NAME, c.CATEGORY_NAME
 <span class="keyword">FROM</span> TBL_PRODUCTS p
 <span class="keyword">LEFT JOIN</span> TBL_PRODUCT_CATEGORIES c <span class="keyword">ON</span> p.CATEGORY_ID = c.CATEGORY_ID;</code></pre></div></div>
                     </div>
                     <div class="tab-content" id="jright" role="tabpanel">
-                        <p style="color:var(--text-secondary);margin-bottom:var(--space-md)"><strong>RIGHT JOIN:</strong> All rows from right table + matches from left (NULL if no match)</p>
+                        <p style="color:var(--text-secondary);margin-bottom:var(--space-md)"><strong>RIGHT JOIN:</strong> Same as LEFT JOIN, but prioritize the SECOND table instead. Show everything from table 2, fill in from table 1 where possible.</p>
                         <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="keyword">SELECT</span> c.CATEGORY_NAME, p.PRODUCT_NAME
 <span class="keyword">FROM</span> TBL_PRODUCTS p
 <span class="keyword">RIGHT JOIN</span> TBL_PRODUCT_CATEGORIES c <span class="keyword">ON</span> p.CATEGORY_ID = c.CATEGORY_ID;</code></pre></div></div>
                     </div>
                     <div class="tab-content" id="jfull" role="tabpanel">
-                        <p style="color:var(--text-secondary);margin-bottom:var(--space-md)"><strong>FULL JOIN:</strong> All rows from both tables (NULL where no match)</p>
+                        <p style="color:var(--text-secondary);margin-bottom:var(--space-md)"><strong>FULL JOIN:</strong> Show me EVERYTHING from BOTH tables. Fill in blanks where there's no match. Nothing gets left behind.</p>
                         <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="keyword">SELECT</span> c.NAME, o.ORDER_ID, o.STATUS
 <span class="keyword">FROM</span> TBL_CUSTOMERS c
 <span class="keyword">FULL OUTER JOIN</span> TBL_ORDERS o <span class="keyword">ON</span> c.CUSTOMER_ID = o.CUSTOMER_ID;</code></pre></div></div>
@@ -844,7 +844,7 @@ code{font-family:var(--font-mono)}
 <span class="keyword">UNION ALL SELECT</span> <span class="string">'Items'</span>, <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> TBL_ITEMS
 <span class="keyword">UNION ALL SELECT</span> <span class="string">'Inventories'</span>, <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> TBL_INVENTORIES;</code></pre></div></div></div>
 
-            <div class="info-box info-tip"><div class="info-box-icon">✅</div><div class="info-box-content"><h4>Expected Counts</h4><p>Categories: 5 | Warehouses: 3 | Customers: 3 | Employees: 3 | Products: 5 | Orders: 4 | Items: 6 | Inventories: 8</p></div></div>
+            <div class="info-box info-tip"><div class="info-box-icon">✅</div><div class="info-box-content"><h4>Does Yours Match? You Did It!</h4><p>Categories: 5 | Warehouses: 3 | Customers: 3 | Employees: 3 | Products: 5 | Orders: 4 | Items: 6 | Inventories: 8<br><br>🎉 If your numbers match, congratulations — you just built a real database!</p></div></div>
         </section>
 
         <section class="tutorial-section" id="complete-script">
@@ -884,7 +884,7 @@ code{font-family:var(--font-mono)}
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-logo">🗄️ SQL Database Tutorial</div>
-            <p class="footer-text">Complete guide covering relational theory, ER modeling, normalization & SQL implementation</p>
+            <p class="footer-text">From "what's a database?" to building your own — you've got this! Bookmark and revisit anytime.</p>
             <div class="footer-links">
                 <a href="#concepts">Concepts</a>
                 <a href="#modeling">Modeling</a>
