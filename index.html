@@ -7,1356 +7,270 @@
     <meta name="theme-color" content="#667eea">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    
     <title>SQL Database Tutorial | Learn Step by Step</title>
-    
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗄️</text></svg>">
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗄️</text></svg>">
-    
-    <!-- Preload Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    
     <style>
-        /* ============================================
-           CSS CUSTOM PROPERTIES (Easy to Customize)
-           ============================================ */
-        :root {
-            /* Colors */
-            --primary: #667eea;
-            --primary-dark: #5a67d8;
-            --secondary: #764ba2;
-            --accent: #f093fb;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --info: #3b82f6;
-            
-            /* Neutrals */
-            --bg-primary: #0f0f23;
-            --bg-secondary: #1a1a2e;
-            --bg-tertiary: #16213e;
-            --bg-card: #1e1e3f;
-            --bg-code: #0d1117;
-            
-            /* Text */
-            --text-primary: #ffffff;
-            --text-secondary: #a0aec0;
-            --text-muted: #718096;
-            
-            /* Borders */
-            --border-color: #2d3748;
-            --border-light: #4a5568;
-            
-            /* Shadows */
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
-            --shadow-lg: 0 10px 25px rgba(0,0,0,0.5);
-            --shadow-glow: 0 0 40px rgba(102,126,234,0.3);
-            
-            /* Spacing */
-            --space-xs: 0.25rem;
-            --space-sm: 0.5rem;
-            --space-md: 1rem;
-            --space-lg: 1.5rem;
-            --space-xl: 2rem;
-            --space-2xl: 3rem;
-            --space-3xl: 4rem;
-            
-            /* Border Radius */
-            --radius-sm: 0.375rem;
-            --radius-md: 0.5rem;
-            --radius-lg: 0.75rem;
-            --radius-xl: 1rem;
-            --radius-2xl: 1.5rem;
-            --radius-full: 9999px;
-            
-            /* Transitions */
-            --transition-fast: 150ms ease;
-            --transition-base: 250ms ease;
-            --transition-slow: 350ms ease;
-            
-            /* Typography */
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-        }
+:root {
+    --primary: #667eea; --primary-dark: #5a67d8; --secondary: #764ba2; --accent: #f093fb;
+    --success: #10b981; --warning: #f59e0b; --danger: #ef4444; --info: #3b82f6;
+    --bg-primary: #0f0f23; --bg-secondary: #1a1a2e; --bg-tertiary: #16213e;
+    --bg-card: #1e1e3f; --bg-code: #0d1117;
+    --text-primary: #ffffff; --text-secondary: #a0aec0; --text-muted: #718096;
+    --border-color: #2d3748; --border-light: #4a5568;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.3); --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,0.5); --shadow-glow: 0 0 40px rgba(102,126,234,0.3);
+    --space-xs: 0.25rem; --space-sm: 0.5rem; --space-md: 1rem; --space-lg: 1.5rem;
+    --space-xl: 2rem; --space-2xl: 3rem; --space-3xl: 4rem;
+    --radius-sm: 0.375rem; --radius-md: 0.5rem; --radius-lg: 0.75rem;
+    --radius-xl: 1rem; --radius-2xl: 1.5rem; --radius-full: 9999px;
+    --transition-fast: 150ms ease; --transition-base: 250ms ease; --transition-slow: 350ms ease;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+[data-theme="light"] {
+    --bg-primary: #f7fafc; --bg-secondary: #edf2f7; --bg-tertiary: #e2e8f0;
+    --bg-card: #ffffff; --bg-code: #1e1e3f; --text-primary: #1a202c;
+    --text-secondary: #4a5568; --text-muted: #718096;
+    --border-color: #e2e8f0; --border-light: #cbd5e0;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+    font-family: var(--font-sans); background: var(--bg-primary); color: var(--text-primary);
+    line-height: 1.7; min-height: 100vh; overflow-x: hidden;
+}
+::selection { background: var(--primary); color: white; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: var(--radius-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
 
-        /* Light Theme */
-        [data-theme="light"] {
-            --bg-primary: #f7fafc;
-            --bg-secondary: #edf2f7;
-            --bg-tertiary: #e2e8f0;
-            --bg-card: #ffffff;
-            --bg-code: #1e1e3f;
-            --text-primary: #1a202c;
-            --text-secondary: #4a5568;
-            --text-muted: #718096;
-            --border-color: #e2e8f0;
-            --border-light: #cbd5e0;
-        }
-
-        /* ============================================
-           CSS RESET & BASE STYLES
-           ============================================ */
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 80px;
-        }
-
-        body {
-            font-family: var(--font-sans);
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.7;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Selection */
-        ::selection {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-            height: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-secondary);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: var(--radius-full);
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
-        }
-
-        /* ============================================
-           ANIMATED BACKGROUND
-           ============================================ */
-        .bg-pattern {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            opacity: 0.5;
-        }
-
-        .bg-pattern::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(102,126,234,0.15) 0%, transparent 50%),
+.bg-pattern { position: fixed; inset: 0; pointer-events: none; z-index: -1; opacity: 0.5; }
+.bg-pattern::before {
+    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle at 20% 80%, rgba(102,126,234,0.15) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(118,75,162,0.15) 0%, transparent 50%),
                 radial-gradient(circle at 50% 50%, rgba(240,147,251,0.1) 0%, transparent 50%);
-            animation: floatBg 20s ease-in-out infinite;
-        }
-
-        @keyframes floatBg {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(2%, 2%) rotate(1deg); }
-            66% { transform: translate(-1%, 1%) rotate(-1deg); }
-        }
-
-        /* ============================================
-           NAVIGATION
-           ============================================ */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(15, 15, 35, 0.9);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-color);
-            padding: var(--space-md) var(--space-xl);
-            transition: var(--transition-base);
-        }
-
-        .navbar.scrolled {
-            box-shadow: var(--shadow-lg);
-        }
-
-        .navbar-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-
-        .logo-icon {
-            font-size: 2rem;
-        }
-
-        .logo-text {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: var(--space-lg);
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            padding: var(--space-sm) var(--space-md);
-            border-radius: var(--radius-md);
-            transition: var(--transition-fast);
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-            background: rgba(102,126,234,0.1);
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-        }
-
-        /* Theme Toggle */
-        .theme-toggle {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-full);
-            padding: var(--space-sm);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            font-size: 1.25rem;
-            transition: var(--transition-base);
-        }
-
-        .theme-toggle:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-            transform: rotate(180deg);
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: var(--space-sm);
-        }
-
-        /* ============================================
-           HERO SECTION
-           ============================================ */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 120px var(--space-xl) var(--space-3xl);
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 900px;
-            text-align: center;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-sm);
-            background: linear-gradient(135deg, rgba(102,126,234,0.2), rgba(118,75,162,0.2));
-            border: 1px solid rgba(102,126,234,0.3);
-            padding: var(--space-sm) var(--space-lg);
-            border-radius: var(--radius-full);
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--primary);
-            margin-bottom: var(--space-xl);
-            animation: fadeInUp 0.6s ease;
-        }
-
-        .hero-badge-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--success);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
-        }
-
-        .hero-title {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: var(--space-lg);
-            animation: fadeInUp 0.6s ease 0.1s both;
-        }
-
-        .hero-title-gradient {
-            background: linear-gradient(135deg, var(--primary), var(--accent), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.125rem, 2vw, 1.375rem);
-            color: var(--text-secondary);
-            max-width: 650px;
-            margin: 0 auto var(--space-2xl);
-            animation: fadeInUp 0.6s ease 0.2s both;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: var(--space-md);
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.6s ease 0.3s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-sm);
-            padding: var(--space-md) var(--space-xl);
-            border-radius: var(--radius-lg);
-            font-family: inherit;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            transition: var(--transition-base);
-            border: none;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            box-shadow: var(--shadow-md), 0 0 30px rgba(102,126,234,0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg), 0 0 50px rgba(102,126,234,0.4);
-        }
-
-        .btn-secondary {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-
-        .btn-secondary:hover {
-            background: var(--bg-tertiary);
-            border-color: var(--primary);
-            transform: translateY(-3px);
-        }
-
-        /* Hero Stats */
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: var(--space-3xl);
-            margin-top: var(--space-3xl);
-            padding-top: var(--space-2xl);
-            border-top: 1px solid var(--border-color);
-            animation: fadeInUp 0.6s ease 0.4s both;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-label {
-            color: var(--text-muted);
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-
-        /* ============================================
-           PROGRESS TRACKER
-           ============================================ */
-        .progress-container {
-            position: fixed;
-            left: var(--space-xl);
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 100;
-            display: none;
-        }
-
-        @media (min-width: 1200px) {
-            .progress-container {
-                display: block;
-            }
-        }
-
-        .progress-track {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
-        }
-
-        .progress-step {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--border-color);
-            border: 2px solid var(--border-color);
-            transition: var(--transition-base);
-            cursor: pointer;
-            position: relative;
-        }
-
-        .progress-step.active {
-            background: var(--primary);
-            border-color: var(--primary);
-            box-shadow: 0 0 20px rgba(102,126,234,0.5);
-        }
-
-        .progress-step.completed {
-            background: var(--success);
-            border-color: var(--success);
-        }
-
-        .progress-step-label {
-            position: absolute;
-            left: 24px;
-            top: 50%;
-            transform: translateY(-50%);
-            white-space: nowrap;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            opacity: 0;
-            transition: var(--transition-fast);
-        }
-
-        .progress-step:hover .progress-step-label {
-            opacity: 1;
-        }
-
-        /* ============================================
-           MAIN CONTENT
-           ============================================ */
-        .main-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 var(--space-xl) var(--space-3xl);
-        }
-
-        /* Section Styles */
-        .tutorial-section {
-            margin-bottom: var(--space-3xl);
-            scroll-margin-top: 100px;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            margin-bottom: var(--space-xl);
-        }
-
-        .section-number {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: var(--radius-xl);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: white;
-            flex-shrink: 0;
-            box-shadow: var(--shadow-glow);
-        }
-
-        .section-title {
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            font-weight: 700;
-        }
-
-        .section-description {
-            color: var(--text-secondary);
-            font-size: 1.125rem;
-            margin-bottom: var(--space-xl);
-            line-height: 1.8;
-        }
-
-        /* ============================================
-           CARDS
-           ============================================ */
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-xl);
-            padding: var(--space-xl);
-            margin-bottom: var(--space-lg);
-            transition: var(--transition-base);
-        }
-
-        .card:hover {
-            border-color: var(--primary);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            margin-bottom: var(--space-lg);
-        }
-
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, rgba(102,126,234,0.2), rgba(118,75,162,0.2));
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-
-        .card-subtitle {
-            color: var(--text-muted);
-            font-size: 0.875rem;
-        }
-
-        /* ============================================
-           INFO BOXES
-           ============================================ */
-        .info-box {
-            padding: var(--space-lg);
-            border-radius: var(--radius-lg);
-            margin: var(--space-lg) 0;
-            display: flex;
-            gap: var(--space-md);
-        }
-
-        .info-box-icon {
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .info-box-content h4 {
-            font-weight: 600;
-            margin-bottom: var(--space-xs);
-        }
-
-        .info-box-content p {
-            font-size: 0.9375rem;
-            line-height: 1.7;
-        }
-
-        .info-tip {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-        }
-
-        .info-tip .info-box-icon { color: var(--success); }
-        .info-tip h4 { color: var(--success); }
-
-        .info-warning {
-            background: rgba(245, 158, 11, 0.1);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-        }
-
-        .info-warning .info-box-icon { color: var(--warning); }
-        .info-warning h4 { color: var(--warning); }
-
-        .info-note {
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-        }
-
-        .info-note .info-box-icon { color: var(--info); }
-        .info-note h4 { color: var(--info); }
-
-        /* ============================================
-           CODE BLOCKS
-           ============================================ */
-        .code-container {
-            position: relative;
-            margin: var(--space-lg) 0;
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            background: var(--bg-code);
-            border: 1px solid var(--border-color);
-        }
-
-        .code-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: var(--space-md) var(--space-lg);
-            background: rgba(255,255,255,0.05);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .code-language {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-        }
-
-        .code-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .code-dot.sql { background: #e38c00; }
-        .code-dot.result { background: var(--success); }
-
-        .code-actions {
-            display: flex;
-            gap: var(--space-sm);
-        }
-
-        .code-btn {
-            background: rgba(255,255,255,0.1);
-            border: none;
-            color: var(--text-secondary);
-            padding: var(--space-sm) var(--space-md);
-            border-radius: var(--radius-md);
-            font-size: 0.8125rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition-fast);
-            display: flex;
-            align-items: center;
-            gap: var(--space-xs);
-        }
-
-        .code-btn:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        .code-btn.copied {
-            background: var(--success);
-            color: white;
-        }
-
-        .code-content {
-            padding: var(--space-lg);
-            overflow-x: auto;
-        }
-
-        pre {
-            margin: 0;
-            font-family: var(--font-mono);
-            font-size: 0.875rem;
-            line-height: 1.7;
-        }
-
-        code {
-            font-family: var(--font-mono);
-        }
-
-        /* Syntax Highlighting */
-        .keyword { color: #c678dd; font-weight: 500; }
-        .function { color: #61afef; }
-        .string { color: #98c379; }
-        .number { color: #d19a66; }
-        .comment { color: #5c6370; font-style: italic; }
-        .type { color: #e5c07b; }
-        .operator { color: #56b6c2; }
-        .table-name { color: #e06c75; }
-        .column-name { color: #98c379; }
-
-        /* Inline Code */
-        .inline-code {
-            background: rgba(102,126,234,0.15);
-            color: var(--primary);
-            padding: 0.125rem 0.5rem;
-            border-radius: var(--radius-sm);
-            font-family: var(--font-mono);
-            font-size: 0.875em;
-        }
-
-        /* ============================================
-           DATABASE DIAGRAM
-           ============================================ */
-        .diagram-container {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-xl);
-            padding: var(--space-xl);
-            margin: var(--space-xl) 0;
-            overflow-x: auto;
-        }
-
-        .diagram-title {
-            text-align: center;
-            margin-bottom: var(--space-xl);
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-
-        .erd-diagram {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--space-lg);
-            justify-items: center;
-        }
-
-        .erd-table {
-            background: var(--bg-secondary);
-            border: 2px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            min-width: 180px;
-            overflow: hidden;
-            transition: var(--transition-base);
-        }
-
-        .erd-table:hover {
-            border-color: var(--primary);
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .erd-table-header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: var(--space-md);
-            font-weight: 600;
-            text-align: center;
-            font-size: 0.875rem;
-        }
-
-        .erd-table-body {
-            padding: var(--space-sm);
-        }
-
-        .erd-column {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            padding: var(--space-xs) var(--space-sm);
-            font-size: 0.75rem;
-            font-family: var(--font-mono);
-        }
-
-        .erd-column-key {
-            color: var(--warning);
-            font-weight: bold;
-        }
-
-        .erd-column-fk {
-            color: var(--info);
-        }
-
-        .erd-column-name {
-            flex: 1;
-            color: var(--text-primary);
-        }
-
-        .erd-column-type {
-            color: var(--text-muted);
-            font-size: 0.6875rem;
-        }
-
-        /* ============================================
-           STEPS LIST
-           ============================================ */
-        .steps-list {
-            list-style: none;
-            counter-reset: step-counter;
-        }
-
-        .step-item {
-            counter-increment: step-counter;
-            position: relative;
-            padding-left: 3.5rem;
-            padding-bottom: var(--space-xl);
-            border-left: 2px solid var(--border-color);
-            margin-left: 1rem;
-        }
-
-        .step-item:last-child {
-            border-left: 2px solid transparent;
-            padding-bottom: 0;
-        }
-
-        .step-item::before {
-            content: counter(step-counter);
-            position: absolute;
-            left: -1.25rem;
-            top: 0;
-            width: 2.5rem;
-            height: 2.5rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: white;
-            font-size: 0.875rem;
-        }
-
-        .step-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: var(--space-sm);
-        }
-
-        .step-content {
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-
-        /* ============================================
-           TABLE STYLES
-           ============================================ */
-        .data-table-container {
-            overflow-x: auto;
-            margin: var(--space-lg) 0;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-color);
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.875rem;
-        }
-
-        .data-table th,
-        .data-table td {
-            padding: var(--space-md);
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .data-table th {
-            background: var(--bg-tertiary);
-            font-weight: 600;
-            color: var(--text-primary);
-            white-space: nowrap;
-        }
-
-        .data-table tr:hover td {
-            background: rgba(102,126,234,0.05);
-        }
-
-        .data-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        /* ============================================
-           ACCORDION
-           ============================================ */
-        .accordion {
-            margin: var(--space-lg) 0;
-        }
-
-        .accordion-item {
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            margin-bottom: var(--space-sm);
-            overflow: hidden;
-        }
-
-        .accordion-header {
-            width: 100%;
-            padding: var(--space-lg);
-            background: var(--bg-card);
-            border: none;
-            color: var(--text-primary);
-            font-size: 1rem;
-            font-weight: 600;
-            text-align: left;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: var(--transition-base);
-        }
-
-        .accordion-header:hover {
-            background: var(--bg-secondary);
-        }
-
-        .accordion-icon {
-            font-size: 1.25rem;
-            transition: var(--transition-base);
-        }
-
-        .accordion-item.active .accordion-icon {
-            transform: rotate(45deg);
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .accordion-item.active .accordion-content {
-            max-height: 2000px;
-        }
-
-        .accordion-body {
-            padding: var(--space-lg);
-            border-top: 1px solid var(--border-color);
-        }
-
-        /* ============================================
-           TABS
-           ============================================ */
-        .tabs-container {
-            margin: var(--space-xl) 0;
-        }
-
-        .tabs-header {
-            display: flex;
-            gap: var(--space-xs);
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: var(--space-lg);
-            overflow-x: auto;
-            padding-bottom: 1px;
-        }
-
-        .tab-btn {
-            padding: var(--space-md) var(--space-lg);
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 0.9375rem;
-            font-weight: 500;
-            cursor: pointer;
-            white-space: nowrap;
-            position: relative;
-            transition: var(--transition-fast);
-        }
-
-        .tab-btn:hover {
-            color: var(--text-primary);
-        }
-
-        .tab-btn.active {
-            color: var(--primary);
-        }
-
-        .tab-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--primary);
-            border-radius: var(--radius-full);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* ============================================
-           FEATURE GRID
-           ============================================ */
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-lg);
-            margin: var(--space-xl) 0;
-        }
-
-        .feature-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-xl);
-            padding: var(--space-xl);
-            text-align: center;
-            transition: var(--transition-base);
-        }
-
-        .feature-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .feature-icon {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, rgba(102,126,234,0.2), rgba(118,75,162,0.2));
-            border-radius: var(--radius-xl);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin: 0 auto var(--space-lg);
-        }
-
-        .feature-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: var(--space-sm);
-        }
-
-        .feature-description {
-            color: var(--text-secondary);
-            font-size: 0.9375rem;
-            line-height: 1.7;
-        }
-
-        /* ============================================
-           QUICK REFERENCE
-           ============================================ */
-        .quick-ref {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-xl);
-            padding: var(--space-xl);
-            margin: var(--space-xl) 0;
-        }
-
-        .quick-ref-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: var(--space-lg);
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-        }
-
-        .quick-ref-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: var(--space-md);
-        }
-
-        .quick-ref-item {
-            background: var(--bg-secondary);
-            padding: var(--space-md);
-            border-radius: var(--radius-md);
-            border-left: 3px solid var(--primary);
-        }
-
-        .quick-ref-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: var(--space-xs);
-        }
-
-        .quick-ref-value {
-            font-family: var(--font-mono);
-            font-size: 0.875rem;
-            color: var(--primary);
-        }
-
-        /* ============================================
-           FOOTER
-           ============================================ */
-        .footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: var(--space-3xl) var(--space-xl);
-            margin-top: var(--space-3xl);
-        }
-
-        .footer-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .footer-logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: var(--space-md);
-        }
-
-        .footer-text {
-            color: var(--text-muted);
-            margin-bottom: var(--space-lg);
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: var(--space-xl);
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: var(--transition-fast);
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-
-        /* ============================================
-           BACK TO TOP
-           ============================================ */
-        .back-to-top {
-            position: fixed;
-            bottom: var(--space-xl);
-            right: var(--space-xl);
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 1.25rem;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition-base);
-            box-shadow: var(--shadow-lg);
-            z-index: 100;
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .back-to-top:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-glow);
-        }
-
-        /* ============================================
-           LOADING / OFFLINE STATES
-           ============================================ */
-        .offline-notice {
-            position: fixed;
-            bottom: var(--space-lg);
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--warning);
-            color: #000;
-            padding: var(--space-md) var(--space-xl);
-            border-radius: var(--radius-full);
-            font-weight: 500;
-            font-size: 0.875rem;
-            display: none;
-            z-index: 1001;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .offline-notice.visible {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-        }
-
-        /* ============================================
-           RESPONSIVE DESIGN
-           ============================================ */
-        @media (max-width: 1024px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-        }
-
-        @media (max-width: 768px) {
-            :root {
-                --space-xl: 1.5rem;
-                --space-2xl: 2rem;
-                --space-3xl: 3rem;
-            }
-
-            .hero-stats {
-                flex-direction: column;
-                gap: var(--space-lg);
-            }
-
-            .section-header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .step-item {
-                padding-left: 2.5rem;
-                margin-left: 0.5rem;
-            }
-
-            .step-item::before {
-                width: 2rem;
-                height: 2rem;
-                left: -1rem;
-                font-size: 0.75rem;
-            }
-
-            .hero-actions {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .code-header {
-                flex-direction: column;
-                gap: var(--space-sm);
-                align-items: flex-start;
-            }
-
-            .erd-diagram {
-                grid-template-columns: 1fr;
-            }
-
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* ============================================
-           PRINT STYLES
-           ============================================ */
-        @media print {
-            .navbar,
-            .progress-container,
-            .back-to-top,
-            .code-actions,
-            .theme-toggle {
-                display: none !important;
-            }
-
-            body {
-                background: white;
-                color: black;
-            }
-
-            .code-container {
-                border: 1px solid #ccc;
-            }
-
-            pre {
-                white-space: pre-wrap;
-                word-wrap: break-word;
-            }
-        }
+    animation: floatBg 20s ease-in-out infinite;
+}
+@keyframes floatBg {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(2%, 2%) rotate(1deg); }
+    66% { transform: translate(-1%, 1%) rotate(-1deg); }
+}
+
+.navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(15, 15, 35, 0.9); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color); padding: var(--space-md) var(--space-xl);
+    transition: var(--transition-base);
+}
+.navbar.scrolled { box-shadow: var(--shadow-lg); }
+.navbar-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.logo { display: flex; align-items: center; gap: var(--space-sm); font-size: 1.5rem; font-weight: 700; color: var(--text-primary); text-decoration: none; }
+.logo-icon { font-size: 2rem; }
+.logo-text { background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.nav-links { display: flex; gap: var(--space-lg); list-style: none; }
+.nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); transition: var(--transition-fast); }
+.nav-links a:hover { color: var(--primary); background: rgba(102,126,234,0.1); }
+.nav-actions { display: flex; align-items: center; gap: var(--space-md); }
+.theme-toggle {
+    background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-full);
+    padding: var(--space-sm); cursor: pointer; display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; font-size: 1.25rem; transition: var(--transition-base);
+}
+.theme-toggle:hover { background: var(--primary); border-color: var(--primary); transform: rotate(180deg); }
+.mobile-menu-btn { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; padding: var(--space-sm); }
+
+.hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 120px var(--space-xl) var(--space-3xl); position: relative; }
+.hero-content { max-width: 900px; text-align: center; }
+.hero-badge {
+    display: inline-flex; align-items: center; gap: var(--space-sm);
+    background: linear-gradient(135deg, rgba(102,126,234,0.2), rgba(118,75,162,0.2));
+    border: 1px solid rgba(102,126,234,0.3); padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-full); font-size: 0.875rem; font-weight: 500; color: var(--primary);
+    margin-bottom: var(--space-xl); animation: fadeInUp 0.6s ease;
+}
+.hero-badge-dot { width: 8px; height: 8px; background: var(--success); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } }
+.hero-title { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; line-height: 1.1; margin-bottom: var(--space-lg); animation: fadeInUp 0.6s ease 0.1s both; }
+.hero-title-gradient { background: linear-gradient(135deg, var(--primary), var(--accent), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-subtitle { font-size: clamp(1.125rem, 2vw, 1.375rem); color: var(--text-secondary); max-width: 650px; margin: 0 auto var(--space-2xl); animation: fadeInUp 0.6s ease 0.2s both; }
+.hero-actions { display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap; animation: fadeInUp 0.6s ease 0.3s both; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+.btn { display: inline-flex; align-items: center; gap: var(--space-sm); padding: var(--space-md) var(--space-xl); border-radius: var(--radius-lg); font-family: inherit; font-size: 1rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: var(--transition-base); border: none; }
+.btn-primary { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; box-shadow: var(--shadow-md), 0 0 30px rgba(102,126,234,0.3); }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg), 0 0 50px rgba(102,126,234,0.4); }
+.btn-secondary { background: var(--bg-secondary); color: var(--text-primary); border: 1px solid var(--border-color); }
+.btn-secondary:hover { background: var(--bg-tertiary); border-color: var(--primary); transform: translateY(-3px); }
+
+.hero-stats { display: flex; justify-content: center; gap: var(--space-3xl); margin-top: var(--space-3xl); padding-top: var(--space-2xl); border-top: 1px solid var(--border-color); animation: fadeInUp 0.6s ease 0.4s both; }
+.stat-item { text-align: center; }
+.stat-number { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.stat-label { color: var(--text-muted); font-size: 0.875rem; font-weight: 500; }
+
+.progress-container { position: fixed; left: var(--space-xl); top: 50%; transform: translateY(-50%); z-index: 100; display: none; }
+@media (min-width: 1200px) { .progress-container { display: block; } }
+.progress-track { display: flex; flex-direction: column; gap: var(--space-sm); }
+.progress-step { width: 12px; height: 12px; border-radius: 50%; background: var(--border-color); border: 2px solid var(--border-color); transition: var(--transition-base); cursor: pointer; position: relative; }
+.progress-step.active { background: var(--primary); border-color: var(--primary); box-shadow: 0 0 20px rgba(102,126,234,0.5); }
+.progress-step.completed { background: var(--success); border-color: var(--success); }
+.progress-step-label { position: absolute; left: 24px; top: 50%; transform: translateY(-50%); white-space: nowrap; font-size: 0.75rem; font-weight: 500; color: var(--text-muted); opacity: 0; transition: var(--transition-fast); }
+.progress-step:hover .progress-step-label { opacity: 1; }
+
+.main-content { max-width: 1000px; margin: 0 auto; padding: 0 var(--space-xl) var(--space-3xl); }
+.tutorial-section { margin-bottom: var(--space-3xl); scroll-margin-top: 100px; }
+.section-header { display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-xl); }
+.section-number { width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; color: white; flex-shrink: 0; box-shadow: var(--shadow-glow); }
+.section-title { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; }
+.section-description { color: var(--text-secondary); font-size: 1.125rem; margin-bottom: var(--space-xl); line-height: 1.8; }
+
+.card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: var(--space-xl); margin-bottom: var(--space-lg); transition: var(--transition-base); }
+.card:hover { border-color: var(--primary); box-shadow: var(--shadow-glow); }
+.card-header { display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-lg); }
+.card-icon { width: 48px; height: 48px; background: linear-gradient(135deg, rgba(102,126,234,0.2), rgba(118,75,162,0.2)); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+.card-title { font-size: 1.25rem; font-weight: 600; }
+.card-subtitle { color: var(--text-muted); font-size: 0.875rem; }
+
+.info-box { padding: var(--space-lg); border-radius: var(--radius-lg); margin: var(--space-lg) 0; display: flex; gap: var(--space-md); }
+.info-box-icon { font-size: 1.5rem; flex-shrink: 0; }
+.info-box-content h4 { font-weight: 600; margin-bottom: var(--space-xs); }
+.info-box-content p { font-size: 0.9375rem; line-height: 1.7; }
+.info-tip { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); }
+.info-tip .info-box-icon, .info-tip h4 { color: var(--success); }
+.info-warning { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); }
+.info-warning .info-box-icon, .info-warning h4 { color: var(--warning); }
+.info-note { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); }
+.info-note .info-box-icon, .info-note h4 { color: var(--info); }
+
+.code-container { position: relative; margin: var(--space-lg) 0; border-radius: var(--radius-xl); overflow: hidden; background: var(--bg-code); border: 1px solid var(--border-color); }
+.code-header { display: flex; justify-content: space-between; align-items: center; padding: var(--space-md) var(--space-lg); background: rgba(255,255,255,0.05); border-bottom: 1px solid var(--border-color); }
+.code-language { display: flex; align-items: center; gap: var(--space-sm); font-size: 0.875rem; font-weight: 500; color: var(--text-secondary); }
+.code-dot { width: 12px; height: 12px; border-radius: 50%; }
+.code-dot.sql { background: #e38c00; }
+.code-actions { display: flex; gap: var(--space-sm); }
+.code-btn { background: rgba(255,255,255,0.1); border: none; color: var(--text-secondary); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); font-size: 0.8125rem; font-weight: 500; cursor: pointer; transition: var(--transition-fast); display: flex; align-items: center; gap: var(--space-xs); }
+.code-btn:hover { background: var(--primary); color: white; }
+.code-btn.copied { background: var(--success); color: white; }
+.code-content { padding: var(--space-lg); overflow-x: auto; }
+pre { margin: 0; font-family: var(--font-mono); font-size: 0.875rem; line-height: 1.7; }
+code { font-family: var(--font-mono); }
+.keyword { color: #c678dd; font-weight: 500; }
+.function { color: #61afef; }
+.string { color: #98c379; }
+.number { color: #d19a66; }
+.comment { color: #5c6370; font-style: italic; }
+.type { color: #e5c07b; }
+.table-name { color: #e06c75; }
+.inline-code { background: rgba(102,126,234,0.15); color: var(--primary); padding: 0.125rem 0.5rem; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.875em; }
+
+.diagram-container { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: var(--space-xl); margin: var(--space-xl) 0; overflow-x: auto; }
+.diagram-title { text-align: center; margin-bottom: var(--space-xl); font-size: 1.25rem; font-weight: 600; }
+.erd-diagram { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-lg); justify-items: center; }
+.erd-table { background: var(--bg-secondary); border: 2px solid var(--border-color); border-radius: var(--radius-lg); min-width: 180px; overflow: hidden; transition: var(--transition-base); }
+.erd-table:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: var(--shadow-glow); }
+.erd-table-header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: var(--space-md); font-weight: 600; text-align: center; font-size: 0.875rem; }
+.erd-table-body { padding: var(--space-sm); }
+.erd-column { display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-xs) var(--space-sm); font-size: 0.75rem; font-family: var(--font-mono); }
+.erd-column-key { color: var(--warning); font-weight: bold; }
+.erd-column-fk { color: var(--info); }
+.erd-column-name { flex: 1; color: var(--text-primary); }
+.erd-column-type { color: var(--text-muted); font-size: 0.6875rem; }
+
+.steps-list { list-style: none; counter-reset: step-counter; }
+.step-item { counter-increment: step-counter; position: relative; padding-left: 3.5rem; padding-bottom: var(--space-xl); border-left: 2px solid var(--border-color); margin-left: 1rem; }
+.step-item:last-child { border-left: 2px solid transparent; padding-bottom: 0; }
+.step-item::before { content: counter(step-counter); position: absolute; left: -1.25rem; top: 0; width: 2.5rem; height: 2.5rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 0.875rem; }
+.step-title { font-size: 1.125rem; font-weight: 600; margin-bottom: var(--space-sm); }
+.step-content { color: var(--text-secondary); line-height: 1.8; }
+
+.accordion { margin: var(--space-lg) 0; }
+.accordion-item { border: 1px solid var(--border-color); border-radius: var(--radius-lg); margin-bottom: var(--space-sm); overflow: hidden; }
+.accordion-header { width: 100%; padding: var(--space-lg); background: var(--bg-card); border: none; color: var(--text-primary); font-size: 1rem; font-weight: 600; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: var(--transition-base); }
+.accordion-header:hover { background: var(--bg-secondary); }
+.accordion-icon { font-size: 1.25rem; transition: var(--transition-base); }
+.accordion-item.active .accordion-icon { transform: rotate(45deg); }
+.accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.accordion-item.active .accordion-content { max-height: 2000px; }
+.accordion-body { padding: var(--space-lg); border-top: 1px solid var(--border-color); }
+
+.tabs-container { margin: var(--space-xl) 0; }
+.tabs-header { display: flex; gap: var(--space-xs); border-bottom: 1px solid var(--border-color); margin-bottom: var(--space-lg); overflow-x: auto; padding-bottom: 1px; }
+.tab-btn { padding: var(--space-md) var(--space-lg); background: none; border: none; color: var(--text-muted); font-size: 0.9375rem; font-weight: 500; cursor: pointer; white-space: nowrap; position: relative; transition: var(--transition-fast); }
+.tab-btn:hover { color: var(--text-primary); }
+.tab-btn.active { color: var(--primary); }
+.tab-btn.active::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px; background: var(--primary); border-radius: var(--radius-full); }
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-lg); margin: var(--space-xl) 0; }
+.feature-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: var(--space-xl); text-align: center; transition: var(--transition-base); }
+.feature-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: var(--shadow-glow); }
+.feature-icon { width: 64px; height: 64px; background: linear-gradient(135deg, rgba(102,126,234,0.2), rgba(118,75,162,0.2)); border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto var(--space-lg); }
+.feature-title { font-size: 1.125rem; font-weight: 600; margin-bottom: var(--space-sm); }
+.feature-description { color: var(--text-secondary); font-size: 0.9375rem; line-height: 1.7; }
+
+.quick-ref { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: var(--space-xl); margin: var(--space-xl) 0; }
+.quick-ref-title { font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-lg); display: flex; align-items: center; gap: var(--space-sm); }
+.quick-ref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--space-md); }
+.quick-ref-item { background: var(--bg-secondary); padding: var(--space-md); border-radius: var(--radius-md); border-left: 3px solid var(--primary); }
+.quick-ref-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-xs); }
+.quick-ref-value { font-family: var(--font-mono); font-size: 0.875rem; color: var(--primary); }
+
+.footer { background: var(--bg-secondary); border-top: 1px solid var(--border-color); padding: var(--space-3xl) var(--space-xl); margin-top: var(--space-3xl); }
+.footer-content { max-width: 1000px; margin: 0 auto; text-align: center; }
+.footer-logo { font-size: 1.5rem; font-weight: 700; margin-bottom: var(--space-md); }
+.footer-text { color: var(--text-muted); margin-bottom: var(--space-lg); }
+.footer-links { display: flex; justify-content: center; gap: var(--space-xl); flex-wrap: wrap; }
+.footer-links a { color: var(--text-secondary); text-decoration: none; transition: var(--transition-fast); }
+.footer-links a:hover { color: var(--primary); }
+
+.back-to-top { position: fixed; bottom: var(--space-xl); right: var(--space-xl); width: 50px; height: 50px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border: none; border-radius: 50%; font-size: 1.25rem; cursor: pointer; opacity: 0; visibility: hidden; transition: var(--transition-base); box-shadow: var(--shadow-lg); z-index: 100; }
+.back-to-top.visible { opacity: 1; visibility: visible; }
+.back-to-top:hover { transform: translateY(-5px); box-shadow: var(--shadow-glow); }
+
+.offline-notice { position: fixed; bottom: var(--space-lg); left: 50%; transform: translateX(-50%); background: var(--warning); color: #000; padding: var(--space-md) var(--space-xl); border-radius: var(--radius-full); font-weight: 500; font-size: 0.875rem; display: none; z-index: 1001; box-shadow: var(--shadow-lg); }
+.offline-notice.visible { display: flex; align-items: center; gap: var(--space-sm); }
+
+@media (max-width: 1024px) { .nav-links { display: none; } .mobile-menu-btn { display: block; } }
+@media (max-width: 768px) {
+    :root { --space-xl: 1.5rem; --space-2xl: 2rem; --space-3xl: 3rem; }
+    .hero-stats { flex-direction: column; gap: var(--space-lg); }
+    .section-header { flex-direction: column; text-align: center; }
+    .step-item { padding-left: 2.5rem; margin-left: 0.5rem; }
+    .step-item::before { width: 2rem; height: 2rem; left: -1rem; font-size: 0.75rem; }
+    .hero-actions { flex-direction: column; }
+    .btn { width: 100%; justify-content: center; }
+}
+@media (max-width: 480px) {
+    .code-header { flex-direction: column; gap: var(--space-sm); align-items: flex-start; }
+    .erd-diagram, .feature-grid { grid-template-columns: 1fr; }
+}
+@media print {
+    .navbar, .progress-container, .back-to-top, .code-actions, .theme-toggle { display: none !important; }
+    body { background: white; color: black; }
+    .code-container { border: 1px solid #ccc; }
+    pre { white-space: pre-wrap; word-wrap: break-word; }
+}
     </style>
 </head>
 <body>
-    <!-- Background Pattern -->
     <div class="bg-pattern"></div>
+    <div class="offline-notice" id="offlineNotice">📴 You're offline - Cached content available</div>
 
-    <!-- Offline Notice -->
-    <div class="offline-notice" id="offlineNotice">
-        📴 You're offline - Cached content available
-    </div>
-
-    <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="navbar-content">
             <a href="#" class="logo">
                 <span class="logo-icon">🗄️</span>
                 <span class="logo-text">SQL Tutorial</span>
             </a>
-            
             <ul class="nav-links">
                 <li><a href="#intro">Introduction</a></li>
                 <li><a href="#setup">Setup</a></li>
@@ -1364,391 +278,159 @@
                 <li><a href="#data">Data</a></li>
                 <li><a href="#verify">Verify</a></li>
             </ul>
-
             <div class="nav-actions">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    🌙
-                </button>
-                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
-                    ☰
-                </button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">☰</button>
             </div>
         </div>
     </nav>
 
-    <!-- Progress Tracker -->
     <div class="progress-container">
         <div class="progress-track">
-            <div class="progress-step active" data-section="hero">
-                <span class="progress-step-label">Start</span>
-            </div>
-            <div class="progress-step" data-section="intro">
-                <span class="progress-step-label">Introduction</span>
-            </div>
-            <div class="progress-step" data-section="setup">
-                <span class="progress-step-label">Database Setup</span>
-            </div>
-            <div class="progress-step" data-section="tables">
-                <span class="progress-step-label">Create Tables</span>
-            </div>
-            <div class="progress-step" data-section="data">
-                <span class="progress-step-label">Insert Data</span>
-            </div>
-            <div class="progress-step" data-section="verify">
-                <span class="progress-step-label">Verification</span>
-            </div>
+            <div class="progress-step active" data-section="hero"><span class="progress-step-label">Start</span></div>
+            <div class="progress-step" data-section="intro"><span class="progress-step-label">Introduction</span></div>
+            <div class="progress-step" data-section="setup"><span class="progress-step-label">Database Setup</span></div>
+            <div class="progress-step" data-section="tables"><span class="progress-step-label">Create Tables</span></div>
+            <div class="progress-step" data-section="data"><span class="progress-step-label">Insert Data</span></div>
+            <div class="progress-step" data-section="verify"><span class="progress-step-label">Verification</span></div>
         </div>
     </div>
 
-    <!-- Hero Section -->
     <section class="hero" id="hero">
         <div class="hero-content">
             <div class="hero-badge">
                 <span class="hero-badge-dot"></span>
                 Updated for 2026 • SQL Server
             </div>
-            
-            <h1 class="hero-title">
-                Master <span class="hero-title-gradient">SQL Server Database</span> Creation
-            </h1>
-            
-            <p class="hero-subtitle">
-                Learn to build professional databases step-by-step. 
-                This beginner-friendly tutorial covers everything from setup to verification 
-                with real-world examples.
-            </p>
-            
+            <h1 class="hero-title">Master <span class="hero-title-gradient">SQL Server Database</span> Creation</h1>
+            <p class="hero-subtitle">Learn to build professional databases step-by-step. This beginner-friendly tutorial covers everything from setup to verification with real-world examples.</p>
             <div class="hero-actions">
-                <a href="#intro" class="btn btn-primary">
-                    🚀 Start Learning
-                </a>
-                <a href="#complete-script" class="btn btn-secondary">
-                    📋 Full Script
-                </a>
+                <a href="#intro" class="btn btn-primary">🚀 Start Learning</a>
+                <a href="#complete-script" class="btn btn-secondary">📋 Full Script</a>
             </div>
-            
             <div class="hero-stats">
-                <div class="stat-item">
-                    <div class="stat-number">8</div>
-                    <div class="stat-label">Tables to Create</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">30+</div>
-                    <div class="stat-label">Sample Records</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">~15</div>
-                    <div class="stat-label">Minutes to Complete</div>
-                </div>
+                <div class="stat-item"><div class="stat-number">8</div><div class="stat-label">Tables to Create</div></div>
+                <div class="stat-item"><div class="stat-number">30+</div><div class="stat-label">Sample Records</div></div>
+                <div class="stat-item"><div class="stat-number">~15</div><div class="stat-label">Minutes to Complete</div></div>
             </div>
         </div>
     </section>
 
-    <!-- Main Content -->
     <main class="main-content">
-        <!-- Introduction Section -->
         <section class="tutorial-section" id="intro">
             <div class="section-header">
                 <div class="section-number">1</div>
                 <h2 class="section-title">Introduction: What We're Building</h2>
             </div>
-            
-            <p class="section-description">
-                We're creating a complete <strong>Order Management System</strong> database. 
-                Think of it like the brain behind an online store – it tracks products, 
-                customers, orders, employees, and inventory across multiple warehouses.
-            </p>
+            <p class="section-description">We're creating a complete <strong>Order Management System</strong> database. Think of it like the brain behind an online store – it tracks products, customers, orders, employees, and inventory across multiple warehouses.</p>
 
             <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📦</div>
-                    <h3 class="feature-title">Products & Categories</h3>
-                    <p class="feature-description">
-                        Store product information with prices and organize them into categories
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">👥</div>
-                    <h3 class="feature-title">Customers & Orders</h3>
-                    <p class="feature-description">
-                        Manage customer accounts and track all their purchase orders
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🏭</div>
-                    <h3 class="feature-title">Warehouses & Inventory</h3>
-                    <p class="feature-description">
-                        Track stock levels across multiple warehouse locations
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">👔</div>
-                    <h3 class="feature-title">Employees</h3>
-                    <p class="feature-description">
-                        Record employee info and link them to orders they process
-                    </p>
-                </div>
+                <div class="feature-card"><div class="feature-icon">📦</div><h3 class="feature-title">Products & Categories</h3><p class="feature-description">Store product information with prices and organize them into categories</p></div>
+                <div class="feature-card"><div class="feature-icon">👥</div><h3 class="feature-title">Customers & Orders</h3><p class="feature-description">Manage customer accounts and track all their purchase orders</p></div>
+                <div class="feature-card"><div class="feature-icon">🏭</div><h3 class="feature-title">Warehouses & Inventory</h3><p class="feature-description">Track stock levels across multiple warehouse locations</p></div>
+                <div class="feature-card"><div class="feature-icon">👔</div><h3 class="feature-title">Employees</h3><p class="feature-description">Record employee info and link them to orders they process</p></div>
             </div>
 
-            <!-- Database Diagram -->
             <div class="diagram-container">
                 <h3 class="diagram-title">📊 Database Structure Overview</h3>
                 <div class="erd-diagram">
                     <div class="erd-table">
                         <div class="erd-table-header">TBL_PRODUCT_CATEGORIES</div>
                         <div class="erd-table-body">
-                            <div class="erd-column">
-                                <span class="erd-column-key">🔑</span>
-                                <span class="erd-column-name">CATEGORY_ID</span>
-                                <span class="erd-column-type">BIGINT</span>
-                            </div>
-                            <div class="erd-column">
-                                <span></span>
-                                <span class="erd-column-name">CATEGORY_NAME</span>
-                                <span class="erd-column-type">VARCHAR</span>
-                            </div>
+                            <div class="erd-column"><span class="erd-column-key">🔑</span><span class="erd-column-name">CATEGORY_ID</span><span class="erd-column-type">BIGINT</span></div>
+                            <div class="erd-column"><span></span><span class="erd-column-name">CATEGORY_NAME</span><span class="erd-column-type">VARCHAR</span></div>
                         </div>
                     </div>
-
                     <div class="erd-table">
                         <div class="erd-table-header">TBL_PRODUCTS</div>
                         <div class="erd-table-body">
-                            <div class="erd-column">
-                                <span class="erd-column-key">🔑</span>
-                                <span class="erd-column-name">PRODUCT_ID</span>
-                                <span class="erd-column-type">BIGINT</span>
-                            </div>
-                            <div class="erd-column">
-                                <span></span>
-                                <span class="erd-column-name">PRODUCT_NAME</span>
-                                <span class="erd-column-type">VARCHAR</span>
-                            </div>
-                            <div class="erd-column">
-                                <span></span>
-                                <span class="erd-column-name">STANDARD_COST</span>
-                                <span class="erd-column-type">DECIMAL</span>
-                            </div>
-                            <div class="erd-column">
-                                <span></span>
-                                <span class="erd-column-name">LIST_PRICE</span>
-                                <span class="erd-column-type">DECIMAL</span>
-                            </div>
-                            <div class="erd-column">
-                                <span class="erd-column-fk">🔗</span>
-                                <span class="erd-column-name">CATEGORY_ID</span>
-                                <span class="erd-column-type">FK</span>
-                            </div>
+                            <div class="erd-column"><span class="erd-column-key">🔑</span><span class="erd-column-name">PRODUCT_ID</span><span class="erd-column-type">BIGINT</span></div>
+                            <div class="erd-column"><span></span><span class="erd-column-name">PRODUCT_NAME</span><span class="erd-column-type">VARCHAR</span></div>
+                            <div class="erd-column"><span></span><span class="erd-column-name">STANDARD_COST</span><span class="erd-column-type">DECIMAL</span></div>
+                            <div class="erd-column"><span></span><span class="erd-column-name">LIST_PRICE</span><span class="erd-column-type">DECIMAL</span></div>
+                            <div class="erd-column"><span class="erd-column-fk">🔗</span><span class="erd-column-name">CATEGORY_ID</span><span class="erd-column-type">FK</span></div>
                         </div>
                     </div>
-
                     <div class="erd-table">
                         <div class="erd-table-header">TBL_CUSTOMERS</div>
                         <div class="erd-table-body">
-                            <div class="erd-column">
-                                <span class="erd-column-key">🔑</span>
-                                <span class="erd-column-name">CUSTOMER_ID</span>
-                                <span class="erd-column-type">BIGINT</span>
-                            </div>
-                            <div class="erd-column">
-                                <span></span>
-                                <span class="erd-column-name">NAME</span>
-                                <span class="erd-column-type">VARCHAR</span>
-                            </div>
-                            <div class="erd-column">
-                                <span></span>
-                                <span class="erd-column-name">ADDRESS</span>
-                                <span class="erd-column-type">VARCHAR</span>
-                            </div>
-                            <div class="erd-column">
-                                <span></span>
-                                <span class="erd-column-name">CREDIT_LIMIT</span>
-                                <span class="erd-column-type">INT</span>
-                            </div>
+                            <div class="erd-column"><span class="erd-column-key">🔑</span><span class="erd-column-name">CUSTOMER_ID</span><span class="erd-column-type">BIGINT</span></div>
+                            <div class="erd-column"><span></span><span class="erd-column-name">NAME</span><span class="erd-column-type">VARCHAR</span></div>
+                            <div class="erd-column"><span></span><span class="erd-column-name">ADDRESS</span><span class="erd-column-type">VARCHAR</span></div>
+                            <div class="erd-column"><span></span><span class="erd-column-name">CREDIT_LIMIT</span><span class="erd-column-type">INT</span></div>
                         </div>
                     </div>
-
                     <div class="erd-table">
                         <div class="erd-table-header">TBL_EMPLOYEES</div>
                         <div class="erd-table-body">
-                            <div class="erd-column">
-                                <span class="erd-column-key">🔑</span>
-                                <span class="erd-column-name">EMPLOYEE_ID</span>
-                                <span class="erd-column-type">BIGINT</span>
-                            </div>
-                            <div class="erd-column">
-                                <span></span>
-                                <span class="erd-column-name">FIRST_NAME</span>
-                                <span class="erd-column-type">VARCHAR</span>
-                            </div>
-                            <div class="erd-column">
-                                <span></span>
-                                <span class="erd-column-name">LAST_NAME</span>
-                                <span class="erd-column-type">VARCHAR</span>
-                            </div>
-                            <div class="erd-column">
-                                <span></span>
-                                <span class="erd-column-name">PHONE</span>
-                                <span class="erd-column-type">INT</span>
-                            </div>
-                            <div class="erd-column">
-                                <span></span>
-                                <span class="erd-column-name">HIRE_DATE</span>
-                                <span class="erd-column-type">VARCHAR</span>
-                            </div>
+                            <div class="erd-column"><span class="erd-column-key">🔑</span><span class="erd-column-name">EMPLOYEE_ID</span><span class="erd-column-type">BIGINT</span></div>
+                            <div class="erd-column"><span></span><span class="erd-column-name">FIRST_NAME</span><span class="erd-column-type">VARCHAR</span></div>
+                            <div class="erd-column"><span></span><span class="erd-column-name">LAST_NAME</span><span class="erd-column-type">VARCHAR</span></div>
+                            <div class="erd-column"><span></span><span class="erd-column-name">PHONE</span><span class="erd-column-type">INT</span></div>
+                            <div class="erd-column"><span></span><span class="erd-column-name">HIRE_DATE</span><span class="erd-column-type">VARCHAR</span></div>
                         </div>
                     </div>
-
                     <div class="erd-table">
                         <div class="erd-table-header">TBL_ORDERS</div>
                         <div class="erd-table-body">
-                            <div class="erd-column">
-                                <span class="erd-column-key">🔑</span>
-                                <span class="erd-column-name">ORDER_ID</span>
-                                <span class="erd-column-type">BIGINT</span>
-                            </div>
-                            <div class="erd-column">
-                                <span class="erd-column-fk">🔗</span>
-                                <span class="erd-column-name">CUSTOMER_ID</span>
-                                <span class="erd-column-type">FK</span>
-                            </div>
-                            <div class="erd-column">
-                                <span class="erd-column-fk">🔗</span>
-                                <span class="erd-column-name">EMPLOYEE_ID</span>
-                                <span class="erd-column-type">FK</span>
-                            </div>
-                            <div class="erd-column">
-                                <span></span>
-                                <span class="erd-column-name">STATUS</span>
-                                <span class="erd-column-type">VARCHAR</span>
-                            </div>
-                            <div class="erd-column">
-                                <span></span>
-                                <span class="erd-column-name">ORDER_DATE</span>
-                                <span class="erd-column-type">VARCHAR</span>
-                            </div>
+                            <div class="erd-column"><span class="erd-column-key">🔑</span><span class="erd-column-name">ORDER_ID</span><span class="erd-column-type">BIGINT</span></div>
+                            <div class="erd-column"><span class="erd-column-fk">🔗</span><span class="erd-column-name">CUSTOMER_ID</span><span class="erd-column-type">FK</span></div>
+                            <div class="erd-column"><span class="erd-column-fk">🔗</span><span class="erd-column-name">EMPLOYEE_ID</span><span class="erd-column-type">FK</span></div>
+                            <div class="erd-column"><span></span><span class="erd-column-name">STATUS</span><span class="erd-column-type">VARCHAR</span></div>
+                            <div class="erd-column"><span></span><span class="erd-column-name">ORDER_DATE</span><span class="erd-column-type">VARCHAR</span></div>
                         </div>
                     </div>
-
                     <div class="erd-table">
                         <div class="erd-table-header">TBL_ITEMS</div>
                         <div class="erd-table-body">
-                            <div class="erd-column">
-                                <span class="erd-column-key">🔑</span>
-                                <span class="erd-column-name">ITEM_ID</span>
-                                <span class="erd-column-type">BIGINT</span>
-                            </div>
-                            <div class="erd-column">
-                                <span class="erd-column-fk">🔗</span>
-                                <span class="erd-column-name">ORDER_ID</span>
-                                <span class="erd-column-type">FK</span>
-                            </div>
-                            <div class="erd-column">
-                                <span class="erd-column-fk">🔗</span>
-                                <span class="erd-column-name">PRODUCT_ID</span>
-                                <span class="erd-column-type">FK</span>
-                            </div>
-                            <div class="erd-column">
-                                <span></span>
-                                <span class="erd-column-name">QUANTITY</span>
-                                <span class="erd-column-type">INT</span>
-                            </div>
-                            <div class="erd-column">
-                                <span></span>
-                                <span class="erd-column-name">PRICE</span>
-                                <span class="erd-column-type">DECIMAL</span>
-                            </div>
+                            <div class="erd-column"><span class="erd-column-key">🔑</span><span class="erd-column-name">ITEM_ID</span><span class="erd-column-type">BIGINT</span></div>
+                            <div class="erd-column"><span class="erd-column-fk">🔗</span><span class="erd-column-name">ORDER_ID</span><span class="erd-column-type">FK</span></div>
+                            <div class="erd-column"><span class="erd-column-fk">🔗</span><span class="erd-column-name">PRODUCT_ID</span><span class="erd-column-type">FK</span></div>
+                            <div class="erd-column"><span></span><span class="erd-column-name">QUANTITY</span><span class="erd-column-type">INT</span></div>
+                            <div class="erd-column"><span></span><span class="erd-column-name">PRICE</span><span class="erd-column-type">DECIMAL</span></div>
                         </div>
                     </div>
-
                     <div class="erd-table">
                         <div class="erd-table-header">TBL_WAREHOUSES</div>
                         <div class="erd-table-body">
-                            <div class="erd-column">
-                                <span class="erd-column-key">🔑</span>
-                                <span class="erd-column-name">WAREHOUSE_ID</span>
-                                <span class="erd-column-type">BIGINT</span>
-                            </div>
-                            <div class="erd-column">
-                                <span></span>
-                                <span class="erd-column-name">WAREHOUSE_NAME</span>
-                                <span class="erd-column-type">VARCHAR</span>
-                            </div>
+                            <div class="erd-column"><span class="erd-column-key">🔑</span><span class="erd-column-name">WAREHOUSE_ID</span><span class="erd-column-type">BIGINT</span></div>
+                            <div class="erd-column"><span></span><span class="erd-column-name">WAREHOUSE_NAME</span><span class="erd-column-type">VARCHAR</span></div>
                         </div>
                     </div>
-
                     <div class="erd-table">
                         <div class="erd-table-header">TBL_INVENTORIES</div>
                         <div class="erd-table-body">
-                            <div class="erd-column">
-                                <span class="erd-column-key">🔑</span>
-                                <span class="erd-column-name">PRODUCT_ID</span>
-                                <span class="erd-column-type">PK/FK</span>
-                            </div>
-                            <div class="erd-column">
-                                <span class="erd-column-key">🔑</span>
-                                <span class="erd-column-name">WAREHOUSE_ID</span>
-                                <span class="erd-column-type">PK/FK</span>
-                            </div>
-                            <div class="erd-column">
-                                <span></span>
-                                <span class="erd-column-name">QUANTITY</span>
-                                <span class="erd-column-type">INT</span>
-                            </div>
+                            <div class="erd-column"><span class="erd-column-key">🔑</span><span class="erd-column-name">PRODUCT_ID</span><span class="erd-column-type">PK/FK</span></div>
+                            <div class="erd-column"><span class="erd-column-key">🔑</span><span class="erd-column-name">WAREHOUSE_ID</span><span class="erd-column-type">PK/FK</span></div>
+                            <div class="erd-column"><span></span><span class="erd-column-name">QUANTITY</span><span class="erd-column-type">INT</span></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Key Concepts -->
             <div class="quick-ref">
                 <h3 class="quick-ref-title">📚 Key Terms Explained Simply</h3>
                 <div class="quick-ref-grid">
-                    <div class="quick-ref-item">
-                        <div class="quick-ref-label">Primary Key (PK)</div>
-                        <div class="quick-ref-value">Unique ID for each row</div>
-                    </div>
-                    <div class="quick-ref-item">
-                        <div class="quick-ref-label">Foreign Key (FK)</div>
-                        <div class="quick-ref-value">Links to another table</div>
-                    </div>
-                    <div class="quick-ref-item">
-                        <div class="quick-ref-label">IDENTITY(1,1)</div>
-                        <div class="quick-ref-value">Auto-counting ID</div>
-                    </div>
-                    <div class="quick-ref-item">
-                        <div class="quick-ref-label">VARCHAR(100)</div>
-                        <div class="quick-ref-value">Text up to 100 chars</div>
-                    </div>
-                    <div class="quick-ref-item">
-                        <div class="quick-ref-label">DECIMAL(5,2)</div>
-                        <div class="quick-ref-value">Number like 999.99</div>
-                    </div>
-                    <div class="quick-ref-item">
-                        <div class="quick-ref-label">NOT NULL</div>
-                        <div class="quick-ref-value">Required field</div>
-                    </div>
+                    <div class="quick-ref-item"><div class="quick-ref-label">Primary Key (PK)</div><div class="quick-ref-value">Unique ID for each row</div></div>
+                    <div class="quick-ref-item"><div class="quick-ref-label">Foreign Key (FK)</div><div class="quick-ref-value">Links to another table</div></div>
+                    <div class="quick-ref-item"><div class="quick-ref-label">IDENTITY(1,1)</div><div class="quick-ref-value">Auto-counting ID</div></div>
+                    <div class="quick-ref-item"><div class="quick-ref-label">VARCHAR(100)</div><div class="quick-ref-value">Text up to 100 chars</div></div>
+                    <div class="quick-ref-item"><div class="quick-ref-label">DECIMAL(5,2)</div><div class="quick-ref-value">Number like 999.99</div></div>
+                    <div class="quick-ref-item"><div class="quick-ref-label">NOT NULL</div><div class="quick-ref-value">Required field</div></div>
                 </div>
             </div>
         </section>
 
-        <!-- Setup Section -->
         <section class="tutorial-section" id="setup">
             <div class="section-header">
                 <div class="section-number">2</div>
                 <h2 class="section-title">Database Setup</h2>
             </div>
-
-            <p class="section-description">
-                First, we need to create our database. Think of a database like a filing cabinet – 
-                it holds all our tables (folders) that contain our data (files).
-            </p>
+            <p class="section-description">First, we need to create our database. Think of a database like a filing cabinet – it holds all our tables (folders) that contain our data (files).</p>
 
             <div class="info-box info-warning">
                 <div class="info-box-icon">⚠️</div>
-                <div class="info-box-content">
-                    <h4>Before You Begin</h4>
-                    <p>Make sure you have SQL Server Management Studio (SSMS) installed and you're connected to your SQL Server instance.</p>
-                </div>
+                <div class="info-box-content"><h4>Before You Begin</h4><p>Make sure you have SQL Server Management Studio (SSMS) installed and you're connected to your SQL Server instance.</p></div>
             </div>
 
             <ol class="steps-list">
@@ -1757,113 +439,56 @@
                     <div class="step-content">
                         <p>We start in the "master" database – it's like the control room where we create new databases.</p>
                         <div class="code-container">
-                            <div class="code-header">
-                                <div class="code-language">
-                                    <span class="code-dot sql"></span>
-                                    SQL
-                                </div>
-                                <div class="code-actions">
-                                    <button class="code-btn copy-btn" data-code="USE master;
-GO">📋 Copy</button>
-                                </div>
-                            </div>
-                            <div class="code-content">
-<pre><code><span class="keyword">USE</span> master;
-<span class="keyword">GO</span></code></pre>
-                            </div>
+                            <div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div>
+                            <div class="code-content"><pre><code><span class="keyword">USE</span> master;
+<span class="keyword">GO</span></code></pre></div>
                         </div>
                     </div>
                 </li>
-
                 <li class="step-item">
                     <h3 class="step-title">Remove Old Database (If Exists)</h3>
                     <div class="step-content">
                         <p>If you're re-running this tutorial, we first delete any old version to start fresh.</p>
                         <div class="code-container">
-                            <div class="code-header">
-                                <div class="code-language">
-                                    <span class="code-dot sql"></span>
-                                    SQL
-                                </div>
-                                <div class="code-actions">
-                                    <button class="code-btn copy-btn">📋 Copy</button>
-                                </div>
-                            </div>
-                            <div class="code-content">
-<pre><code><span class="comment">-- Check if database exists and remove it</span>
-<span class="keyword">IF EXISTS</span> (<span class="keyword">SELECT</span> name <span class="keyword">FROM</span> sys.databases 
+                            <div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div>
+                            <div class="code-content"><pre><code><span class="keyword">IF EXISTS</span> (<span class="keyword">SELECT</span> name <span class="keyword">FROM</span> sys.databases 
            <span class="keyword">WHERE</span> name = <span class="string">N'DB_LastNameFirstName01'</span>)
 <span class="keyword">BEGIN</span>
-    <span class="comment">-- Kick out any users connected to it</span>
     <span class="keyword">ALTER DATABASE</span> [DB_LastNameFirstName01] 
         <span class="keyword">SET</span> SINGLE_USER <span class="keyword">WITH</span> ROLLBACK IMMEDIATE;
-    
-    <span class="comment">-- Delete the database</span>
     <span class="keyword">DROP DATABASE</span> [DB_LastNameFirstName01];
 <span class="keyword">END</span>
-<span class="keyword">GO</span></code></pre>
-                            </div>
+<span class="keyword">GO</span></code></pre></div>
                         </div>
                     </div>
                 </li>
-
                 <li class="step-item">
                     <h3 class="step-title">Create New Database</h3>
                     <div class="step-content">
                         <p>Now we create our brand new database and switch to using it.</p>
                         <div class="code-container">
-                            <div class="code-header">
-                                <div class="code-language">
-                                    <span class="code-dot sql"></span>
-                                    SQL
-                                </div>
-                                <div class="code-actions">
-                                    <button class="code-btn copy-btn">📋 Copy</button>
-                                </div>
-                            </div>
-                            <div class="code-content">
-<pre><code><span class="comment">-- Create fresh database</span>
-<span class="keyword">CREATE DATABASE</span> [DB_LastNameFirstName01];
+                            <div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div>
+                            <div class="code-content"><pre><code><span class="keyword">CREATE DATABASE</span> [DB_LastNameFirstName01];
 <span class="keyword">GO</span>
 
-<span class="comment">-- Switch to our new database</span>
 <span class="keyword">USE</span> [DB_LastNameFirstName01];
-<span class="keyword">GO</span></code></pre>
-                            </div>
+<span class="keyword">GO</span></code></pre></div>
                         </div>
-                        <div class="info-box info-tip">
-                            <div class="info-box-icon">💡</div>
-                            <div class="info-box-content">
-                                <h4>Naming Convention</h4>
-                                <p>Replace "LastNameFirstName" with your actual name. Example: <code class="inline-code">DB_SmithJohn01</code></p>
-                            </div>
-                        </div>
+                        <div class="info-box info-tip"><div class="info-box-icon">💡</div><div class="info-box-content"><h4>Naming Convention</h4><p>Replace "LastNameFirstName" with your actual name. Example: <code class="inline-code">DB_SmithJohn01</code></p></div></div>
                     </div>
                 </li>
             </ol>
         </section>
 
-        <!-- Tables Section -->
         <section class="tutorial-section" id="tables">
             <div class="section-header">
                 <div class="section-number">3</div>
                 <h2 class="section-title">Creating Tables</h2>
             </div>
+            <p class="section-description">Now comes the main part – creating our 8 tables. We'll create them in a specific order because some tables depend on others (foreign key relationships).</p>
 
-            <p class="section-description">
-                Now comes the main part – creating our 8 tables. We'll create them in a specific order 
-                because some tables depend on others (foreign key relationships).
-            </p>
+            <div class="info-box info-note"><div class="info-box-icon">📌</div><div class="info-box-content"><h4>Order Matters!</h4><p>We create "parent" tables first (like Categories), then "child" tables (like Products that belong to categories).</p></div></div>
 
-            <div class="info-box info-note">
-                <div class="info-box-icon">📌</div>
-                <div class="info-box-content">
-                    <h4>Order Matters!</h4>
-                    <p>We create "parent" tables first (like Categories), then "child" tables (like Products that belong to categories).</p>
-                </div>
-            </div>
-
-            <!-- Tabs for Each Table -->
             <div class="tabs-container">
                 <div class="tabs-header">
                     <button class="tab-btn active" data-tab="tab1">Categories</button>
@@ -1876,738 +501,327 @@ GO">📋 Copy</button>
                     <button class="tab-btn" data-tab="tab8">Inventories</button>
                 </div>
 
-                <!-- Tab 1: Categories -->
                 <div class="tab-content active" id="tab1">
                     <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon">🏷️</div>
-                            <div>
-                                <h3 class="card-title">TBL_PRODUCT_CATEGORIES</h3>
-                                <p class="card-subtitle">Groups products into categories like Electronics, Clothing, etc.</p>
-                            </div>
-                        </div>
+                        <div class="card-header"><div class="card-icon">🏷️</div><div><h3 class="card-title">TBL_PRODUCT_CATEGORIES</h3><p class="card-subtitle">Groups products into categories like Electronics, Clothing, etc.</p></div></div>
                         <div class="code-container">
-                            <div class="code-header">
-                                <div class="code-language">
-                                    <span class="code-dot sql"></span>
-                                    SQL
-                                </div>
-                                <div class="code-actions">
-                                    <button class="code-btn copy-btn">📋 Copy</button>
-                                </div>
-                            </div>
-                            <div class="code-content">
-<pre><code><span class="keyword">CREATE TABLE</span> <span class="table-name">TBL_PRODUCT_CATEGORIES</span>
+                            <div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div>
+                            <div class="code-content"><pre><code><span class="keyword">CREATE TABLE</span> <span class="table-name">TBL_PRODUCT_CATEGORIES</span>
 (
-    <span class="comment">-- Auto-incrementing ID starting at 1</span>
     CATEGORY_ID     <span class="type">BIGINT</span> <span class="keyword">IDENTITY</span>(<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">NOT NULL</span>,
-    
-    <span class="comment">-- Category name up to 100 characters</span>
     CATEGORY_NAME   <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span>,
-    
-    <span class="comment">-- Make CATEGORY_ID the primary key</span>
-    <span class="keyword">CONSTRAINT</span> PK_PRODUCT_CATEGORIES 
-        <span class="keyword">PRIMARY KEY</span> (CATEGORY_ID)
+    <span class="keyword">CONSTRAINT</span> PK_PRODUCT_CATEGORIES <span class="keyword">PRIMARY KEY</span> (CATEGORY_ID)
 );
-<span class="keyword">GO</span></code></pre>
-                            </div>
+<span class="keyword">GO</span></code></pre></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Tab 2: Warehouses -->
                 <div class="tab-content" id="tab2">
                     <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon">🏭</div>
-                            <div>
-                                <h3 class="card-title">TBL_WAREHOUSES</h3>
-                                <p class="card-subtitle">Physical locations where products are stored</p>
-                            </div>
-                        </div>
+                        <div class="card-header"><div class="card-icon">🏭</div><div><h3 class="card-title">TBL_WAREHOUSES</h3><p class="card-subtitle">Physical locations where products are stored</p></div></div>
                         <div class="code-container">
-                            <div class="code-header">
-                                <div class="code-language">
-                                    <span class="code-dot sql"></span>
-                                    SQL
-                                </div>
-                                <div class="code-actions">
-                                    <button class="code-btn copy-btn">📋 Copy</button>
-                                </div>
-                            </div>
-                            <div class="code-content">
-<pre><code><span class="keyword">CREATE TABLE</span> <span class="table-name">TBL_WAREHOUSES</span>
+                            <div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div>
+                            <div class="code-content"><pre><code><span class="keyword">CREATE TABLE</span> <span class="table-name">TBL_WAREHOUSES</span>
 (
     WAREHOUSE_ID    <span class="type">BIGINT</span> <span class="keyword">IDENTITY</span>(<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">NOT NULL</span>,
     WAREHOUSE_NAME  <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span>,
-    
-    <span class="keyword">CONSTRAINT</span> PK_WAREHOUSES 
-        <span class="keyword">PRIMARY KEY</span> (WAREHOUSE_ID)
+    <span class="keyword">CONSTRAINT</span> PK_WAREHOUSES <span class="keyword">PRIMARY KEY</span> (WAREHOUSE_ID)
 );
-<span class="keyword">GO</span></code></pre>
-                            </div>
+<span class="keyword">GO</span></code></pre></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Tab 3: Customers -->
                 <div class="tab-content" id="tab3">
                     <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon">👥</div>
-                            <div>
-                                <h3 class="card-title">TBL_CUSTOMERS</h3>
-                                <p class="card-subtitle">People or companies who buy products</p>
-                            </div>
-                        </div>
+                        <div class="card-header"><div class="card-icon">👥</div><div><h3 class="card-title">TBL_CUSTOMERS</h3><p class="card-subtitle">People or companies who buy products</p></div></div>
                         <div class="code-container">
-                            <div class="code-header">
-                                <div class="code-language">
-                                    <span class="code-dot sql"></span>
-                                    SQL
-                                </div>
-                                <div class="code-actions">
-                                    <button class="code-btn copy-btn">📋 Copy</button>
-                                </div>
-                            </div>
-                            <div class="code-content">
-<pre><code><span class="keyword">CREATE TABLE</span> <span class="table-name">TBL_CUSTOMERS</span>
+                            <div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div>
+                            <div class="code-content"><pre><code><span class="keyword">CREATE TABLE</span> <span class="table-name">TBL_CUSTOMERS</span>
 (
     CUSTOMER_ID     <span class="type">BIGINT</span> <span class="keyword">IDENTITY</span>(<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">NOT NULL</span>,
     NAME            <span class="type">VARCHAR</span>(<span class="number">150</span>) <span class="keyword">NOT NULL</span>,
-    ADDRESS         <span class="type">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NULL</span>,     <span class="comment">-- Optional</span>
-    CREDIT_LIMIT    <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>,        <span class="comment">-- Defaults to 0</span>
-    
-    <span class="keyword">CONSTRAINT</span> PK_CUSTOMERS 
-        <span class="keyword">PRIMARY KEY</span> (CUSTOMER_ID)
+    ADDRESS         <span class="type">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NULL</span>,
+    CREDIT_LIMIT    <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>,
+    <span class="keyword">CONSTRAINT</span> PK_CUSTOMERS <span class="keyword">PRIMARY KEY</span> (CUSTOMER_ID)
 );
-<span class="keyword">GO</span></code></pre>
-                            </div>
+<span class="keyword">GO</span></code></pre></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Tab 4: Employees -->
                 <div class="tab-content" id="tab4">
                     <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon">👔</div>
-                            <div>
-                                <h3 class="card-title">TBL_EMPLOYEES</h3>
-                                <p class="card-subtitle">Staff who process and manage orders</p>
-                            </div>
-                        </div>
-                        <div class="info-box info-warning">
-                            <div class="info-box-icon">⚠️</div>
-                            <div class="info-box-content">
-                                <h4>Special Note</h4>
-                                <p>Per specification: PHONE is INT (not VARCHAR) and HIRE_DATE is VARCHAR (not DATE).</p>
-                            </div>
-                        </div>
+                        <div class="card-header"><div class="card-icon">👔</div><div><h3 class="card-title">TBL_EMPLOYEES</h3><p class="card-subtitle">Staff who process and manage orders</p></div></div>
+                        <div class="info-box info-warning"><div class="info-box-icon">⚠️</div><div class="info-box-content"><h4>Special Note</h4><p>Per specification: PHONE is INT (not VARCHAR) and HIRE_DATE is VARCHAR (not DATE).</p></div></div>
                         <div class="code-container">
-                            <div class="code-header">
-                                <div class="code-language">
-                                    <span class="code-dot sql"></span>
-                                    SQL
-                                </div>
-                                <div class="code-actions">
-                                    <button class="code-btn copy-btn">📋 Copy</button>
-                                </div>
-                            </div>
-                            <div class="code-content">
-<pre><code><span class="keyword">CREATE TABLE</span> <span class="table-name">TBL_EMPLOYEES</span>
+                            <div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div>
+                            <div class="code-content"><pre><code><span class="keyword">CREATE TABLE</span> <span class="table-name">TBL_EMPLOYEES</span>
 (
     EMPLOYEE_ID     <span class="type">BIGINT</span> <span class="keyword">IDENTITY</span>(<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">NOT NULL</span>,
     FIRST_NAME      <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span>,
     LAST_NAME       <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span>,
     EMAIL           <span class="type">VARCHAR</span>(<span class="number">150</span>) <span class="keyword">NOT NULL</span>,
-    PHONE           <span class="type">INT</span> <span class="keyword">NULL</span>,                    <span class="comment">-- SPEC: INT type</span>
-    HIRE_DATE       <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT NULL</span>,        <span class="comment">-- SPEC: VARCHAR type</span>
+    PHONE           <span class="type">INT</span> <span class="keyword">NULL</span>,
+    HIRE_DATE       <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT NULL</span>,
     JOB_TITLE       <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span>,
-    
-    <span class="keyword">CONSTRAINT</span> PK_EMPLOYEES 
-        <span class="keyword">PRIMARY KEY</span> (EMPLOYEE_ID)
+    <span class="keyword">CONSTRAINT</span> PK_EMPLOYEES <span class="keyword">PRIMARY KEY</span> (EMPLOYEE_ID)
 );
-<span class="keyword">GO</span></code></pre>
-                            </div>
+<span class="keyword">GO</span></code></pre></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Tab 5: Products -->
                 <div class="tab-content" id="tab5">
                     <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon">📦</div>
-                            <div>
-                                <h3 class="card-title">TBL_PRODUCTS</h3>
-                                <p class="card-subtitle">Items available for sale (links to Categories)</p>
-                            </div>
-                        </div>
+                        <div class="card-header"><div class="card-icon">📦</div><div><h3 class="card-title">TBL_PRODUCTS</h3><p class="card-subtitle">Items available for sale (links to Categories)</p></div></div>
                         <div class="code-container">
-                            <div class="code-header">
-                                <div class="code-language">
-                                    <span class="code-dot sql"></span>
-                                    SQL
-                                </div>
-                                <div class="code-actions">
-                                    <button class="code-btn copy-btn">📋 Copy</button>
-                                </div>
-                            </div>
-                            <div class="code-content">
-<pre><code><span class="keyword">CREATE TABLE</span> <span class="table-name">TBL_PRODUCTS</span>
+                            <div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div>
+                            <div class="code-content"><pre><code><span class="keyword">CREATE TABLE</span> <span class="table-name">TBL_PRODUCTS</span>
 (
     PRODUCT_ID      <span class="type">BIGINT</span> <span class="keyword">IDENTITY</span>(<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">NOT NULL</span>,
     PRODUCT_NAME    <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT NULL</span>,
     DESCRIPTION     <span class="type">VARCHAR</span>(<span class="number">500</span>) <span class="keyword">NULL</span>,
-    STANDARD_COST   <span class="type">DECIMAL</span>(<span class="number">5</span>,<span class="number">2</span>) <span class="keyword">NOT NULL</span>,   <span class="comment">-- Max: 999.99</span>
-    LIST_PRICE      <span class="type">DECIMAL</span>(<span class="number">5</span>,<span class="number">2</span>) <span class="keyword">NOT NULL</span>,   <span class="comment">-- Max: 999.99</span>
+    STANDARD_COST   <span class="type">DECIMAL</span>(<span class="number">5</span>,<span class="number">2</span>) <span class="keyword">NOT NULL</span>,
+    LIST_PRICE      <span class="type">DECIMAL</span>(<span class="number">5</span>,<span class="number">2</span>) <span class="keyword">NOT NULL</span>,
     CATEGORY_ID     <span class="type">BIGINT</span> <span class="keyword">NOT NULL</span>,
-    
-    <span class="keyword">CONSTRAINT</span> PK_PRODUCTS 
-        <span class="keyword">PRIMARY KEY</span> (PRODUCT_ID),
-    
-    <span class="comment">-- Links to Categories table</span>
-    <span class="keyword">CONSTRAINT</span> FK_PRODUCTS_CATEGORY 
-        <span class="keyword">FOREIGN KEY</span> (CATEGORY_ID) 
+    <span class="keyword">CONSTRAINT</span> PK_PRODUCTS <span class="keyword">PRIMARY KEY</span> (PRODUCT_ID),
+    <span class="keyword">CONSTRAINT</span> FK_PRODUCTS_CATEGORY <span class="keyword">FOREIGN KEY</span> (CATEGORY_ID) 
         <span class="keyword">REFERENCES</span> TBL_PRODUCT_CATEGORIES(CATEGORY_ID)
 );
-<span class="keyword">GO</span></code></pre>
-                            </div>
+<span class="keyword">GO</span></code></pre></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Tab 6: Orders -->
                 <div class="tab-content" id="tab6">
                     <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon">📋</div>
-                            <div>
-                                <h3 class="card-title">TBL_ORDERS</h3>
-                                <p class="card-subtitle">Customer purchase orders (links to Customers & Employees)</p>
-                            </div>
-                        </div>
+                        <div class="card-header"><div class="card-icon">📋</div><div><h3 class="card-title">TBL_ORDERS</h3><p class="card-subtitle">Customer purchase orders (links to Customers & Employees)</p></div></div>
                         <div class="code-container">
-                            <div class="code-header">
-                                <div class="code-language">
-                                    <span class="code-dot sql"></span>
-                                    SQL
-                                </div>
-                                <div class="code-actions">
-                                    <button class="code-btn copy-btn">📋 Copy</button>
-                                </div>
-                            </div>
-                            <div class="code-content">
-<pre><code><span class="keyword">CREATE TABLE</span> <span class="table-name">TBL_ORDERS</span>
+                            <div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div>
+                            <div class="code-content"><pre><code><span class="keyword">CREATE TABLE</span> <span class="table-name">TBL_ORDERS</span>
 (
     ORDER_ID        <span class="type">BIGINT</span> <span class="keyword">IDENTITY</span>(<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">NOT NULL</span>,
     CUSTOMER_ID     <span class="type">BIGINT</span> <span class="keyword">NOT NULL</span>,
     STATUS          <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT NULL</span>,
     EMPLOYEE_ID     <span class="type">BIGINT</span> <span class="keyword">NOT NULL</span>,
-    ORDER_DATE      <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT NULL</span>,        <span class="comment">-- SPEC: VARCHAR</span>
-    
-    <span class="keyword">CONSTRAINT</span> PK_ORDERS 
-        <span class="keyword">PRIMARY KEY</span> (ORDER_ID),
-    <span class="keyword">CONSTRAINT</span> FK_ORDERS_CUSTOMER 
-        <span class="keyword">FOREIGN KEY</span> (CUSTOMER_ID) 
+    ORDER_DATE      <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT NULL</span>,
+    <span class="keyword">CONSTRAINT</span> PK_ORDERS <span class="keyword">PRIMARY KEY</span> (ORDER_ID),
+    <span class="keyword">CONSTRAINT</span> FK_ORDERS_CUSTOMER <span class="keyword">FOREIGN KEY</span> (CUSTOMER_ID) 
         <span class="keyword">REFERENCES</span> TBL_CUSTOMERS(CUSTOMER_ID),
-    <span class="keyword">CONSTRAINT</span> FK_ORDERS_EMPLOYEE 
-        <span class="keyword">FOREIGN KEY</span> (EMPLOYEE_ID) 
+    <span class="keyword">CONSTRAINT</span> FK_ORDERS_EMPLOYEE <span class="keyword">FOREIGN KEY</span> (EMPLOYEE_ID) 
         <span class="keyword">REFERENCES</span> TBL_EMPLOYEES(EMPLOYEE_ID)
 );
-<span class="keyword">GO</span></code></pre>
-                            </div>
+<span class="keyword">GO</span></code></pre></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Tab 7: Items -->
                 <div class="tab-content" id="tab7">
                     <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon">🛒</div>
-                            <div>
-                                <h3 class="card-title">TBL_ITEMS</h3>
-                                <p class="card-subtitle">Individual line items within each order</p>
-                            </div>
-                        </div>
+                        <div class="card-header"><div class="card-icon">🛒</div><div><h3 class="card-title">TBL_ITEMS</h3><p class="card-subtitle">Individual line items within each order</p></div></div>
                         <div class="code-container">
-                            <div class="code-header">
-                                <div class="code-language">
-                                    <span class="code-dot sql"></span>
-                                    SQL
-                                </div>
-                                <div class="code-actions">
-                                    <button class="code-btn copy-btn">📋 Copy</button>
-                                </div>
-                            </div>
-                            <div class="code-content">
-<pre><code><span class="keyword">CREATE TABLE</span> <span class="table-name">TBL_ITEMS</span>
+                            <div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div>
+                            <div class="code-content"><pre><code><span class="keyword">CREATE TABLE</span> <span class="table-name">TBL_ITEMS</span>
 (
     ITEM_ID         <span class="type">BIGINT</span> <span class="keyword">IDENTITY</span>(<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">NOT NULL</span>,
     ORDER_ID        <span class="type">BIGINT</span> <span class="keyword">NOT NULL</span>,
     PRODUCT_ID      <span class="type">BIGINT</span> <span class="keyword">NOT NULL</span>,
     QUANTITY        <span class="type">INT</span> <span class="keyword">NOT NULL</span>,
-    PRICE           <span class="type">DECIMAL</span>(<span class="number">5</span>,<span class="number">2</span>) <span class="keyword">NOT NULL</span>,       <span class="comment">-- SPEC: PRICE column</span>
-    
-    <span class="keyword">CONSTRAINT</span> PK_ITEMS 
-        <span class="keyword">PRIMARY KEY</span> (ITEM_ID),
-    <span class="keyword">CONSTRAINT</span> FK_ITEMS_ORDER 
-        <span class="keyword">FOREIGN KEY</span> (ORDER_ID) 
+    PRICE           <span class="type">DECIMAL</span>(<span class="number">5</span>,<span class="number">2</span>) <span class="keyword">NOT NULL</span>,
+    <span class="keyword">CONSTRAINT</span> PK_ITEMS <span class="keyword">PRIMARY KEY</span> (ITEM_ID),
+    <span class="keyword">CONSTRAINT</span> FK_ITEMS_ORDER <span class="keyword">FOREIGN KEY</span> (ORDER_ID) 
         <span class="keyword">REFERENCES</span> TBL_ORDERS(ORDER_ID),
-    <span class="keyword">CONSTRAINT</span> FK_ITEMS_PRODUCT 
-        <span class="keyword">FOREIGN KEY</span> (PRODUCT_ID) 
+    <span class="keyword">CONSTRAINT</span> FK_ITEMS_PRODUCT <span class="keyword">FOREIGN KEY</span> (PRODUCT_ID) 
         <span class="keyword">REFERENCES</span> TBL_PRODUCTS(PRODUCT_ID)
 );
-<span class="keyword">GO</span></code></pre>
-                            </div>
+<span class="keyword">GO</span></code></pre></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Tab 8: Inventories -->
                 <div class="tab-content" id="tab8">
                     <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon">📊</div>
-                            <div>
-                                <h3 class="card-title">TBL_INVENTORIES</h3>
-                                <p class="card-subtitle">Stock levels for products in each warehouse (composite key)</p>
-                            </div>
-                        </div>
-                        <div class="info-box info-note">
-                            <div class="info-box-icon">📌</div>
-                            <div class="info-box-content">
-                                <h4>Composite Primary Key</h4>
-                                <p>This table uses TWO columns together as the primary key. This means the same product can exist in multiple warehouses.</p>
-                            </div>
-                        </div>
+                        <div class="card-header"><div class="card-icon">📊</div><div><h3 class="card-title">TBL_INVENTORIES</h3><p class="card-subtitle">Stock levels for products in each warehouse (composite key)</p></div></div>
+                        <div class="info-box info-note"><div class="info-box-icon">📌</div><div class="info-box-content"><h4>Composite Primary Key</h4><p>This table uses TWO columns together as the primary key. This means the same product can exist in multiple warehouses.</p></div></div>
                         <div class="code-container">
-                            <div class="code-header">
-                                <div class="code-language">
-                                    <span class="code-dot sql"></span>
-                                    SQL
-                                </div>
-                                <div class="code-actions">
-                                    <button class="code-btn copy-btn">📋 Copy</button>
-                                </div>
-                            </div>
-                            <div class="code-content">
-<pre><code><span class="keyword">CREATE TABLE</span> <span class="table-name">TBL_INVENTORIES</span>
+                            <div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div>
+                            <div class="code-content"><pre><code><span class="keyword">CREATE TABLE</span> <span class="table-name">TBL_INVENTORIES</span>
 (
     PRODUCT_ID      <span class="type">BIGINT</span> <span class="keyword">NOT NULL</span>,
     WAREHOUSE_ID    <span class="type">BIGINT</span> <span class="keyword">NOT NULL</span>,
     QUANTITY        <span class="type">INT</span> <span class="keyword">NOT NULL DEFAULT</span> <span class="number">0</span>,
-    
-    <span class="comment">-- Composite Primary Key (both columns together)</span>
-    <span class="keyword">CONSTRAINT</span> PK_INVENTORIES 
-        <span class="keyword">PRIMARY KEY</span> (PRODUCT_ID, WAREHOUSE_ID),
-    <span class="keyword">CONSTRAINT</span> FK_INVENTORIES_PRODUCT 
-        <span class="keyword">FOREIGN KEY</span> (PRODUCT_ID) 
+    <span class="keyword">CONSTRAINT</span> PK_INVENTORIES <span class="keyword">PRIMARY KEY</span> (PRODUCT_ID, WAREHOUSE_ID),
+    <span class="keyword">CONSTRAINT</span> FK_INVENTORIES_PRODUCT <span class="keyword">FOREIGN KEY</span> (PRODUCT_ID) 
         <span class="keyword">REFERENCES</span> TBL_PRODUCTS(PRODUCT_ID),
-    <span class="keyword">CONSTRAINT</span> FK_INVENTORIES_WAREHOUSE 
-        <span class="keyword">FOREIGN KEY</span> (WAREHOUSE_ID) 
+    <span class="keyword">CONSTRAINT</span> FK_INVENTORIES_WAREHOUSE <span class="keyword">FOREIGN KEY</span> (WAREHOUSE_ID) 
         <span class="keyword">REFERENCES</span> TBL_WAREHOUSES(WAREHOUSE_ID)
 );
-<span class="keyword">GO</span></code></pre>
-                            </div>
+<span class="keyword">GO</span></code></pre></div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Data Section -->
         <section class="tutorial-section" id="data">
             <div class="section-header">
                 <div class="section-number">4</div>
                 <h2 class="section-title">Inserting Sample Data</h2>
             </div>
-
-            <p class="section-description">
-                Empty tables aren't very useful! Let's add some sample data to test our database. 
-                We'll insert data in the same order we created tables.
-            </p>
+            <p class="section-description">Empty tables aren't very useful! Let's add some sample data to test our database. We'll insert data in the same order we created tables.</p>
 
             <div class="accordion">
                 <div class="accordion-item active">
-                    <button class="accordion-header">
-                        <span>🏷️ Categories Data (5 records)</span>
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <div class="code-container">
-                                <div class="code-header">
-                                    <div class="code-language">
-                                        <span class="code-dot sql"></span>
-                                        SQL
-                                    </div>
-                                    <div class="code-actions">
-                                        <button class="code-btn copy-btn">📋 Copy</button>
-                                    </div>
-                                </div>
-                                <div class="code-content">
-<pre><code><span class="keyword">INSERT INTO</span> TBL_PRODUCT_CATEGORIES (CATEGORY_NAME) 
-<span class="keyword">VALUES</span> 
-    (<span class="string">'Electronics'</span>), 
-    (<span class="string">'Clothing'</span>), 
-    (<span class="string">'Food'</span>), 
-    (<span class="string">'Sports'</span>), 
-    (<span class="string">'Books'</span>);
-<span class="keyword">GO</span></code></pre>
-                                </div>
-                            </div>
+                    <button class="accordion-header"><span>🏷️ Categories Data (5 records)</span><span class="accordion-icon">+</span></button>
+                    <div class="accordion-content"><div class="accordion-body">
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div>
+                            <div class="code-content"><pre><code><span class="keyword">INSERT INTO</span> TBL_PRODUCT_CATEGORIES (CATEGORY_NAME) <span class="keyword">VALUES</span> 
+    (<span class="string">'Electronics'</span>), (<span class="string">'Clothing'</span>), (<span class="string">'Food'</span>), (<span class="string">'Sports'</span>), (<span class="string">'Books'</span>);
+<span class="keyword">GO</span></code></pre></div>
                         </div>
-                    </div>
+                    </div></div>
                 </div>
 
                 <div class="accordion-item">
-                    <button class="accordion-header">
-                        <span>🏭 Warehouses Data (3 records)</span>
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <div class="code-container">
-                                <div class="code-header">
-                                    <div class="code-language">
-                                        <span class="code-dot sql"></span>
-                                        SQL
-                                    </div>
-                                    <div class="code-actions">
-                                        <button class="code-btn copy-btn">📋 Copy</button>
-                                    </div>
-                                </div>
-                                <div class="code-content">
-<pre><code><span class="keyword">INSERT INTO</span> TBL_WAREHOUSES (WAREHOUSE_NAME) 
-<span class="keyword">VALUES</span> 
-    (<span class="string">'Main Warehouse'</span>), 
-    (<span class="string">'North Branch'</span>), 
-    (<span class="string">'South Branch'</span>);
-<span class="keyword">GO</span></code></pre>
-                                </div>
-                            </div>
+                    <button class="accordion-header"><span>🏭 Warehouses Data (3 records)</span><span class="accordion-icon">+</span></button>
+                    <div class="accordion-content"><div class="accordion-body">
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div>
+                            <div class="code-content"><pre><code><span class="keyword">INSERT INTO</span> TBL_WAREHOUSES (WAREHOUSE_NAME) <span class="keyword">VALUES</span> 
+    (<span class="string">'Main Warehouse'</span>), (<span class="string">'North Branch'</span>), (<span class="string">'South Branch'</span>);
+<span class="keyword">GO</span></code></pre></div>
                         </div>
-                    </div>
+                    </div></div>
                 </div>
 
                 <div class="accordion-item">
-                    <button class="accordion-header">
-                        <span>👥 Customers Data (3 records)</span>
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <div class="code-container">
-                                <div class="code-header">
-                                    <div class="code-language">
-                                        <span class="code-dot sql"></span>
-                                        SQL
-                                    </div>
-                                    <div class="code-actions">
-                                        <button class="code-btn copy-btn">📋 Copy</button>
-                                    </div>
-                                </div>
-                                <div class="code-content">
-<pre><code><span class="keyword">INSERT INTO</span> TBL_CUSTOMERS (NAME, ADDRESS, CREDIT_LIMIT) 
-<span class="keyword">VALUES</span> 
+                    <button class="accordion-header"><span>👥 Customers Data (3 records)</span><span class="accordion-icon">+</span></button>
+                    <div class="accordion-content"><div class="accordion-body">
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div>
+                            <div class="code-content"><pre><code><span class="keyword">INSERT INTO</span> TBL_CUSTOMERS (NAME, ADDRESS, CREDIT_LIMIT) <span class="keyword">VALUES</span> 
     (<span class="string">'ABC Corporation'</span>, <span class="string">'Manila'</span>, <span class="number">500000</span>),
     (<span class="string">'XYZ Trading'</span>, <span class="string">'Quezon City'</span>, <span class="number">300000</span>),
     (<span class="string">'Best Retail'</span>, <span class="string">'Makati'</span>, <span class="number">200000</span>);
-<span class="keyword">GO</span></code></pre>
-                                </div>
-                            </div>
+<span class="keyword">GO</span></code></pre></div>
                         </div>
-                    </div>
+                    </div></div>
                 </div>
 
                 <div class="accordion-item">
-                    <button class="accordion-header">
-                        <span>👔 Employees Data (3 records)</span>
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <div class="code-container">
-                                <div class="code-header">
-                                    <div class="code-language">
-                                        <span class="code-dot sql"></span>
-                                        SQL
-                                    </div>
-                                    <div class="code-actions">
-                                        <button class="code-btn copy-btn">📋 Copy</button>
-                                    </div>
-                                </div>
-                                <div class="code-content">
-<pre><code><span class="keyword">INSERT INTO</span> TBL_EMPLOYEES 
-    (FIRST_NAME, LAST_NAME, EMAIL, PHONE, HIRE_DATE, JOB_TITLE) 
-<span class="keyword">VALUES</span> 
-    (<span class="string">'Juan'</span>, <span class="string">'Dela Cruz'</span>, <span class="string">'juan@company.com'</span>, 
-     <span class="number">917123456</span>, <span class="string">'2020-01-15'</span>, <span class="string">'Sales Manager'</span>),
-    (<span class="string">'Maria'</span>, <span class="string">'Santos'</span>, <span class="string">'maria@company.com'</span>, 
-     <span class="number">918123456</span>, <span class="string">'2020-03-20'</span>, <span class="string">'Sales Rep'</span>),
-    (<span class="string">'Pedro'</span>, <span class="string">'Reyes'</span>, <span class="string">'pedro@company.com'</span>, 
-     <span class="number">919123456</span>, <span class="string">'2019-06-10'</span>, <span class="string">'Warehouse Manager'</span>);
-<span class="keyword">GO</span></code></pre>
-                                </div>
-                            </div>
+                    <button class="accordion-header"><span>👔 Employees Data (3 records)</span><span class="accordion-icon">+</span></button>
+                    <div class="accordion-content"><div class="accordion-body">
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div>
+                            <div class="code-content"><pre><code><span class="keyword">INSERT INTO</span> TBL_EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE, HIRE_DATE, JOB_TITLE) <span class="keyword">VALUES</span> 
+    (<span class="string">'Juan'</span>, <span class="string">'Dela Cruz'</span>, <span class="string">'juan@company.com'</span>, <span class="number">917123456</span>, <span class="string">'2020-01-15'</span>, <span class="string">'Sales Manager'</span>),
+    (<span class="string">'Maria'</span>, <span class="string">'Santos'</span>, <span class="string">'maria@company.com'</span>, <span class="number">918123456</span>, <span class="string">'2020-03-20'</span>, <span class="string">'Sales Rep'</span>),
+    (<span class="string">'Pedro'</span>, <span class="string">'Reyes'</span>, <span class="string">'pedro@company.com'</span>, <span class="number">919123456</span>, <span class="string">'2019-06-10'</span>, <span class="string">'Warehouse Manager'</span>);
+<span class="keyword">GO</span></code></pre></div>
                         </div>
-                    </div>
+                    </div></div>
                 </div>
 
                 <div class="accordion-item">
-                    <button class="accordion-header">
-                        <span>📦 Products Data (5 records)</span>
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <div class="code-container">
-                                <div class="code-header">
-                                    <div class="code-language">
-                                        <span class="code-dot sql"></span>
-                                        SQL
-                                    </div>
-                                    <div class="code-actions">
-                                        <button class="code-btn copy-btn">📋 Copy</button>
-                                    </div>
-                                </div>
-                                <div class="code-content">
-<pre><code><span class="keyword">INSERT INTO</span> TBL_PRODUCTS 
-    (PRODUCT_NAME, DESCRIPTION, STANDARD_COST, LIST_PRICE, CATEGORY_ID) 
-<span class="keyword">VALUES</span> 
+                    <button class="accordion-header"><span>📦 Products Data (5 records)</span><span class="accordion-icon">+</span></button>
+                    <div class="accordion-content"><div class="accordion-body">
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div>
+                            <div class="code-content"><pre><code><span class="keyword">INSERT INTO</span> TBL_PRODUCTS (PRODUCT_NAME, DESCRIPTION, STANDARD_COST, LIST_PRICE, CATEGORY_ID) <span class="keyword">VALUES</span> 
     (<span class="string">'Wireless Mouse'</span>, <span class="string">'Ergonomic mouse'</span>, <span class="number">15.00</span>, <span class="number">29.99</span>, <span class="number">1</span>),
     (<span class="string">'USB Cable'</span>, <span class="string">'Type-C cable'</span>, <span class="number">5.00</span>, <span class="number">12.99</span>, <span class="number">1</span>),
     (<span class="string">'T-Shirt'</span>, <span class="string">'Cotton shirt'</span>, <span class="number">8.00</span>, <span class="number">19.99</span>, <span class="number">2</span>),
     (<span class="string">'Running Shoes'</span>, <span class="string">'Sport shoes'</span>, <span class="number">45.00</span>, <span class="number">89.99</span>, <span class="number">4</span>),
     (<span class="string">'Novel Book'</span>, <span class="string">'Bestseller'</span>, <span class="number">10.00</span>, <span class="number">24.99</span>, <span class="number">5</span>);
-<span class="keyword">GO</span></code></pre>
-                                </div>
-                            </div>
+<span class="keyword">GO</span></code></pre></div>
                         </div>
-                    </div>
+                    </div></div>
                 </div>
 
                 <div class="accordion-item">
-                    <button class="accordion-header">
-                        <span>📋 Orders Data (4 records)</span>
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <div class="code-container">
-                                <div class="code-header">
-                                    <div class="code-language">
-                                        <span class="code-dot sql"></span>
-                                        SQL
-                                    </div>
-                                    <div class="code-actions">
-                                        <button class="code-btn copy-btn">📋 Copy</button>
-                                    </div>
-                                </div>
-                                <div class="code-content">
-<pre><code><span class="keyword">INSERT INTO</span> TBL_ORDERS 
-    (CUSTOMER_ID, STATUS, EMPLOYEE_ID, ORDER_DATE) 
-<span class="keyword">VALUES</span> 
+                    <button class="accordion-header"><span>📋 Orders Data (4 records)</span><span class="accordion-icon">+</span></button>
+                    <div class="accordion-content"><div class="accordion-body">
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div>
+                            <div class="code-content"><pre><code><span class="keyword">INSERT INTO</span> TBL_ORDERS (CUSTOMER_ID, STATUS, EMPLOYEE_ID, ORDER_DATE) <span class="keyword">VALUES</span> 
     (<span class="number">1</span>, <span class="string">'Delivered'</span>, <span class="number">1</span>, <span class="string">'2024-01-15'</span>),
     (<span class="number">2</span>, <span class="string">'Shipped'</span>, <span class="number">2</span>, <span class="string">'2024-01-16'</span>),
     (<span class="number">3</span>, <span class="string">'Pending'</span>, <span class="number">1</span>, <span class="string">'2024-01-17'</span>),
     (<span class="number">1</span>, <span class="string">'Processing'</span>, <span class="number">2</span>, <span class="string">'2024-01-18'</span>);
-<span class="keyword">GO</span></code></pre>
-                                </div>
-                            </div>
+<span class="keyword">GO</span></code></pre></div>
                         </div>
-                    </div>
+                    </div></div>
                 </div>
 
                 <div class="accordion-item">
-                    <button class="accordion-header">
-                        <span>🛒 Items Data (6 records)</span>
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <div class="code-container">
-                                <div class="code-header">
-                                    <div class="code-language">
-                                        <span class="code-dot sql"></span>
-                                        SQL
-                                    </div>
-                                    <div class="code-actions">
-                                        <button class="code-btn copy-btn">📋 Copy</button>
-                                    </div>
-                                </div>
-                                <div class="code-content">
-<pre><code><span class="keyword">INSERT INTO</span> TBL_ITEMS 
-    (ORDER_ID, PRODUCT_ID, QUANTITY, PRICE) 
-<span class="keyword">VALUES</span> 
-    (<span class="number">1</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">29.99</span>),
-    (<span class="number">1</span>, <span class="number">2</span>, <span class="number">20</span>, <span class="number">12.99</span>),
-    (<span class="number">2</span>, <span class="number">3</span>, <span class="number">50</span>, <span class="number">19.99</span>),
-    (<span class="number">2</span>, <span class="number">4</span>, <span class="number">15</span>, <span class="number">89.99</span>),
-    (<span class="number">3</span>, <span class="number">5</span>, <span class="number">30</span>, <span class="number">24.99</span>),
-    (<span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">29.99</span>);
-<span class="keyword">GO</span></code></pre>
-                                </div>
-                            </div>
+                    <button class="accordion-header"><span>🛒 Items Data (6 records)</span><span class="accordion-icon">+</span></button>
+                    <div class="accordion-content"><div class="accordion-body">
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div>
+                            <div class="code-content"><pre><code><span class="keyword">INSERT INTO</span> TBL_ITEMS (ORDER_ID, PRODUCT_ID, QUANTITY, PRICE) <span class="keyword">VALUES</span> 
+    (<span class="number">1</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">29.99</span>), (<span class="number">1</span>, <span class="number">2</span>, <span class="number">20</span>, <span class="number">12.99</span>),
+    (<span class="number">2</span>, <span class="number">3</span>, <span class="number">50</span>, <span class="number">19.99</span>), (<span class="number">2</span>, <span class="number">4</span>, <span class="number">15</span>, <span class="number">89.99</span>),
+    (<span class="number">3</span>, <span class="number">5</span>, <span class="number">30</span>, <span class="number">24.99</span>), (<span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">29.99</span>);
+<span class="keyword">GO</span></code></pre></div>
                         </div>
-                    </div>
+                    </div></div>
                 </div>
 
                 <div class="accordion-item">
-                    <button class="accordion-header">
-                        <span>📊 Inventories Data (8 records)</span>
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <div class="code-container">
-                                <div class="code-header">
-                                    <div class="code-language">
-                                        <span class="code-dot sql"></span>
-                                        SQL
-                                    </div>
-                                    <div class="code-actions">
-                                        <button class="code-btn copy-btn">📋 Copy</button>
-                                    </div>
-                                </div>
-                                <div class="code-content">
-<pre><code><span class="keyword">INSERT INTO</span> TBL_INVENTORIES 
-    (PRODUCT_ID, WAREHOUSE_ID, QUANTITY) 
-<span class="keyword">VALUES</span> 
-    (<span class="number">1</span>, <span class="number">1</span>, <span class="number">500</span>), (<span class="number">1</span>, <span class="number">2</span>, <span class="number">200</span>),
-    (<span class="number">2</span>, <span class="number">1</span>, <span class="number">1000</span>), (<span class="number">2</span>, <span class="number">3</span>, <span class="number">300</span>),
-    (<span class="number">3</span>, <span class="number">1</span>, <span class="number">800</span>), (<span class="number">3</span>, <span class="number">2</span>, <span class="number">400</span>),
-    (<span class="number">4</span>, <span class="number">2</span>, <span class="number">150</span>), (<span class="number">5</span>, <span class="number">1</span>, <span class="number">250</span>);
-<span class="keyword">GO</span></code></pre>
-                                </div>
-                            </div>
+                    <button class="accordion-header"><span>📊 Inventories Data (8 records)</span><span class="accordion-icon">+</span></button>
+                    <div class="accordion-content"><div class="accordion-body">
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div>
+                            <div class="code-content"><pre><code><span class="keyword">INSERT INTO</span> TBL_INVENTORIES (PRODUCT_ID, WAREHOUSE_ID, QUANTITY) <span class="keyword">VALUES</span> 
+    (<span class="number">1</span>, <span class="number">1</span>, <span class="number">500</span>), (<span class="number">1</span>, <span class="number">2</span>, <span class="number">200</span>), (<span class="number">2</span>, <span class="number">1</span>, <span class="number">1000</span>), (<span class="number">2</span>, <span class="number">3</span>, <span class="number">300</span>),
+    (<span class="number">3</span>, <span class="number">1</span>, <span class="number">800</span>), (<span class="number">3</span>, <span class="number">2</span>, <span class="number">400</span>), (<span class="number">4</span>, <span class="number">2</span>, <span class="number">150</span>), (<span class="number">5</span>, <span class="number">1</span>, <span class="number">250</span>);
+<span class="keyword">GO</span></code></pre></div>
                         </div>
-                    </div>
+                    </div></div>
                 </div>
             </div>
         </section>
 
-        <!-- Verification Section -->
         <section class="tutorial-section" id="verify">
             <div class="section-header">
                 <div class="section-number">5</div>
                 <h2 class="section-title">Verification Queries</h2>
             </div>
-
-            <p class="section-description">
-                Let's make sure everything worked correctly! These queries will show you 
-                all your tables, columns, relationships, and data counts.
-            </p>
+            <p class="section-description">Let's make sure everything worked correctly! These queries will show you all your tables, columns, relationships, and data counts.</p>
 
             <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">✅</div>
-                    <div>
-                        <h3 class="card-title">View All Tables</h3>
-                        <p class="card-subtitle">Shows all 8 tables in your database</p>
-                    </div>
-                </div>
-                <div class="code-container">
-                    <div class="code-header">
-                        <div class="code-language">
-                            <span class="code-dot sql"></span>
-                            SQL
-                        </div>
-                        <div class="code-actions">
-                            <button class="code-btn copy-btn">📋 Copy</button>
-                        </div>
-                    </div>
-                    <div class="code-content">
-<pre><code><span class="keyword">SELECT</span> TABLE_NAME 
-<span class="keyword">FROM</span> INFORMATION_SCHEMA.TABLES 
-<span class="keyword">WHERE</span> TABLE_TYPE = <span class="string">'BASE TABLE'</span> 
-<span class="keyword">ORDER BY</span> TABLE_NAME;</code></pre>
-                    </div>
+                <div class="card-header"><div class="card-icon">✅</div><div><h3 class="card-title">View All Tables</h3><p class="card-subtitle">Shows all 8 tables in your database</p></div></div>
+                <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div>
+                    <div class="code-content"><pre><code><span class="keyword">SELECT</span> TABLE_NAME <span class="keyword">FROM</span> INFORMATION_SCHEMA.TABLES 
+<span class="keyword">WHERE</span> TABLE_TYPE = <span class="string">'BASE TABLE'</span> <span class="keyword">ORDER BY</span> TABLE_NAME;</code></pre></div>
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">📊</div>
-                    <div>
-                        <h3 class="card-title">Count Records in Each Table</h3>
-                        <p class="card-subtitle">Verify data was inserted correctly</p>
-                    </div>
-                </div>
-                <div class="code-container">
-                    <div class="code-header">
-                        <div class="code-language">
-                            <span class="code-dot sql"></span>
-                            SQL
-                        </div>
-                        <div class="code-actions">
-                            <button class="code-btn copy-btn">📋 Copy</button>
-                        </div>
-                    </div>
-                    <div class="code-content">
-<pre><code><span class="keyword">SELECT</span> <span class="string">'TBL_PRODUCT_CATEGORIES'</span> <span class="keyword">AS</span> TableName, <span class="function">COUNT</span>(*) <span class="keyword">AS</span> Records 
-    <span class="keyword">FROM</span> TBL_PRODUCT_CATEGORIES
-<span class="keyword">UNION ALL</span> 
-<span class="keyword">SELECT</span> <span class="string">'TBL_WAREHOUSES'</span>, <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> TBL_WAREHOUSES
-<span class="keyword">UNION ALL</span> 
-<span class="keyword">SELECT</span> <span class="string">'TBL_CUSTOMERS'</span>, <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> TBL_CUSTOMERS
-<span class="keyword">UNION ALL</span> 
-<span class="keyword">SELECT</span> <span class="string">'TBL_EMPLOYEES'</span>, <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> TBL_EMPLOYEES
-<span class="keyword">UNION ALL</span> 
-<span class="keyword">SELECT</span> <span class="string">'TBL_PRODUCTS'</span>, <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> TBL_PRODUCTS
-<span class="keyword">UNION ALL</span> 
-<span class="keyword">SELECT</span> <span class="string">'TBL_ORDERS'</span>, <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> TBL_ORDERS
-<span class="keyword">UNION ALL</span> 
-<span class="keyword">SELECT</span> <span class="string">'TBL_ITEMS'</span>, <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> TBL_ITEMS
-<span class="keyword">UNION ALL</span> 
-<span class="keyword">SELECT</span> <span class="string">'TBL_INVENTORIES'</span>, <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> TBL_INVENTORIES;</code></pre>
-                    </div>
+                <div class="card-header"><div class="card-icon">📊</div><div><h3 class="card-title">Count Records in Each Table</h3><p class="card-subtitle">Verify data was inserted correctly</p></div></div>
+                <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div>
+                    <div class="code-content"><pre><code><span class="keyword">SELECT</span> <span class="string">'TBL_PRODUCT_CATEGORIES'</span> <span class="keyword">AS</span> TableName, <span class="function">COUNT</span>(*) <span class="keyword">AS</span> Records <span class="keyword">FROM</span> TBL_PRODUCT_CATEGORIES
+<span class="keyword">UNION ALL SELECT</span> <span class="string">'TBL_WAREHOUSES'</span>, <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> TBL_WAREHOUSES
+<span class="keyword">UNION ALL SELECT</span> <span class="string">'TBL_CUSTOMERS'</span>, <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> TBL_CUSTOMERS
+<span class="keyword">UNION ALL SELECT</span> <span class="string">'TBL_EMPLOYEES'</span>, <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> TBL_EMPLOYEES
+<span class="keyword">UNION ALL SELECT</span> <span class="string">'TBL_PRODUCTS'</span>, <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> TBL_PRODUCTS
+<span class="keyword">UNION ALL SELECT</span> <span class="string">'TBL_ORDERS'</span>, <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> TBL_ORDERS
+<span class="keyword">UNION ALL SELECT</span> <span class="string">'TBL_ITEMS'</span>, <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> TBL_ITEMS
+<span class="keyword">UNION ALL SELECT</span> <span class="string">'TBL_INVENTORIES'</span>, <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> TBL_INVENTORIES;</code></pre></div>
                 </div>
             </div>
 
-            <!-- Expected Results -->
-            <div class="info-box info-tip">
-                <div class="info-box-icon">✅</div>
-                <div class="info-box-content">
-                    <h4>Expected Results</h4>
-                    <p>Categories: 5 | Warehouses: 3 | Customers: 3 | Employees: 3 | Products: 5 | Orders: 4 | Items: 6 | Inventories: 8</p>
-                </div>
-            </div>
+            <div class="info-box info-tip"><div class="info-box-icon">✅</div><div class="info-box-content"><h4>Expected Results</h4><p>Categories: 5 | Warehouses: 3 | Customers: 3 | Employees: 3 | Products: 5 | Orders: 4 | Items: 6 | Inventories: 8</p></div></div>
         </section>
 
-        <!-- Complete Script Section -->
         <section class="tutorial-section" id="complete-script">
             <div class="section-header">
                 <div class="section-number">📋</div>
                 <h2 class="section-title">Complete Script</h2>
             </div>
-
-            <p class="section-description">
-                Here's the entire script in one place. Copy this to run everything at once!
-            </p>
+            <p class="section-description">Here's the entire script in one place. Copy this to run everything at once!</p>
 
             <div class="code-container">
-                <div class="code-header">
-                    <div class="code-language">
-                        <span class="code-dot sql"></span>
-                        Complete SQL Script
-                    </div>
-                    <div class="code-actions">
-                        <button class="code-btn copy-btn" id="copyFullScript">📋 Copy All</button>
-                    </div>
-                </div>
+                <div class="code-header"><div class="code-language"><span class="code-dot sql"></span>Complete SQL Script</div><div class="code-actions"><button class="code-btn copy-btn" id="copyFullScript">📋 Copy All</button></div></div>
                 <div class="code-content" style="max-height: 500px; overflow-y: auto;">
-<pre><code id="fullScript"><span class="comment">-- ============================================================
--- COMPLETE SQL SERVER DATABASE SCRIPT
--- ============================================================</span>
-
-<span class="keyword">USE</span> master;
+<pre><code id="fullScript"><span class="keyword">USE</span> master;
 <span class="keyword">GO</span>
 
-<span class="comment">-- Drop database if exists</span>
 <span class="keyword">IF EXISTS</span> (<span class="keyword">SELECT</span> name <span class="keyword">FROM</span> sys.databases <span class="keyword">WHERE</span> name = <span class="string">N'DB_LastNameFirstName01'</span>)
 <span class="keyword">BEGIN</span>
     <span class="keyword">ALTER DATABASE</span> [DB_LastNameFirstName01] <span class="keyword">SET</span> SINGLE_USER <span class="keyword">WITH</span> ROLLBACK IMMEDIATE;
@@ -2621,7 +835,6 @@ GO">📋 Copy</button>
 <span class="keyword">USE</span> [DB_LastNameFirstName01];
 <span class="keyword">GO</span>
 
-<span class="comment">-- Create all tables...</span>
 <span class="keyword">CREATE TABLE</span> TBL_PRODUCT_CATEGORIES (
     CATEGORY_ID <span class="type">BIGINT</span> <span class="keyword">IDENTITY</span>(<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">NOT NULL</span>,
     CATEGORY_NAME <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span>,
@@ -2629,8 +842,125 @@ GO">📋 Copy</button>
 );
 <span class="keyword">GO</span>
 
-<span class="comment">-- [Additional tables follow the same pattern...]</span>
-<span class="comment">-- See individual sections above for complete code</span>
+<span class="keyword">CREATE TABLE</span> TBL_WAREHOUSES (
+    WAREHOUSE_ID <span class="type">BIGINT</span> <span class="keyword">IDENTITY</span>(<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">NOT NULL</span>,
+    WAREHOUSE_NAME <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span>,
+    <span class="keyword">CONSTRAINT</span> PK_WAREHOUSES <span class="keyword">PRIMARY KEY</span> (WAREHOUSE_ID)
+);
+<span class="keyword">GO</span>
+
+<span class="keyword">CREATE TABLE</span> TBL_CUSTOMERS (
+    CUSTOMER_ID <span class="type">BIGINT</span> <span class="keyword">IDENTITY</span>(<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">NOT NULL</span>,
+    NAME <span class="type">VARCHAR</span>(<span class="number">150</span>) <span class="keyword">NOT NULL</span>,
+    ADDRESS <span class="type">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NULL</span>,
+    CREDIT_LIMIT <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>,
+    <span class="keyword">CONSTRAINT</span> PK_CUSTOMERS <span class="keyword">PRIMARY KEY</span> (CUSTOMER_ID)
+);
+<span class="keyword">GO</span>
+
+<span class="keyword">CREATE TABLE</span> TBL_EMPLOYEES (
+    EMPLOYEE_ID <span class="type">BIGINT</span> <span class="keyword">IDENTITY</span>(<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">NOT NULL</span>,
+    FIRST_NAME <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span>,
+    LAST_NAME <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span>,
+    EMAIL <span class="type">VARCHAR</span>(<span class="number">150</span>) <span class="keyword">NOT NULL</span>,
+    PHONE <span class="type">INT</span> <span class="keyword">NULL</span>,
+    HIRE_DATE <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT NULL</span>,
+    JOB_TITLE <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span>,
+    <span class="keyword">CONSTRAINT</span> PK_EMPLOYEES <span class="keyword">PRIMARY KEY</span> (EMPLOYEE_ID)
+);
+<span class="keyword">GO</span>
+
+<span class="keyword">CREATE TABLE</span> TBL_PRODUCTS (
+    PRODUCT_ID <span class="type">BIGINT</span> <span class="keyword">IDENTITY</span>(<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">NOT NULL</span>,
+    PRODUCT_NAME <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT NULL</span>,
+    DESCRIPTION <span class="type">VARCHAR</span>(<span class="number">500</span>) <span class="keyword">NULL</span>,
+    STANDARD_COST <span class="type">DECIMAL</span>(<span class="number">5</span>,<span class="number">2</span>) <span class="keyword">NOT NULL</span>,
+    LIST_PRICE <span class="type">DECIMAL</span>(<span class="number">5</span>,<span class="number">2</span>) <span class="keyword">NOT NULL</span>,
+    CATEGORY_ID <span class="type">BIGINT</span> <span class="keyword">NOT NULL</span>,
+    <span class="keyword">CONSTRAINT</span> PK_PRODUCTS <span class="keyword">PRIMARY KEY</span> (PRODUCT_ID),
+    <span class="keyword">CONSTRAINT</span> FK_PRODUCTS_CATEGORY <span class="keyword">FOREIGN KEY</span> (CATEGORY_ID) <span class="keyword">REFERENCES</span> TBL_PRODUCT_CATEGORIES(CATEGORY_ID)
+);
+<span class="keyword">GO</span>
+
+<span class="keyword">CREATE TABLE</span> TBL_ORDERS (
+    ORDER_ID <span class="type">BIGINT</span> <span class="keyword">IDENTITY</span>(<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">NOT NULL</span>,
+    CUSTOMER_ID <span class="type">BIGINT</span> <span class="keyword">NOT NULL</span>,
+    STATUS <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT NULL</span>,
+    EMPLOYEE_ID <span class="type">BIGINT</span> <span class="keyword">NOT NULL</span>,
+    ORDER_DATE <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT NULL</span>,
+    <span class="keyword">CONSTRAINT</span> PK_ORDERS <span class="keyword">PRIMARY KEY</span> (ORDER_ID),
+    <span class="keyword">CONSTRAINT</span> FK_ORDERS_CUSTOMER <span class="keyword">FOREIGN KEY</span> (CUSTOMER_ID) <span class="keyword">REFERENCES</span> TBL_CUSTOMERS(CUSTOMER_ID),
+    <span class="keyword">CONSTRAINT</span> FK_ORDERS_EMPLOYEE <span class="keyword">FOREIGN KEY</span> (EMPLOYEE_ID) <span class="keyword">REFERENCES</span> TBL_EMPLOYEES(EMPLOYEE_ID)
+);
+<span class="keyword">GO</span>
+
+<span class="keyword">CREATE TABLE</span> TBL_ITEMS (
+    ITEM_ID <span class="type">BIGINT</span> <span class="keyword">IDENTITY</span>(<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">NOT NULL</span>,
+    ORDER_ID <span class="type">BIGINT</span> <span class="keyword">NOT NULL</span>,
+    PRODUCT_ID <span class="type">BIGINT</span> <span class="keyword">NOT NULL</span>,
+    QUANTITY <span class="type">INT</span> <span class="keyword">NOT NULL</span>,
+    PRICE <span class="type">DECIMAL</span>(<span class="number">5</span>,<span class="number">2</span>) <span class="keyword">NOT NULL</span>,
+    <span class="keyword">CONSTRAINT</span> PK_ITEMS <span class="keyword">PRIMARY KEY</span> (ITEM_ID),
+    <span class="keyword">CONSTRAINT</span> FK_ITEMS_ORDER <span class="keyword">FOREIGN KEY</span> (ORDER_ID) <span class="keyword">REFERENCES</span> TBL_ORDERS(ORDER_ID),
+    <span class="keyword">CONSTRAINT</span> FK_ITEMS_PRODUCT <span class="keyword">FOREIGN KEY</span> (PRODUCT_ID) <span class="keyword">REFERENCES</span> TBL_PRODUCTS(PRODUCT_ID)
+);
+<span class="keyword">GO</span>
+
+<span class="keyword">CREATE TABLE</span> TBL_INVENTORIES (
+    PRODUCT_ID <span class="type">BIGINT</span> <span class="keyword">NOT NULL</span>,
+    WAREHOUSE_ID <span class="type">BIGINT</span> <span class="keyword">NOT NULL</span>,
+    QUANTITY <span class="type">INT</span> <span class="keyword">NOT NULL DEFAULT</span> <span class="number">0</span>,
+    <span class="keyword">CONSTRAINT</span> PK_INVENTORIES <span class="keyword">PRIMARY KEY</span> (PRODUCT_ID, WAREHOUSE_ID),
+    <span class="keyword">CONSTRAINT</span> FK_INVENTORIES_PRODUCT <span class="keyword">FOREIGN KEY</span> (PRODUCT_ID) <span class="keyword">REFERENCES</span> TBL_PRODUCTS(PRODUCT_ID),
+    <span class="keyword">CONSTRAINT</span> FK_INVENTORIES_WAREHOUSE <span class="keyword">FOREIGN KEY</span> (WAREHOUSE_ID) <span class="keyword">REFERENCES</span> TBL_WAREHOUSES(WAREHOUSE_ID)
+);
+<span class="keyword">GO</span>
+
+<span class="keyword">INSERT INTO</span> TBL_PRODUCT_CATEGORIES (CATEGORY_NAME) <span class="keyword">VALUES</span> 
+(<span class="string">'Electronics'</span>), (<span class="string">'Clothing'</span>), (<span class="string">'Food'</span>), (<span class="string">'Sports'</span>), (<span class="string">'Books'</span>);
+<span class="keyword">GO</span>
+
+<span class="keyword">INSERT INTO</span> TBL_WAREHOUSES (WAREHOUSE_NAME) <span class="keyword">VALUES</span> 
+(<span class="string">'Main Warehouse'</span>), (<span class="string">'North Branch'</span>), (<span class="string">'South Branch'</span>);
+<span class="keyword">GO</span>
+
+<span class="keyword">INSERT INTO</span> TBL_CUSTOMERS (NAME, ADDRESS, CREDIT_LIMIT) <span class="keyword">VALUES</span> 
+(<span class="string">'ABC Corporation'</span>, <span class="string">'Manila'</span>, <span class="number">500000</span>),
+(<span class="string">'XYZ Trading'</span>, <span class="string">'Quezon City'</span>, <span class="number">300000</span>),
+(<span class="string">'Best Retail'</span>, <span class="string">'Makati'</span>, <span class="number">200000</span>);
+<span class="keyword">GO</span>
+
+<span class="keyword">INSERT INTO</span> TBL_EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE, HIRE_DATE, JOB_TITLE) <span class="keyword">VALUES</span> 
+(<span class="string">'Juan'</span>, <span class="string">'Dela Cruz'</span>, <span class="string">'juan@company.com'</span>, <span class="number">917123456</span>, <span class="string">'2020-01-15'</span>, <span class="string">'Sales Manager'</span>),
+(<span class="string">'Maria'</span>, <span class="string">'Santos'</span>, <span class="string">'maria@company.com'</span>, <span class="number">918123456</span>, <span class="string">'2020-03-20'</span>, <span class="string">'Sales Rep'</span>),
+(<span class="string">'Pedro'</span>, <span class="string">'Reyes'</span>, <span class="string">'pedro@company.com'</span>, <span class="number">919123456</span>, <span class="string">'2019-06-10'</span>, <span class="string">'Warehouse Manager'</span>);
+<span class="keyword">GO</span>
+
+<span class="keyword">INSERT INTO</span> TBL_PRODUCTS (PRODUCT_NAME, DESCRIPTION, STANDARD_COST, LIST_PRICE, CATEGORY_ID) <span class="keyword">VALUES</span> 
+(<span class="string">'Wireless Mouse'</span>, <span class="string">'Ergonomic mouse'</span>, <span class="number">15.00</span>, <span class="number">29.99</span>, <span class="number">1</span>),
+(<span class="string">'USB Cable'</span>, <span class="string">'Type-C cable'</span>, <span class="number">5.00</span>, <span class="number">12.99</span>, <span class="number">1</span>),
+(<span class="string">'T-Shirt'</span>, <span class="string">'Cotton shirt'</span>, <span class="number">8.00</span>, <span class="number">19.99</span>, <span class="number">2</span>),
+(<span class="string">'Running Shoes'</span>, <span class="string">'Sport shoes'</span>, <span class="number">45.00</span>, <span class="number">89.99</span>, <span class="number">4</span>),
+(<span class="string">'Novel Book'</span>, <span class="string">'Bestseller'</span>, <span class="number">10.00</span>, <span class="number">24.99</span>, <span class="number">5</span>);
+<span class="keyword">GO</span>
+
+<span class="keyword">INSERT INTO</span> TBL_ORDERS (CUSTOMER_ID, STATUS, EMPLOYEE_ID, ORDER_DATE) <span class="keyword">VALUES</span> 
+(<span class="number">1</span>, <span class="string">'Delivered'</span>, <span class="number">1</span>, <span class="string">'2024-01-15'</span>),
+(<span class="number">2</span>, <span class="string">'Shipped'</span>, <span class="number">2</span>, <span class="string">'2024-01-16'</span>),
+(<span class="number">3</span>, <span class="string">'Pending'</span>, <span class="number">1</span>, <span class="string">'2024-01-17'</span>),
+(<span class="number">1</span>, <span class="string">'Processing'</span>, <span class="number">2</span>, <span class="string">'2024-01-18'</span>);
+<span class="keyword">GO</span>
+
+<span class="keyword">INSERT INTO</span> TBL_ITEMS (ORDER_ID, PRODUCT_ID, QUANTITY, PRICE) <span class="keyword">VALUES</span> 
+(<span class="number">1</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">29.99</span>), (<span class="number">1</span>, <span class="number">2</span>, <span class="number">20</span>, <span class="number">12.99</span>),
+(<span class="number">2</span>, <span class="number">3</span>, <span class="number">50</span>, <span class="number">19.99</span>), (<span class="number">2</span>, <span class="number">4</span>, <span class="number">15</span>, <span class="number">89.99</span>),
+(<span class="number">3</span>, <span class="number">5</span>, <span class="number">30</span>, <span class="number">24.99</span>), (<span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">29.99</span>);
+<span class="keyword">GO</span>
+
+<span class="keyword">INSERT INTO</span> TBL_INVENTORIES (PRODUCT_ID, WAREHOUSE_ID, QUANTITY) <span class="keyword">VALUES</span> 
+(<span class="number">1</span>, <span class="number">1</span>, <span class="number">500</span>), (<span class="number">1</span>, <span class="number">2</span>, <span class="number">200</span>), (<span class="number">2</span>, <span class="number">1</span>, <span class="number">1000</span>), (<span class="number">2</span>, <span class="number">3</span>, <span class="number">300</span>),
+(<span class="number">3</span>, <span class="number">1</span>, <span class="number">800</span>), (<span class="number">3</span>, <span class="number">2</span>, <span class="number">400</span>), (<span class="number">4</span>, <span class="number">2</span>, <span class="number">150</span>), (<span class="number">5</span>, <span class="number">1</span>, <span class="number">250</span>);
+<span class="keyword">GO</span>
 
 <span class="keyword">PRINT</span> <span class="string">'Database created successfully!'</span>;
 <span class="keyword">GO</span></code></pre>
@@ -2639,14 +969,10 @@ GO">📋 Copy</button>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-logo">🗄️ SQL Tutorial</div>
-            <p class="footer-text">
-                Built with ❤️ for database learners everywhere<br>
-                Works offline • Mobile-friendly • Always free
-            </p>
+            <p class="footer-text">Built with ❤️ for database learners everywhere<br>Works offline • Mobile-friendly • Always free</p>
             <div class="footer-links">
                 <a href="#intro">Introduction</a>
                 <a href="#setup">Setup</a>
@@ -2656,216 +982,121 @@ GO">📋 Copy</button>
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
     <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
 
-    <!-- JavaScript -->
     <script>
-        // ============================================
-        // SERVICE WORKER REGISTRATION
-        // ============================================
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then(reg => console.log('✅ Service Worker registered'))
-                    .catch(err => console.log('❌ SW registration failed:', err));
-            });
-        }
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(err => console.log('SW failed:', err));
+    });
+}
 
-        // ============================================
-        // THEME TOGGLE
-        // ============================================
-        const themeToggle = document.getElementById('themeToggle');
-        const html = document.documentElement;
-        
-        // Check saved theme or system preference
-        const savedTheme = localStorage.getItem('theme');
-        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        
-        if (savedTheme) {
-            html.setAttribute('data-theme', savedTheme);
-            themeToggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
-        } else if (!systemDark) {
-            html.setAttribute('data-theme', 'light');
-            themeToggle.textContent = '☀️';
-        }
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+const savedTheme = localStorage.getItem('theme');
+const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            themeToggle.textContent = newTheme === 'dark' ? '🌙' : '☀️';
-        });
+if (savedTheme) {
+    html.setAttribute('data-theme', savedTheme);
+    themeToggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+} else if (!systemDark) {
+    html.setAttribute('data-theme', 'light');
+    themeToggle.textContent = '☀️';
+}
 
-        // ============================================
-        // NAVBAR SCROLL EFFECT
-        // ============================================
-        const navbar = document.getElementById('navbar');
-        
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+themeToggle.addEventListener('click', () => {
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    themeToggle.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+});
 
-        // ============================================
-        // COPY CODE FUNCTIONALITY
-        // ============================================
-        document.querySelectorAll('.copy-btn').forEach(btn => {
-            btn.addEventListener('click', async () => {
-                const codeContainer = btn.closest('.code-container');
-                const codeContent = codeContainer.querySelector('pre').textContent;
-                
-                try {
-                    await navigator.clipboard.writeText(codeContent);
-                    const originalText = btn.textContent;
-                    btn.textContent = '✅ Copied!';
-                    btn.classList.add('copied');
-                    
-                    setTimeout(() => {
-                        btn.textContent = originalText;
-                        btn.classList.remove('copied');
-                    }, 2000);
-                } catch (err) {
-                    console.error('Failed to copy:', err);
-                    btn.textContent = '❌ Failed';
-                }
-            });
-        });
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
 
-        // ============================================
-        // TABS FUNCTIONALITY
-        // ============================================
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const tabId = btn.getAttribute('data-tab');
-                const tabsContainer = btn.closest('.tabs-container');
-                
-                // Remove active from all tabs and content
-                tabsContainer.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
-                tabsContainer.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                
-                // Add active to clicked tab and corresponding content
-                btn.classList.add('active');
-                document.getElementById(tabId).classList.add('active');
-            });
-        });
+document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+        const codeContainer = btn.closest('.code-container');
+        const codeContent = codeContainer.querySelector('pre').textContent;
+        try {
+            await navigator.clipboard.writeText(codeContent);
+            const originalText = btn.textContent;
+            btn.textContent = '✅ Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = originalText; btn.classList.remove('copied'); }, 2000);
+        } catch (err) { btn.textContent = '❌ Failed'; }
+    });
+});
 
-        // ============================================
-        // ACCORDION FUNCTIONALITY
-        // ============================================
-        document.querySelectorAll('.accordion-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const item = header.parentElement;
-                const wasActive = item.classList.contains('active');
-                
-                // Close all accordions in this group
-                item.parentElement.querySelectorAll('.accordion-item').forEach(i => {
-                    i.classList.remove('active');
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const tabId = btn.getAttribute('data-tab');
+        const tabsContainer = btn.closest('.tabs-container');
+        tabsContainer.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+        tabsContainer.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+    });
+});
+
+document.querySelectorAll('.accordion-header').forEach(header => {
+    header.addEventListener('click', () => {
+        const item = header.parentElement;
+        const wasActive = item.classList.contains('active');
+        item.parentElement.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
+        if (!wasActive) item.classList.add('active');
+    });
+});
+
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => { backToTop.classList.toggle('visible', window.scrollY > 500); });
+backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+const sections = ['hero', 'intro', 'setup', 'tables', 'data', 'verify'];
+const progressSteps = document.querySelectorAll('.progress-step');
+
+function updateProgress() {
+    const scrollPos = window.scrollY + 200;
+    sections.forEach((sectionId, index) => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+            const sectionTop = section.offsetTop;
+            const sectionBottom = sectionTop + section.offsetHeight;
+            if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+                progressSteps.forEach((step, i) => {
+                    step.classList.remove('active');
+                    step.classList.toggle('completed', i < index);
                 });
-                
-                // Toggle clicked one
-                if (!wasActive) {
-                    item.classList.add('active');
-                }
-            });
-        });
-
-        // ============================================
-        // BACK TO TOP BUTTON
-        // ============================================
-        const backToTop = document.getElementById('backToTop');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 500) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
-        });
-
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // ============================================
-        // PROGRESS TRACKER
-        // ============================================
-        const sections = ['hero', 'intro', 'setup', 'tables', 'data', 'verify'];
-        const progressSteps = document.querySelectorAll('.progress-step');
-
-        function updateProgress() {
-            const scrollPos = window.scrollY + 200;
-            
-            sections.forEach((sectionId, index) => {
-                const section = document.getElementById(sectionId);
-                if (section) {
-                    const sectionTop = section.offsetTop;
-                    const sectionBottom = sectionTop + section.offsetHeight;
-                    
-                    if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
-                        progressSteps.forEach((step, i) => {
-                            step.classList.remove('active');
-                            if (i < index) {
-                                step.classList.add('completed');
-                            } else {
-                                step.classList.remove('completed');
-                            }
-                        });
-                        progressSteps[index]?.classList.add('active');
-                    }
-                }
-            });
-        }
-
-        window.addEventListener('scroll', updateProgress);
-
-        // Progress step click
-        progressSteps.forEach(step => {
-            step.addEventListener('click', () => {
-                const sectionId = step.getAttribute('data-section');
-                document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-
-        // ============================================
-        // OFFLINE DETECTION
-        // ============================================
-        const offlineNotice = document.getElementById('offlineNotice');
-
-        function updateOnlineStatus() {
-            if (!navigator.onLine) {
-                offlineNotice.classList.add('visible');
-            } else {
-                offlineNotice.classList.remove('visible');
+                progressSteps[index]?.classList.add('active');
             }
         }
+    });
+}
+window.addEventListener('scroll', updateProgress);
 
-        window.addEventListener('online', updateOnlineStatus);
-        window.addEventListener('offline', updateOnlineStatus);
-        updateOnlineStatus();
+progressSteps.forEach(step => {
+    step.addEventListener('click', () => {
+        const sectionId = step.getAttribute('data-section');
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    });
+});
 
-        // ============================================
-        // SMOOTH SCROLL FOR ANCHOR LINKS
-        // ============================================
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
+const offlineNotice = document.getElementById('offlineNotice');
+function updateOnlineStatus() { offlineNotice.classList.toggle('visible', !navigator.onLine); }
+window.addEventListener('online', updateOnlineStatus);
+window.addEventListener('offline', updateOnlineStatus);
+updateOnlineStatus();
 
-        // ============================================
-        // INITIAL SETUP
-        // ============================================
-        console.log('🎓 SQL Tutorial loaded successfully!');
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+});
     </script>
 </body>
 </html>
