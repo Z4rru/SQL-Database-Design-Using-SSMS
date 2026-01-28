@@ -855,8 +855,8 @@ code{font-family:var(--font-mono)}
                 <div class="code-header"><div class="code-language"><span class="code-dot sql"></span>Full Script</div><div class="code-actions"><button class="code-btn copy-btn" id="copyFull">📋 Copy All</button><button class="code-btn" id="downloadBtn">⬇️ Download</button></div></div>
                 <div class="code-content" style="max-height:400px;overflow-y:auto"><pre><code id="fullScript"><span class="keyword">USE</span> master; <span class="keyword">GO</span>
 <span class="keyword">IF EXISTS</span>(<span class="keyword">SELECT</span> name <span class="keyword">FROM</span> sys.databases <span class="keyword">WHERE</span> name=<span class="string">N'DB_OrderManagement'</span>)
-<span class="keyword">BEGIN ALTER DATABASE</span> [DB_OrderManagement] <span class="keyword">SET</span> SINGLE_USER <span> class="keyword">WITH</span> ROLLBACK IMMEDIATE;
-<span class="keyword">DROP DATABASE</span> [DB_OrderManagement]; <span>class="keyword">END GO</span>
+<span class="keyword">BEGIN ALTER DATABASE</span> [DB_OrderManagement] <span class="keyword">SET</span> SINGLE_USER <span class="keyword">WITH</span> ROLLBACK IMMEDIATE;
+<span class="keyword">DROP DATABASE</span> [DB_OrderManagement]; <span class="keyword">END</span> <span class="keyword">GO</span>
 <span class="keyword">CREATE DATABASE</span> [DB_OrderManagement]; <span class="keyword">GO USE</span> [DB_OrderManagement]; <span class="keyword">GO</span>
 
 <span class="keyword">CREATE TABLE</span> TBL_PRODUCT_CATEGORIES(CATEGORY_ID <span class="type">BIGINT</span> <span class="keyword">IDENTITY</span>(<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">NOT NULL</span>,CATEGORY_NAME <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span>,<span class="keyword">CONSTRAINT</span> PK_PRODUCT_CATEGORIES <span class="keyword">PRIMARY KEY</span>(CATEGORY_ID)); <span class="keyword">GO</span>
