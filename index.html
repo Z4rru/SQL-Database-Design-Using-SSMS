@@ -307,6 +307,161 @@ code{font-family:var(--font-mono)}
 @media(max-width:480px){.code-header{flex-direction:column;gap:var(--space-sm);align-items:flex-start}.erd-diagram,.feature-grid{grid-template-columns:1fr}}
 @media print{.navbar,.progress-container,.back-to-top,.code-actions,.theme-toggle,.keyboard-hint,.reading-progress,.toc-sidebar,.toc-toggle,.section-complete,.section-collapse-btn,.breadcrumbs,.search-modal,.mobile-nav,.bg-pattern{display:none!important}body{background:#fff;color:#000;font-size:11pt;line-height:1.5}h1,h2,h3{page-break-after:avoid;color:#000}.tutorial-section{page-break-inside:avoid;opacity:1!important;transform:none!important;margin-bottom:2rem}.code-container{border:1px solid #ccc;page-break-inside:avoid;background:#f5f5f5!important}pre{white-space:pre-wrap;font-size:9pt}.code-header{background:#eee!important;border-bottom:1px solid #ccc}.card{border:1px solid #ddd;box-shadow:none;page-break-inside:avoid}.data-table{font-size:9pt}.data-table th,.data-table td{border:1px solid #ccc;padding:4px 8px}.info-box{border:1px solid #ccc;background:#f9f9f9!important}.hero{min-height:auto;padding:2rem}a[href]::after{content:" (" attr(href) ")";font-size:9pt;color:#666}a[href^="#"]::after{content:""}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.bg-pattern::before{animation:none}.hero-badge-dot{animation:none}.hero-title-gradient{animation:none}}
+
+/* ===== ENHANCED ANIMATIONS ===== */
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+@keyframes bounceIn{0%{opacity:0;transform:scale(0.3)}50%{transform:scale(1.05)}70%{transform:scale(0.9)}100%{opacity:1;transform:scale(1)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(102,126,234,0.3)}50%{box-shadow:0 0 40px rgba(102,126,234,0.6)}}
+@keyframes typewriter{from{width:0}to{width:100%}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes ripple{0%{transform:scale(0);opacity:1}100%{transform:scale(4);opacity:0}}
+@keyframes shake{0%,100%{transform:translateX(0)}10%,30%,50%,70%,90%{transform:translateX(-5px)}20%,40%,60%,80%{transform:translateX(5px)}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px);max-height:0}to{opacity:1;transform:translateY(0);max-height:2000px}}
+
+/* Staggered animations for children */
+.stagger-animation>*{opacity:0;animation:fadeInUp 0.5s ease forwards}
+.stagger-animation>*:nth-child(1){animation-delay:0.1s}
+.stagger-animation>*:nth-child(2){animation-delay:0.2s}
+.stagger-animation>*:nth-child(3){animation-delay:0.3s}
+.stagger-animation>*:nth-child(4){animation-delay:0.4s}
+.stagger-animation>*:nth-child(5){animation-delay:0.5s}
+.stagger-animation>*:nth-child(6){animation-delay:0.6s}
+.stagger-animation>*:nth-child(7){animation-delay:0.7s}
+.stagger-animation>*:nth-child(8){animation-delay:0.8s}
+
+/* Card entrance animations */
+.card{opacity:0;transform:translateY(20px)}
+.card.animate-in{animation:fadeInUp 0.6s ease forwards}
+.card:nth-child(2).animate-in{animation-delay:0.1s}
+.card:nth-child(3).animate-in{animation-delay:0.2s}
+.card:nth-child(4).animate-in{animation-delay:0.3s}
+
+/* Feature card hover enhancements */
+.feature-card{position:relative;overflow:hidden}
+.feature-card::before{content:'';position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(102,126,234,0.1);border-radius:50%;transform:translate(-50%,-50%);transition:width 0.6s ease,height 0.6s ease}
+.feature-card:hover::before{width:300%;height:300%}
+.feature-icon{transition:transform 0.4s cubic-bezier(0.68,-0.55,0.265,1.55)}
+.feature-card:hover .feature-icon{transform:scale(1.2) rotate(10deg)}
+
+/* ERD table stagger animation */
+.erd-diagram.animate .erd-table{opacity:0;animation:scaleIn 0.5s ease forwards}
+.erd-diagram.animate .erd-table:nth-child(1){animation-delay:0.1s}
+.erd-diagram.animate .erd-table:nth-child(2){animation-delay:0.2s}
+.erd-diagram.animate .erd-table:nth-child(3){animation-delay:0.3s}
+.erd-diagram.animate .erd-table:nth-child(4){animation-delay:0.4s}
+.erd-diagram.animate .erd-table:nth-child(5){animation-delay:0.5s}
+.erd-diagram.animate .erd-table:nth-child(6){animation-delay:0.6s}
+
+/* Smooth accordion animation */
+.accordion-content{transition:max-height 0.4s cubic-bezier(0.4,0,0.2,1),opacity 0.3s ease,padding 0.3s ease}
+.accordion-item:not(.active) .accordion-content{opacity:0}
+.accordion-item.active .accordion-content{opacity:1}
+.accordion-header{transition:background 0.3s ease,transform 0.2s ease}
+.accordion-header:active{transform:scale(0.98)}
+
+/* Tab content animations */
+.tab-content{animation:none}
+.tab-content.active{animation:slideInRight 0.4s ease}
+
+/* Progress step pulse */
+.progress-step.active{animation:glow 2s ease-in-out infinite}
+.progress-step{transition:all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55)}
+.progress-step:hover{transform:scale(1.3)}
+
+/* Button ripple effect */
+.btn{position:relative;overflow:hidden}
+.btn::after{content:'';position:absolute;top:50%;left:50%;width:5px;height:5px;background:rgba(255,255,255,0.5);opacity:0;border-radius:50%;transform:translate(-50%,-50%) scale(1);transition:none}
+.btn:active::after{animation:ripple 0.6s ease-out}
+
+/* Code block shimmer on hover */
+.code-container{position:relative}
+.code-container::after{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.03),transparent);transition:none;pointer-events:none}
+.code-container:hover::after{animation:shimmer 1.5s ease}
+
+/* Info box entrance */
+.info-box{opacity:0;transform:translateX(-20px)}
+.info-box.animate-in{animation:slideInLeft 0.5s ease forwards}
+
+/* Section number bounce */
+.section-number{transition:transform 0.4s cubic-bezier(0.68,-0.55,0.265,1.55)}
+.section-header:hover .section-number{transform:scale(1.1) rotate(-5deg)}
+
+/* TOC link active indicator */
+.toc-link{position:relative}
+.toc-link::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:0;background:var(--primary);border-radius:var(--radius-full);transition:height 0.3s ease}
+.toc-link.active::before{height:60%}
+
+/* Hero floating elements */
+.hero-badge{animation:fadeInUp 0.6s ease,float 3s ease-in-out infinite 1s}
+.stat-item{transition:transform 0.3s ease}
+.stat-item:hover{transform:translateY(-5px)}
+.stat-number{transition:transform 0.3s ease}
+.stat-item:hover .stat-number{transform:scale(1.1)}
+
+/* Quick ref items */
+.quick-ref-item{transition:transform 0.3s ease,box-shadow 0.3s ease}
+.quick-ref-item:hover{transform:translateY(-3px) translateX(5px);box-shadow:0 5px 20px rgba(102,126,234,0.2)}
+
+/* Concept card animation */
+.concept-card{transition:transform 0.3s ease,border-color 0.3s ease,box-shadow 0.3s ease}
+.concept-card:hover{transform:translateY(-5px);border-color:var(--primary);box-shadow:0 10px 30px rgba(102,126,234,0.2)}
+
+/* Data table row animation */
+.data-table tbody tr{transition:background 0.2s ease,transform 0.2s ease}
+.data-table tbody tr:hover{transform:translateX(5px)}
+
+/* Mobile nav animations */
+.mobile-nav{opacity:0;transform:translateY(-20px);transition:opacity 0.3s ease,transform 0.3s ease}
+.mobile-nav.active{opacity:1;transform:translateY(0)}
+.mobile-nav a{opacity:0;transform:translateY(20px);transition:opacity 0.3s ease,transform 0.3s ease,background 0.2s ease}
+.mobile-nav.active a{opacity:1;transform:translateY(0)}
+.mobile-nav.active a:nth-child(1){transition-delay:0.05s}
+.mobile-nav.active a:nth-child(2){transition-delay:0.1s}
+.mobile-nav.active a:nth-child(3){transition-delay:0.15s}
+.mobile-nav.active a:nth-child(4){transition-delay:0.2s}
+.mobile-nav.active a:nth-child(5){transition-delay:0.25s}
+.mobile-nav.active a:nth-child(6){transition-delay:0.3s}
+.mobile-nav.active a:nth-child(7){transition-delay:0.35s}
+.mobile-nav.active a:nth-child(8){transition-delay:0.4s}
+
+/* Search modal animation */
+.search-modal{opacity:0;transition:opacity 0.3s ease}
+.search-modal.active{opacity:1}
+.search-box{transform:translateY(-30px) scale(0.95);transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1)}
+.search-modal.active .search-box{transform:translateY(0) scale(1)}
+
+/* Typing cursor for code */
+.code-content code::after{content:'▋';color:var(--primary);animation:blink 1s step-end infinite;display:none}
+.code-container:focus-within code::after{display:inline}
+
+/* Smooth scroll indicator */
+.reading-progress{transition:width 0.15s cubic-bezier(0.4,0,0.2,1)}
+
+/* Back to top enhanced */
+.back-to-top{transition:opacity 0.3s ease,visibility 0.3s ease,transform 0.3s cubic-bezier(0.68,-0.55,0.265,1.55),box-shadow 0.3s ease}
+.back-to-top:hover{box-shadow:0 8px 30px rgba(102,126,234,0.5)}
+.back-to-top:active{transform:translateY(-2px) scale(0.95)}
+
+/* Logo animation */
+.logo-icon{transition:transform 0.3s ease}
+.logo:hover .logo-icon{animation:bounceIn 0.6s ease}
+
+/* Notification toast animation */
+.copy-toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--success);color:#fff;padding:var(--space-sm) var(--space-xl);border-radius:var(--radius-full);font-weight:500;font-size:.9rem;opacity:0;visibility:hidden;transition:all 0.3s cubic-bezier(0.68,-0.55,0.265,1.55);z-index:1002;box-shadow:0 5px 20px rgba(16,185,129,0.4)}
+.copy-toast.show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+
+/* Steps list animation */
+.step-item{opacity:0;transform:translateX(-20px)}
+.step-item.animate-in{animation:slideInLeft 0.5s ease forwards}
+.step-item:nth-child(2).animate-in{animation-delay:0.1s}
+.step-item:nth-child(3).animate-in{animation-delay:0.2s}
+.step-item:nth-child(4).animate-in{animation-delay:0.3s}
+.step-item::before{transition:transform 0.3s ease,box-shadow 0.3s ease}
+.step-item:hover::before{transform:scale(1.1);box-shadow:0 0 20px rgba(102,126,234,0.5)}
     </style>
 </head>
 <body>
@@ -316,6 +471,7 @@ code{font-family:var(--font-mono)}
     <div class="reading-progress" id="readingProgress"></div>
     <div class="bg-pattern"></div>
     <div class="offline-notice" id="offlineNotice" role="status" aria-live="polite">📴 You're offline - Cached content available</div>
+    <div class="copy-toast" id="copyToast" role="status" aria-live="polite">✓ Copied to clipboard!</div>
 
     <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
         <div class="navbar-content">
@@ -597,10 +753,23 @@ code{font-family:var(--font-mono)}
                     <div class="erd-table"><div class="erd-table-header">TBL_ITEMS</div><div class="erd-table-body"><div class="erd-column"><span class="erd-column-key">🔑</span><span class="erd-column-name">ITEM_ID</span><span class="erd-column-type">BIGINT</span></div><div class="erd-column"><span class="erd-column-fk">🔗</span><span class="erd-column-name">ORDER_ID</span><span class="erd-column-type">FK</span></div><div class="erd-column"><span class="erd-column-fk">🔗</span><span class="erd-column-name">PRODUCT_ID</span><span class="erd-column-type">FK</span></div><div class="erd-column"><span class="erd-column-key"></span><span class="erd-column-name">QUANTITY</span><span class="erd-column-type">INT</span></div><div class="erd-column"><span class="erd-column-key"></span><span class="erd-column-name">PRICE</span><span class="erd-column-type">DECIMAL</span></div></div></div>
                     <div class="erd-table"><div class="erd-table-header">TBL_INVENTORIES</div><div class="erd-table-body"><div class="erd-column"><span class="erd-column-key">🔑</span><span class="erd-column-name">PRODUCT_ID</span><span class="erd-column-type">PK/FK</span></div><div class="erd-column"><span class="erd-column-key">🔑</span><span class="erd-column-name">WAREHOUSE_ID</span><span class="erd-column-type">PK/FK</span></div><div class="erd-column"><span class="erd-column-key"></span><span class="erd-column-name">QUANTITY</span><span class="erd-column-type">INT</span></div></div></div>
                 </div>
-            </div>
+                        </div><!-- End section-content -->
         </section>
 
-        <section class="tutorial-section" id="sql-ref">
+        <section class="tutorial-section" id="sql-ref" data-reading-time="6">
+            <div class="section-header" id="sql-ref-header">
+                <div class="section-number">3</div>
+                <h2 class="section-title">SQL Reference</h2>
+                <div class="section-meta">
+                    <span class="reading-time"><span class="reading-time-icon">⏱️</span> 6 min read</span>
+                    <label class="section-complete">
+                        <input type="checkbox" class="complete-checkbox" data-section="sql-ref" aria-label="Mark section as complete">
+                        <span class="complete-label">Complete</span>
+                    </label>
+                </div>
+                <button class="section-collapse-btn" aria-label="Collapse section" data-target="sql-ref-content">▼</button>
+            </div>
+            <div class="section-content" id="sql-ref-content">
             <div class="section-header"><div class="section-number">3</div><h2 class="section-title">SQL Reference</h2></div>
             <p class="section-description">SQL is like talking to your database in simple English. You tell it what you want, and it does the work. These are the main "words" you'll use.</p>
 
@@ -1098,7 +1267,7 @@ code{font-family:var(--font-mono)}
     <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
     <div class="keyboard-hint"><span class="kbd">Ctrl</span>+<span class="kbd">K</span> Search <span class="kbd">↑↓</span> Navigate</div>
 
-        <script>
+                <script>
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
 if('serviceWorker'in navigator)'requestIdleCallback'in window?requestIdleCallback(()=>navigator.serviceWorker.register('sw.js').catch(()=>{})):setTimeout(()=>navigator.serviceWorker.register('sw.js').catch(()=>{}),1);
 
@@ -1111,13 +1280,48 @@ const storage={
     set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}}
 };
 
+// ===== INTERSECTION OBSERVER FOR ANIMATIONS =====
+const animationObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible', 'animate-in');
+            
+            // Staggered card animations
+            entry.target.querySelectorAll('.card').forEach((card, i) => {
+                setTimeout(() => card.classList.add('animate-in'), i * 100);
+            });
+            
+            // Staggered info box animations
+            entry.target.querySelectorAll('.info-box').forEach((box, i) => {
+                setTimeout(() => box.classList.add('animate-in'), i * 150);
+            });
+            
+            // Staggered step animations
+            entry.target.querySelectorAll('.step-item').forEach((step, i) => {
+                setTimeout(() => step.classList.add('animate-in'), i * 100);
+            });
+            
+            // ERD diagram animation
+            const erdDiagram = entry.target.querySelector('.erd-diagram');
+            if (erdDiagram) erdDiagram.classList.add('animate');
+            
+            // Feature cards stagger
+            entry.target.querySelectorAll('.feature-card').forEach((card, i) => {
+                setTimeout(() => card.classList.add('animate-in'), i * 120);
+            });
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+$$('.tutorial-section').forEach(section => animationObserver.observe(section));
+
 // Theme Toggle
 const html=document.documentElement,themeToggle=$('#themeToggle'),savedTheme=storage.get('theme');
 if(savedTheme){html.dataset.theme=savedTheme;themeToggle.textContent=savedTheme==='dark'?'🌙':'☀️'}
 else if(!matchMedia('(prefers-color-scheme:dark)').matches){html.dataset.theme='light';themeToggle.textContent='☀️'}
 themeToggle.onclick=()=>{const t=html.dataset.theme==='light'?'dark':'light';html.dataset.theme=t;storage.set('theme',t);themeToggle.textContent=t==='dark'?'🌙':'☀️';announce(`Theme changed to ${t} mode`)};
 
-// Code Theme Toggle (if element exists)
+// Code Theme Toggle
 const codeThemeToggle=$('#codeThemeToggle');
 if(codeThemeToggle){
     const savedCodeTheme=storage.get('codeTheme','dark');
@@ -1126,50 +1330,53 @@ if(codeThemeToggle){
 }
 
 // Navbar & Scroll Progress
-const navbar=$('#navbar'),mobileNav=$('#mobileNav'),mobileBtn=$('#mobileMenuBtn');
-addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',scrollY>50);$('#readingProgress').style.width=`${scrollY/(document.body.scrollHeight-innerHeight)*100}%`},{passive:true});
+const navbar=$('#navbar'),mobileNav=$('#mobileNav'),mobileBtn=$('#mobileMenuBtn'),progressBar=$('#readingProgress'),tocProgressBar=$('#tocProgressBar');
+let lastScrollY=0,ticking=false;
+
+const updateProgress=()=>{
+    const scrollTop=window.scrollY;
+    const docHeight=document.documentElement.scrollHeight-window.innerHeight;
+    const progress=Math.min((scrollTop/docHeight)*100,100);
+    if(progressBar)progressBar.style.width=progress+'%';
+    if(tocProgressBar)tocProgressBar.style.width=progress+'%';
+};
+
+addEventListener('scroll',()=>{
+    if(!ticking){
+        requestAnimationFrame(()=>{
+            navbar.classList.toggle('scrolled',scrollY>50);
+            updateProgress();
+            updateScrollSpy();
+            backTop?.classList.toggle('visible',scrollY>500);
+            ticking=false;
+        });
+        ticking=true;
+    }
+},{passive:true});
+
 mobileBtn.onclick=()=>{const a=mobileNav.classList.toggle('active');mobileBtn.setAttribute('aria-expanded',a);mobileBtn.textContent=a?'✕':'☰';announce(a?'Menu opened':'Menu closed')};
 mobileNav.querySelectorAll('a').forEach(a=>a.onclick=()=>{mobileNav.classList.remove('active');mobileBtn.textContent='☰'});
 
 // Search Modal with Focus Trap and Results
 const searchModal=$('#searchModal'),searchInput=$('#searchInput'),searchToggle=$('#searchToggle'),searchCloseBtn=$('#searchCloseBtn'),searchResults=$('#searchResults');
-let searchIndex=[];
-let lastFocusedElement=null;
+let searchIndex=[],lastFocusedElement=null;
 
-// Build search index from sections
-const buildSearchIndex=()=>{searchIndex=[];$$('.tutorial-section').forEach(s=>{const title=s.querySelector('.section-title')?.textContent||'';const content=s.textContent.substring(0,500);const id=s.id;searchIndex.push({id,title,content:content.toLowerCase(),excerpt:content.substring(0,150)})})};
+const buildSearchIndex=()=>{searchIndex=[];$$('.tutorial-section').forEach(s=>{const title=s.querySelector('.section-title')?.textContent||'';const content=s.textContent.substring(0,500);searchIndex.push({id:s.id,title,content:content.toLowerCase(),excerpt:content.substring(0,150)})})};
 
-// Perform search and display results
 const performSearch=(query)=>{
     if(!searchResults)return;
     if(!query.trim()){searchResults.innerHTML='';return}
     const q=query.toLowerCase();
     const results=searchIndex.filter(i=>i.title.toLowerCase().includes(q)||i.content.includes(q)).slice(0,5);
-    if(results.length===0){
-        searchResults.innerHTML='<div class="search-no-results">No results found for "'+query+'"</div>';
-        return;
-    }
+    if(results.length===0){searchResults.innerHTML='<div class="search-no-results">No results found for "'+query+'"</div>';return}
     searchResults.innerHTML=results.map((r,i)=>`<div class="search-result-item" data-href="#${r.id}" tabindex="0" ${i===0?'data-selected':''}>
         <div class="search-result-title">${r.title}</div>
         <div class="search-result-excerpt">${r.excerpt.replace(new RegExp(query,'gi'),m=>`<mark>${m}</mark>`)}...</div>
     </div>`).join('');
 };
 
-const openSearch=()=>{
-    buildSearchIndex();
-    lastFocusedElement=document.activeElement;
-    searchModal.classList.add('active');
-    searchInput.focus();
-    announce('Search dialog opened');
-};
-
-const closeSearch=()=>{
-    searchModal.classList.remove('active');
-    if(searchResults)searchResults.innerHTML='';
-    searchInput.value='';
-    if(lastFocusedElement)lastFocusedElement.focus();
-    announce('Search dialog closed');
-};
+const openSearch=()=>{buildSearchIndex();lastFocusedElement=document.activeElement;searchModal.classList.add('active');searchInput.focus();announce('Search dialog opened')};
+const closeSearch=()=>{searchModal.classList.remove('active');if(searchResults)searchResults.innerHTML='';searchInput.value='';if(lastFocusedElement)lastFocusedElement.focus();announce('Search dialog closed')};
 
 searchToggle.onclick=openSearch;
 if(searchCloseBtn)searchCloseBtn.onclick=closeSearch;
@@ -1177,7 +1384,7 @@ searchModal.onclick=e=>{if(e.target===searchModal)closeSearch()};
 if(searchInput)searchInput.oninput=e=>performSearch(e.target.value);
 if(searchResults)searchResults.onclick=e=>{const item=e.target.closest('.search-result-item');if(item){closeSearch();location.hash=item.dataset.href}};
 
-// Focus trap for search modal
+// Focus trap & keyboard nav for search
 searchModal.addEventListener('keydown',e=>{
     if(!searchModal.classList.contains('active'))return;
     const focusable=searchModal.querySelectorAll('input,button:not(.sr-only),[tabindex]:not([tabindex="-1"])');
@@ -1188,11 +1395,9 @@ searchModal.addEventListener('keydown',e=>{
     }
 });
 
-// Global keyboard shortcuts
 addEventListener('keydown',e=>{
     if(e.ctrlKey&&e.key==='k'){e.preventDefault();openSearch()}
     if(e.key==='Escape'&&searchModal.classList.contains('active'))closeSearch();
-    // Arrow navigation in search results
     if(searchModal.classList.contains('active')&&searchResults&&(e.key==='ArrowDown'||e.key==='ArrowUp')){
         e.preventDefault();
         const items=[...searchResults.querySelectorAll('.search-result-item')];
@@ -1210,7 +1415,13 @@ addEventListener('keydown',e=>{
     }
 });
 
-// Copy Button with ARIA feedback
+// Toast Notification
+const copyToast=$('#copyToast');
+const showToast=(msg='✓ Copied to clipboard!')=>{
+    if(copyToast){copyToast.textContent=msg;copyToast.classList.add('show');setTimeout(()=>copyToast.classList.remove('show'),2000)}
+};
+
+// Copy Button with animation
 $$('.copy-btn').forEach(b=>b.onclick=async()=>{
     const c=b.closest('.code-container').querySelector('pre').textContent;
     try{
@@ -1218,13 +1429,10 @@ $$('.copy-btn').forEach(b=>b.onclick=async()=>{
         const t=b.textContent;
         b.textContent='✅ Copied!';
         b.classList.add('copied');
-        b.setAttribute('aria-label','Code copied to clipboard');
+        showToast();
         announce('Code copied to clipboard');
-        setTimeout(()=>{b.textContent=t;b.classList.remove('copied');b.setAttribute('aria-label','Copy code')},2e3);
-    }catch{
-        b.textContent='❌ Failed';
-        announce('Failed to copy code','assertive');
-    }
+        setTimeout(()=>{b.textContent=t;b.classList.remove('copied')},2e3);
+    }catch{b.textContent='❌ Failed';announce('Failed to copy code','assertive')}
 });
 
 // Tab functionality with keyboard support
@@ -1266,39 +1474,19 @@ $$('.accordion-header').forEach(h=>{
             x.classList.remove('active');
             x.querySelector('.accordion-header')?.setAttribute('aria-expanded','false');
         });
-        if(!w){
-            i.classList.add('active');
-            h.setAttribute('aria-expanded','true');
-            announce(`${h.textContent.trim()} section expanded`);
-        }else{
-            announce(`${h.textContent.trim()} section collapsed`);
-        }
+        if(!w){i.classList.add('active');h.setAttribute('aria-expanded','true');announce(`${h.textContent.trim()} expanded`)}
+        else{announce(`${h.textContent.trim()} collapsed`)}
     };
 });
 
 // Back to Top Button
 const backTop=$('#backToTop');
-let ticking=false;
-addEventListener('scroll',()=>{
-    if(!ticking){
-        requestAnimationFrame(()=>{backTop.classList.toggle('visible',scrollY>500);ticking=false});
-        ticking=true;
-    }
-},{passive:true});
 backTop.onclick=()=>{scrollTo({top:0,behavior:'smooth'});announce('Scrolled to top')};
 
-// Table of Contents (if elements exist)
-const tocSidebar=$('#tocSidebar'),tocToggle=$('#tocToggle'),tocClose=$('#tocClose'),tocList=$('#tocList'),tocProgressBar=$('#tocProgressBar');
-if(tocToggle){
-    tocToggle.addEventListener('click',()=>{
-        const v=tocSidebar.classList.toggle('visible');
-        tocToggle.classList.toggle('active',v);
-        announce(v?'Table of contents opened':'Table of contents closed');
-    });
-}
-if(tocClose){
-    tocClose.addEventListener('click',()=>{tocSidebar.classList.remove('visible');tocToggle?.classList.remove('active')});
-}
+// Table of Contents
+const tocSidebar=$('#tocSidebar'),tocToggle=$('#tocToggle'),tocClose=$('#tocClose'),tocList=$('#tocList');
+if(tocToggle){tocToggle.addEventListener('click',()=>{const v=tocSidebar.classList.toggle('visible');tocToggle.classList.toggle('active',v);announce(v?'Table of contents opened':'Table of contents closed')})}
+if(tocClose){tocClose.addEventListener('click',()=>{tocSidebar.classList.remove('visible');tocToggle?.classList.remove('active')})}
 tocList?.querySelectorAll('.toc-link').forEach(l=>l.onclick=()=>{tocSidebar?.classList.remove('visible');tocToggle?.classList.remove('active')});
 
 // Section Configuration
@@ -1310,29 +1498,21 @@ let currentSection='';
 
 // Completed Sections Persistence
 const completedSections=storage.get('completedSections',{});
-
-// Restore completed sections on load
 Object.keys(completedSections).forEach(s=>{
     if(completedSections[s]){
-        const cb=$(`.complete-checkbox[data-section="${s}"]`);
-        if(cb)cb.checked=true;
-        const header=$(`#${s}-header`);
-        if(header)header.classList.add('completed');
-        const tocLink=$(`.toc-link[data-section="${s}"]`);
-        if(tocLink)tocLink.classList.add('completed');
+        const cb=$(`.complete-checkbox[data-section="${s}"]`);if(cb)cb.checked=true;
+        const header=$(`#${s}-header`);if(header)header.classList.add('completed');
+        const tocLink=$(`.toc-link[data-section="${s}"]`);if(tocLink)tocLink.classList.add('completed');
     }
 });
 
-// Section Complete Checkboxes
 $$('.complete-checkbox').forEach(cb=>{
     cb.onchange=()=>{
         const s=cb.dataset.section;
         completedSections[s]=cb.checked;
         storage.set('completedSections',completedSections);
-        const header=$(`#${s}-header`);
-        if(header)header.classList.toggle('completed',cb.checked);
-        const tocLink=$(`.toc-link[data-section="${s}"]`);
-        if(tocLink)tocLink.classList.toggle('completed',cb.checked);
+        $(`#${s}-header`)?.classList.toggle('completed',cb.checked);
+        $(`.toc-link[data-section="${s}"]`)?.classList.toggle('completed',cb.checked);
         announce(cb.checked?`${sectionNames[s]||s} marked complete`:`${sectionNames[s]||s} unmarked`);
     };
 });
@@ -1340,8 +1520,7 @@ $$('.complete-checkbox').forEach(cb=>{
 // Collapsible Sections
 $$('.section-collapse-btn').forEach(btn=>{
     btn.onclick=()=>{
-        const targetId=btn.dataset.target;
-        const content=$(`#${targetId}`);
+        const content=$(`#${btn.dataset.target}`);
         if(content){
             const collapsed=content.classList.toggle('collapsed');
             btn.classList.toggle('collapsed',collapsed);
@@ -1351,70 +1530,32 @@ $$('.section-collapse-btn').forEach(btn=>{
     };
 });
 
-// Section Fade-in Observer
-const sectionObserver=new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:0.1,rootMargin:'-50px'});
-$$('.tutorial-section').forEach(s=>sectionObserver.observe(s));
-
 // Scroll Spy & Progress Update
 const updateScrollSpy=()=>{
     const p=scrollY+200;
     let activeIdx=0;
-    
-    sections.forEach((id,i)=>{
-        const s=$(`#${id}`);
-        if(s&&p>=s.offsetTop)activeIdx=i;
-    });
-    
+    sections.forEach((id,i)=>{const s=$(`#${id}`);if(s&&p>=s.offsetTop)activeIdx=i});
     const activeSection=sections[activeIdx];
     
     if(currentSection!==activeSection){
         currentSection=activeSection;
         
-        // Update progress steps
         steps.forEach((x,j)=>{
             x.classList.remove('active');
             x.classList.toggle('completed',j<activeIdx);
             x.removeAttribute('aria-current');
-            const label=x.querySelector('.progress-step-label');
-            if(label)x.setAttribute('aria-label',label.textContent+(j<activeIdx?' - Completed':''));
         });
-        if(steps[activeIdx]){
-            steps[activeIdx].classList.add('active');
-            steps[activeIdx].setAttribute('aria-current','step');
-            const label=steps[activeIdx].querySelector('.progress-step-label');
-            if(label)steps[activeIdx].setAttribute('aria-label',label.textContent+' - Current section');
-        }
+        if(steps[activeIdx]){steps[activeIdx].classList.add('active');steps[activeIdx].setAttribute('aria-current','step')}
         
-        // Update nav links (scroll spy)
-        navLinks.forEach(l=>{
-            l.classList.remove('active','scroll-active');
-            if(l.getAttribute('href')===`#${activeSection}`)l.classList.add('scroll-active');
-        });
+        navLinks.forEach(l=>{l.classList.remove('active','scroll-active');if(l.getAttribute('href')===`#${activeSection}`)l.classList.add('scroll-active')});
+        tocList?.querySelectorAll('.toc-link').forEach(l=>{l.classList.remove('active');if(l.dataset.section===activeSection)l.classList.add('active')});
         
-        // Update TOC
-        tocList?.querySelectorAll('.toc-link').forEach(l=>{
-            l.classList.remove('active');
-            if(l.dataset.section===activeSection)l.classList.add('active');
-        });
-        
-        // Update breadcrumb
-        const bc=$('#currentBreadcrumb');
-        if(bc)bc.textContent=sectionNames[activeSection]||'Getting Started';
-        
-        // Update TOC progress bar
-        const progress=((activeIdx+1)/sections.length)*100;
-        if(tocProgressBar)tocProgressBar.style.width=`${progress}%`;
+        const bc=$('#currentBreadcrumb');if(bc)bc.textContent=sectionNames[activeSection]||'Getting Started';
     }
-    
-    // Save scroll position
     storage.set('scrollPosition',scrollY);
 };
 
-addEventListener('scroll',updateScrollSpy,{passive:true});
-
-// Restore scroll position on load
+// Restore scroll position
 const savedScroll=storage.get('scrollPosition',0);
 if(savedScroll>0)setTimeout(()=>scrollTo(0,savedScroll),100);
 
@@ -1422,46 +1563,29 @@ if(savedScroll>0)setTimeout(()=>scrollTo(0,savedScroll),100);
 steps.forEach(s=>{
     s.setAttribute('tabindex','0');
     s.setAttribute('role','button');
-    s.onclick=()=>{
-        const section=$(`#${s.dataset.section}`);
-        if(section){
-            section.scrollIntoView({behavior:'smooth'});
-            announce(`Navigated to ${s.querySelector('.progress-step-label')?.textContent||''}`);
-        }
-    };
+    s.onclick=()=>{$(`#${s.dataset.section}`)?.scrollIntoView({behavior:'smooth'});announce(`Navigated to ${s.querySelector('.progress-step-label')?.textContent||''}`)};
     s.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();s.click()}};
 });
 
-// Initialize section visibility
+// Initialize
 updateScrollSpy();
 setTimeout(()=>$$('.tutorial-section').forEach(s=>s.classList.add('visible')),100);
 
 // Offline Notice
 const offline=$('#offlineNotice');
-if(offline){
-    const updateOnline=()=>offline.classList.toggle('visible',!navigator.onLine);
-    addEventListener('online',updateOnline);
-    addEventListener('offline',updateOnline);
-    updateOnline();
-}
+if(offline){const updateOnline=()=>offline.classList.toggle('visible',!navigator.onLine);addEventListener('online',updateOnline);addEventListener('offline',updateOnline);updateOnline()}
 
-// Smooth scroll for all anchor links
-$$('a[href^="#"]').forEach(a=>a.onclick=e=>{
-    e.preventDefault();
-    const t=$(a.getAttribute('href'));
-    t?.scrollIntoView({behavior:'smooth'});
-});
+// Smooth scroll for anchor links
+$$('a[href^="#"]').forEach(a=>a.onclick=e=>{e.preventDefault();$(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'})});
 
 // Download Button
 $('#downloadBtn')?.addEventListener('click',()=>{
     const code=$('#fullScript')?.textContent||'';
     const blob=new Blob([code],{type:'text/sql'});
     const url=URL.createObjectURL(blob);
-    const a=document.createElement('a');
-    a.href=url;
-    a.download='DB_OrderManagement.sql';
-    a.click();
+    const a=document.createElement('a');a.href=url;a.download='DB_OrderManagement.sql';a.click();
     URL.revokeObjectURL(url);
+    showToast('✓ Downloaded!');
     announce('SQL file downloaded');
 });
 </script>
