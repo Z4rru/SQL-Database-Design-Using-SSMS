@@ -476,12 +476,13 @@ code{font-family:var(--font-mono)}
     <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
         <div class="navbar-content">
             <a href="#" class="logo" aria-label="SQL Tutorial Home"><span class="logo-icon">🗄️</span><span class="logo-text">SQL Tutorial</span></a>
-            <ul class="nav-links" role="menubar">
+                        <ul class="nav-links" role="menubar">
                 <li role="none"><a href="#concepts" role="menuitem">Concepts</a></li>
                 <li role="none"><a href="#modeling" role="menuitem">Modeling</a></li>
                 <li role="none"><a href="#sql-ref" role="menuitem">SQL Reference</a></li>
-                <li role="none"><a href="#setup" role="menuitem">Tutorial</a></li>
+                <li role="none"><a href="#advanced" role="menuitem">Advanced</a></li>
                 <li role="none"><a href="#queries" role="menuitem">Queries</a></li>
+                <li role="none"><a href="#best-practices" role="menuitem">Best Practices</a></li>
             </ul>
                         <div class="nav-actions">
                 <button class="search-toggle" id="searchToggle" aria-label="Search" title="Search (Ctrl+K)">🔍</button>
@@ -492,14 +493,16 @@ code{font-family:var(--font-mono)}
         </div>
     </nav>
 
-    <div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+        <div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
         <a href="#concepts">📐 Database Concepts</a>
         <a href="#modeling">📊 ER Modeling</a>
         <a href="#sql-ref">📖 SQL Reference</a>
+        <a href="#advanced">🚀 Advanced SQL</a>
         <a href="#setup">⚙️ Setup Tutorial</a>
         <a href="#tables">📋 Create Tables</a>
-        <a href="#data">💾 Insert Data</a>
         <a href="#queries">🔍 Queries & Joins</a>
+        <a href="#best-practices">💡 Best Practices</a>
+        <a href="#cheatsheet">📋 Cheat Sheet</a>
         <a href="#complete-script">📄 Full Script</a>
     </div>
 
@@ -513,16 +516,16 @@ code{font-family:var(--font-mono)}
         </div>
     </div>
 
-        <nav class="progress-container" aria-label="Tutorial progress">
+                <nav class="progress-container" aria-label="Tutorial progress">
         <div class="progress-track" role="list">
             <div class="progress-step active" data-section="hero" role="listitem" aria-current="step" aria-label="Start - Current section"><span class="progress-step-label">Start</span></div>
             <div class="progress-step" data-section="concepts" role="listitem" aria-label="Concepts"><span class="progress-step-label">Concepts</span></div>
             <div class="progress-step" data-section="modeling" role="listitem" aria-label="Modeling"><span class="progress-step-label">Modeling</span></div>
             <div class="progress-step" data-section="sql-ref" role="listitem" aria-label="SQL Reference"><span class="progress-step-label">SQL Ref</span></div>
+            <div class="progress-step" data-section="advanced" role="listitem" aria-label="Advanced"><span class="progress-step-label">Advanced</span></div>
             <div class="progress-step" data-section="setup" role="listitem" aria-label="Setup"><span class="progress-step-label">Setup</span></div>
-            <div class="progress-step" data-section="tables" role="listitem" aria-label="Tables"><span class="progress-step-label">Tables</span></div>
-            <div class="progress-step" data-section="data" role="listitem" aria-label="Data"><span class="progress-step-label">Data</span></div>
             <div class="progress-step" data-section="queries" role="listitem" aria-label="Queries"><span class="progress-step-label">Queries</span></div>
+            <div class="progress-step" data-section="best-practices" role="listitem" aria-label="Best Practices"><span class="progress-step-label">Tips</span></div>
         </div>
     </nav>
 
@@ -536,17 +539,19 @@ code{font-family:var(--font-mono)}
             <button class="toc-close" id="tocClose" aria-label="Close table of contents">×</button>
         </div>
         <div class="toc-progress"><div class="toc-progress-bar" id="tocProgressBar" style="width:0%"></div></div>
-        <ul class="toc-list" id="tocList">
+                <ul class="toc-list" id="tocList">
             <li class="toc-item"><a href="#hero" class="toc-link active" data-section="hero">🏠 Start<span class="toc-time">1 min</span></a></li>
             <li class="toc-item"><a href="#concepts" class="toc-link" data-section="concepts">1. Fundamentals<span class="toc-time">5 min</span></a></li>
-            <li class="toc-item"><a href="#modeling" class="toc-link" data-section="modeling">2. ER Modeling<span class="toc-time">4 min</span></a></li>
+            <li class="toc-item"><a href="#modeling" class="toc-link" data-section="modeling">2. ER Modeling<span class="toc-time">6 min</span></a></li>
             <li class="toc-item"><a href="#sql-ref" class="toc-link" data-section="sql-ref">3. SQL Reference<span class="toc-time">6 min</span></a></li>
-            <li class="toc-item"><a href="#setup" class="toc-link" data-section="setup">4. Database Setup<span class="toc-time">3 min</span></a></li>
-            <li class="toc-item"><a href="#tables" class="toc-link" data-section="tables">5. Creating Tables<span class="toc-time">5 min</span></a></li>
-            <li class="toc-item"><a href="#data" class="toc-link" data-section="data">6. Insert Data<span class="toc-time">3 min</span></a></li>
-            <li class="toc-item"><a href="#queries" class="toc-link" data-section="queries">7. Queries & Joins<span class="toc-time">5 min</span></a></li>
-            <li class="toc-item"><a href="#verify" class="toc-link" data-section="verify">8. Verification<span class="toc-time">2 min</span></a></li>
-            <li class="toc-item"><a href="#complete-script" class="toc-link" data-section="complete-script">📋 Full Script<span class="toc-time">1 min</span></a></li>
+            <li class="toc-item"><a href="#advanced" class="toc-link" data-section="advanced">4. Advanced SQL<span class="toc-time">8 min</span></a></li>
+            <li class="toc-item"><a href="#setup" class="toc-link" data-section="setup">5. Database Setup<span class="toc-time">3 min</span></a></li>
+            <li class="toc-item"><a href="#tables" class="toc-link" data-section="tables">6. Creating Tables<span class="toc-time">5 min</span></a></li>
+            <li class="toc-item"><a href="#data" class="toc-link" data-section="data">7. Insert Data<span class="toc-time">3 min</span></a></li>
+            <li class="toc-item"><a href="#queries" class="toc-link" data-section="queries">8. Queries & Joins<span class="toc-time">5 min</span></a></li>
+            <li class="toc-item"><a href="#best-practices" class="toc-link" data-section="best-practices">9. Best Practices<span class="toc-time">5 min</span></a></li>
+            <li class="toc-item"><a href="#cheatsheet" class="toc-link" data-section="cheatsheet">📋 Cheat Sheet<span class="toc-time">1 min</span></a></li>
+            <li class="toc-item"><a href="#complete-script" class="toc-link" data-section="complete-script">📄 Full Script<span class="toc-time">1 min</span></a></li>
         </ul>
     </aside>
 
@@ -559,10 +564,11 @@ code{font-family:var(--font-mono)}
                 <a href="#concepts" class="btn btn-primary">🚀 Let's Build Something!</a>
                 <a href="#setup" class="btn btn-secondary">💻 Jump to Hands-On Code</a>
             </div>
-            <div class="hero-stats">
+                        <div class="hero-stats">
                 <div class="stat-item"><div class="stat-number">8</div><div class="stat-label">Tables</div></div>
-                <div class="stat-item"><div class="stat-number">50+</div><div class="stat-label">Examples</div></div>
-                <div class="stat-item"><div class="stat-number">~30</div><div class="stat-label">Minutes</div></div>
+                <div class="stat-item"><div class="stat-number">100+</div><div class="stat-label">Examples</div></div>
+                <div class="stat-item"><div class="stat-number">~45</div><div class="stat-label">Minutes</div></div>
+                <div class="stat-item"><div class="stat-number">15</div><div class="stat-label">Topics</div></div>
             </div>
         </div>
     </section>
@@ -733,12 +739,116 @@ code{font-family:var(--font-mono)}
         <li>✅ Good: Look up department name from Department table when needed</li>
     </ul>
 </div>
-                    <div class="tab-content" id="nfex" role="tabpanel">
+                                        <div class="tab-content" id="nfex" role="tabpanel">
                         <h4 style="color:var(--primary);margin-bottom:var(--space-sm)">Normalization Example</h4>
                         <p style="color:var(--text-muted);margin-bottom:var(--space-md)"><strong>Unnormalized:</strong> ADVISER: Santos A. | SUBJECT: Math | STUDENTS: John L., Mae R., Mark V.</p>
                         <p style="color:var(--text-muted);margin-bottom:var(--space-md)"><strong>1NF:</strong> Split multi-valued STUDENTS into separate rows</p>
                         <p style="color:var(--text-muted);margin-bottom:var(--space-md)"><strong>2NF:</strong> Create separate tables: Advisers, Subjects, Students</p>
                         <p style="color:var(--text-muted)"><strong>3NF:</strong> Add linking table StudentAdvisers (ADV_ID, SUBJ_CODE, STU_NUM)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Normalization Forms -->
+            <div class="card">
+                <div class="card-header"><div class="card-icon">🎯</div><div><h3 class="card-title">Advanced Normal Forms</h3><p class="card-subtitle">BCNF, 4NF, and 5NF</p></div></div>
+                <p style="color:var(--text-secondary);margin-bottom:var(--space-lg)">Beyond 3NF, these forms handle edge cases. Most real-world databases stop at 3NF, but understanding these helps you recognize complex scenarios.</p>
+
+                <div class="tabs-container">
+                    <div class="tabs-header" role="tablist" aria-label="Advanced normalization forms">
+                        <button class="tab-btn active" data-tab="bcnf" role="tab" aria-selected="true" aria-controls="bcnf" tabindex="0" id="tab-bcnf">BCNF</button>
+                        <button class="tab-btn" data-tab="nf4" role="tab" aria-selected="false" aria-controls="nf4" tabindex="-1" id="tab-nf4">4NF</button>
+                        <button class="tab-btn" data-tab="nf5" role="tab" aria-selected="false" aria-controls="nf5" tabindex="-1" id="tab-nf5">5NF</button>
+                        <button class="tab-btn" data-tab="nfwhen" role="tab" aria-selected="false" aria-controls="nfwhen" tabindex="-1" id="tab-nfwhen">When to Use</button>
+                    </div>
+                    <div class="tab-content active" id="bcnf" role="tabpanel" aria-labelledby="tab-bcnf" tabindex="0">
+                        <h4 style="color:var(--primary);margin-bottom:var(--space-sm)">Boyce-Codd Normal Form (BCNF) — The Stricter 3NF</h4>
+                        <p style="color:var(--text-secondary);margin-bottom:var(--space-md)">Every determinant must be a candidate key. Fixes edge cases where 3NF still has anomalies.</p>
+                        <div class="info-box info-note"><div class="info-box-icon">📌</div><div class="info-box-content">
+                            <h4>BCNF Example Problem</h4>
+                            <p><strong>Table:</strong> CourseInstructor (Student, Course, Instructor)<br>
+                            <strong>Issue:</strong> One instructor teaches only one course, but course can have many instructors<br>
+                            <strong>Fix:</strong> Split into CourseInstructor(Course, Instructor) + StudentCourse(Student, Course)</p>
+                        </div></div>
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="comment">-- Before BCNF (has anomalies)</span>
+<span class="keyword">CREATE TABLE</span> CourseInstructor (
+    Student <span class="type">VARCHAR</span>(<span class="number">50</span>),
+    Course <span class="type">VARCHAR</span>(<span class="number">50</span>),
+    Instructor <span class="type">VARCHAR</span>(<span class="number">50</span>)
+);
+
+<span class="comment">-- After BCNF (split tables)</span>
+<span class="keyword">CREATE TABLE</span> InstructorCourse (
+    Instructor <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">PRIMARY KEY</span>,
+    Course <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT NULL</span>
+);
+
+<span class="keyword">CREATE TABLE</span> StudentEnrollment (
+    Student <span class="type">VARCHAR</span>(<span class="number">50</span>),
+    Instructor <span class="type">VARCHAR</span>(<span class="number">50</span>),
+    <span class="keyword">PRIMARY KEY</span> (Student, Instructor)
+);</code></pre></div></div>
+                    </div>
+                    <div class="tab-content" id="nf4" role="tabpanel">
+                        <h4 style="color:var(--primary);margin-bottom:var(--space-sm)">4th Normal Form — No Multi-Valued Dependencies</h4>
+                        <p style="color:var(--text-secondary);margin-bottom:var(--space-md)">Eliminate independent multi-valued facts about an entity stored in one table.</p>
+                        <div class="concept-grid">
+                            <div class="concept-card" style="border-left-color:var(--danger)">
+                                <h4>❌ Before 4NF</h4>
+                                <p>Employee(ID, Skill, Language) — Skills and Languages are independent but stored together, causing redundancy</p>
+                            </div>
+                            <div class="concept-card" style="border-left-color:var(--success)">
+                                <h4>✅ After 4NF</h4>
+                                <p>EmployeeSkills(ID, Skill) + EmployeeLanguages(ID, Language) — Independent facts in separate tables</p>
+                            </div>
+                        </div>
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="comment">-- 4NF: Separate independent multi-valued attributes</span>
+<span class="keyword">CREATE TABLE</span> EmployeeSkills (
+    EmployeeID <span class="type">INT</span>,
+    Skill <span class="type">VARCHAR</span>(<span class="number">100</span>),
+    <span class="keyword">PRIMARY KEY</span> (EmployeeID, Skill)
+);
+
+<span class="keyword">CREATE TABLE</span> EmployeeLanguages (
+    EmployeeID <span class="type">INT</span>,
+    Language <span class="type">VARCHAR</span>(<span class="number">50</span>),
+    <span class="keyword">PRIMARY KEY</span> (EmployeeID, Language)
+);</code></pre></div></div>
+                    </div>
+                    <div class="tab-content" id="nf5" role="tabpanel">
+                        <h4 style="color:var(--primary);margin-bottom:var(--space-sm)">5th Normal Form — No Join Dependencies</h4>
+                        <p style="color:var(--text-secondary);margin-bottom:var(--space-md)">The table cannot be decomposed into smaller tables without losing information. Rarely needed in practice.</p>
+                        <div class="info-box info-warning"><div class="info-box-icon">⚠️</div><div class="info-box-content">
+                            <h4>When 5NF Matters</h4>
+                            <p>Only relevant when you have complex many-to-many-to-many relationships. Example: Agent-Company-Product where agents can sell certain products for certain companies, but the valid combinations aren't derivable from pairs.</p>
+                        </div></div>
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="comment">-- 5NF: Cannot be losslessly decomposed further</span>
+<span class="keyword">CREATE TABLE</span> AgentCompanyProduct (
+    AgentID <span class="type">INT</span>,
+    CompanyID <span class="type">INT</span>,
+    ProductID <span class="type">INT</span>,
+    <span class="keyword">PRIMARY KEY</span> (AgentID, CompanyID, ProductID),
+    <span class="comment">-- This combination is the minimum required</span>
+    <span class="comment">-- Breaking into pairs would lose valid constraint info</span>
+);</code></pre></div></div>
+                    </div>
+                    <div class="tab-content" id="nfwhen" role="tabpanel">
+                        <h4 style="color:var(--primary);margin-bottom:var(--space-sm)">Practical Normalization Guide</h4>
+                        <table class="data-table">
+                            <thead><tr><th>Form</th><th>Use When</th><th>Real-World Frequency</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>1NF</strong></td><td>Always — basic requirement</td><td>100% of databases</td></tr>
+                                <tr><td><strong>2NF</strong></td><td>Have composite keys with partial dependencies</td><td>~95% of databases</td></tr>
+                                <tr><td><strong>3NF</strong></td><td>Standard for most applications</td><td>~90% of databases</td></tr>
+                                <tr><td><strong>BCNF</strong></td><td>Multiple candidate keys with overlap</td><td>~60% of databases</td></tr>
+                                <tr><td><strong>4NF</strong></td><td>Independent multi-valued attributes</td><td>~20% of databases</td></tr>
+                                <tr><td><strong>5NF</strong></td><td>Complex 3-way relationships</td><td>~5% of databases</td></tr>
+                            </tbody>
+                        </table>
+                        <div class="info-box info-tip"><div class="info-box-icon">💡</div><div class="info-box-content">
+                            <h4>Pro Tip</h4>
+                            <p>Most applications work perfectly fine at 3NF. Over-normalizing can hurt performance. Sometimes deliberate denormalization (like caching calculated totals) is the right choice for read-heavy systems.</p>
+                        </div></div>
                     </div>
                 </div>
             </div>
@@ -874,10 +984,318 @@ code{font-family:var(--font-mono)}
                     <div class="quick-ref-item"><div class="quick-ref-label">IDENTITY(1,1)</div><div class="quick-ref-value">Auto-increment</div></div>
                 </div>
             </div>
+                    </div><!-- End section-content -->
         </section>
 
-        <section class="tutorial-section" id="setup">
-            <div class="section-header"><div class="section-number">4</div><h2 class="section-title">Database Setup</h2></div>
+        <!-- ===== ADVANCED SQL SECTION ===== -->
+        <section class="tutorial-section" id="advanced" data-reading-time="8">
+            <div class="section-header" id="advanced-header">
+                <div class="section-number">4</div>
+                <h2 class="section-title">Advanced SQL Features</h2>
+                <div class="section-meta">
+                    <span class="reading-time"><span class="reading-time-icon">⏱️</span> 8 min read</span>
+                    <label class="section-complete">
+                        <input type="checkbox" class="complete-checkbox" data-section="advanced" aria-label="Mark section as complete">
+                        <span class="complete-label">Complete</span>
+                    </label>
+                </div>
+                <button class="section-collapse-btn" aria-label="Collapse section" data-target="advanced-content">▼</button>
+            </div>
+            <div class="section-content" id="advanced-content">
+            <p class="section-description">Level up your SQL skills with indexes for speed, views for convenience, stored procedures for reusability, and transactions for safety.</p>
+
+            <!-- INDEXES -->
+            <div class="card">
+                <div class="card-header"><div class="card-icon">⚡</div><div><h3 class="card-title">Indexes</h3><p class="card-subtitle">Speed up your queries dramatically</p></div></div>
+                <p style="color:var(--text-secondary);margin-bottom:var(--space-lg)">Think of an index like a book's index — instead of reading every page to find "SQL", you look up "SQL" in the index and jump directly to page 42. Databases work the same way!</p>
+                
+                <div class="tabs-container">
+                    <div class="tabs-header" role="tablist" aria-label="Index types">
+                        <button class="tab-btn active" data-tab="idx-basic" role="tab" aria-selected="true" aria-controls="idx-basic" tabindex="0" id="tab-idx-basic">Basic Index</button>
+                        <button class="tab-btn" data-tab="idx-types" role="tab" aria-selected="false" aria-controls="idx-types" tabindex="-1" id="tab-idx-types">Index Types</button>
+                        <button class="tab-btn" data-tab="idx-when" role="tab" aria-selected="false" aria-controls="idx-when" tabindex="-1" id="tab-idx-when">When to Use</button>
+                    </div>
+                    <div class="tab-content active" id="idx-basic" role="tabpanel">
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="comment">-- Create a simple index on a column you search often</span>
+<span class="keyword">CREATE INDEX</span> IX_Products_Name 
+<span class="keyword">ON</span> TBL_PRODUCTS (PRODUCT_NAME);
+
+<span class="comment">-- Create unique index (also enforces uniqueness)</span>
+<span class="keyword">CREATE UNIQUE INDEX</span> IX_Customers_Email 
+<span class="keyword">ON</span> TBL_CUSTOMERS (EMAIL);
+
+<span class="comment">-- Create composite index (for queries filtering on multiple columns)</span>
+<span class="keyword">CREATE INDEX</span> IX_Orders_Customer_Date 
+<span class="keyword">ON</span> TBL_ORDERS (CUSTOMER_ID, ORDER_DATE);
+
+<span class="comment">-- Drop an index when no longer needed</span>
+<span class="keyword">DROP INDEX</span> IX_Products_Name <span class="keyword">ON</span> TBL_PRODUCTS;</code></pre></div></div>
+                    </div>
+                    <div class="tab-content" id="idx-types" role="tabpanel">
+                        <table class="data-table">
+                            <thead><tr><th>Index Type</th><th>Best For</th><th>Example</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Clustered</strong></td><td>Primary key (only 1 per table)</td><td>Automatically created with PRIMARY KEY</td></tr>
+                                <tr><td><strong>Non-Clustered</strong></td><td>Frequently searched columns</td><td><code>CREATE INDEX IX_Name ON Table(Col)</code></td></tr>
+                                <tr><td><strong>Unique</strong></td><td>Columns that must be unique</td><td><code>CREATE UNIQUE INDEX...</code></td></tr>
+                                <tr><td><strong>Composite</strong></td><td>Multi-column WHERE clauses</td><td><code>CREATE INDEX IX ON T(A, B)</code></td></tr>
+                                <tr><td><strong>Covering</strong></td><td>Avoid table lookups</td><td><code>INCLUDE (extra_columns)</code></td></tr>
+                            </tbody>
+                        </table>
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="comment">-- Covering index: includes extra columns to avoid table lookup</span>
+<span class="keyword">CREATE NONCLUSTERED INDEX</span> IX_Orders_Covering
+<span class="keyword">ON</span> TBL_ORDERS (CUSTOMER_ID)
+<span class="keyword">INCLUDE</span> (STATUS, ORDER_DATE);
+
+<span class="comment">-- Now this query uses ONLY the index, no table access needed:</span>
+<span class="keyword">SELECT</span> STATUS, ORDER_DATE 
+<span class="keyword">FROM</span> TBL_ORDERS 
+<span class="keyword">WHERE</span> CUSTOMER_ID = <span class="number">1</span>;</code></pre></div></div>
+                    </div>
+                    <div class="tab-content" id="idx-when" role="tabpanel">
+                        <div class="concept-grid">
+                            <div class="concept-card" style="border-left-color:var(--success)">
+                                <h4>✅ DO Index</h4>
+                                <p>• Primary/Foreign keys<br>• Columns in WHERE clauses<br>• Columns in JOIN conditions<br>• Columns in ORDER BY</p>
+                            </div>
+                            <div class="concept-card" style="border-left-color:var(--danger)">
+                                <h4>❌ DON'T Index</h4>
+                                <p>• Small tables (&lt;1000 rows)<br>• Columns rarely searched<br>• Columns with few unique values<br>• Tables with heavy INSERT/UPDATE</p>
+                            </div>
+                        </div>
+                        <div class="info-box info-warning"><div class="info-box-icon">⚠️</div><div class="info-box-content">
+                            <h4>Index Trade-off</h4>
+                            <p>Indexes speed up SELECT but slow down INSERT/UPDATE/DELETE (because the index must be updated too). Choose wisely!</p>
+                        </div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEWS -->
+            <div class="card">
+                <div class="card-header"><div class="card-icon">👁️</div><div><h3 class="card-title">Views</h3><p class="card-subtitle">Virtual tables that simplify complex queries</p></div></div>
+                <p style="color:var(--text-secondary);margin-bottom:var(--space-lg)">A view is like a saved query that acts like a table. Write a complex JOIN once, then SELECT from it like it's a simple table. Great for security too — show users only certain columns.</p>
+                
+                <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="comment">-- Create a view for order summaries</span>
+<span class="keyword">CREATE VIEW</span> VW_OrderSummary <span class="keyword">AS</span>
+<span class="keyword">SELECT</span> 
+    o.ORDER_ID,
+    c.NAME <span class="keyword">AS</span> CustomerName,
+    <span class="function">CONCAT</span>(e.FIRST_NAME, <span class="string">' '</span>, e.LAST_NAME) <span class="keyword">AS</span> SalesRep,
+    o.STATUS,
+    o.ORDER_DATE,
+    <span class="function">SUM</span>(i.QUANTITY * i.PRICE) <span class="keyword">AS</span> TotalAmount
+<span class="keyword">FROM</span> TBL_ORDERS o
+<span class="keyword">INNER JOIN</span> TBL_CUSTOMERS c <span class="keyword">ON</span> o.CUSTOMER_ID = c.CUSTOMER_ID
+<span class="keyword">INNER JOIN</span> TBL_EMPLOYEES e <span class="keyword">ON</span> o.EMPLOYEE_ID = e.EMPLOYEE_ID
+<span class="keyword">LEFT JOIN</span> TBL_ITEMS i <span class="keyword">ON</span> o.ORDER_ID = i.ORDER_ID
+<span class="keyword">GROUP BY</span> o.ORDER_ID, c.NAME, e.FIRST_NAME, e.LAST_NAME, o.STATUS, o.ORDER_DATE;
+<span class="keyword">GO</span>
+
+<span class="comment">-- Now use it like a simple table!</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> VW_OrderSummary <span class="keyword">WHERE</span> STATUS = <span class="string">'Pending'</span>;
+<span class="keyword">SELECT</span> CustomerName, <span class="function">SUM</span>(TotalAmount) <span class="keyword">FROM</span> VW_OrderSummary <span class="keyword">GROUP BY</span> CustomerName;
+
+<span class="comment">-- Create a security view (hide sensitive data)</span>
+<span class="keyword">CREATE VIEW</span> VW_PublicProducts <span class="keyword">AS</span>
+<span class="keyword">SELECT</span> PRODUCT_ID, PRODUCT_NAME, LIST_PRICE
+<span class="keyword">FROM</span> TBL_PRODUCTS;  <span class="comment">-- Hides STANDARD_COST from users</span>
+<span class="keyword">GO</span>
+
+<span class="comment">-- Modify or drop a view</span>
+<span class="keyword">ALTER VIEW</span> VW_OrderSummary <span class="keyword">AS</span> <span class="comment">/* new query */</span>;
+<span class="keyword">DROP VIEW</span> VW_OrderSummary;</code></pre></div></div>
+            </div>
+
+            <!-- STORED PROCEDURES -->
+            <div class="card">
+                <div class="card-header"><div class="card-icon">📦</div><div><h3 class="card-title">Stored Procedures</h3><p class="card-subtitle">Reusable SQL programs with parameters</p></div></div>
+                <p style="color:var(--text-secondary);margin-bottom:var(--space-lg)">Stored procedures are like functions — write once, call many times with different inputs. They're precompiled for speed and keep logic on the database server.</p>
+                
+                <div class="accordion" id="spAccordion">
+                    <div class="accordion-item active"><button class="accordion-header" aria-expanded="true"><span>Basic Procedure</span><span class="accordion-icon">+</span></button><div class="accordion-content"><div class="accordion-body">
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="comment">-- Create a simple procedure</span>
+<span class="keyword">CREATE PROCEDURE</span> SP_GetAllProducts
+<span class="keyword">AS</span>
+<span class="keyword">BEGIN</span>
+    <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> TBL_PRODUCTS <span class="keyword">ORDER BY</span> PRODUCT_NAME;
+<span class="keyword">END</span>;
+<span class="keyword">GO</span>
+
+<span class="comment">-- Execute it</span>
+<span class="keyword">EXEC</span> SP_GetAllProducts;</code></pre></div></div>
+                    </div></div></div>
+                    <div class="accordion-item"><button class="accordion-header" aria-expanded="false"><span>Procedure with Parameters</span><span class="accordion-icon">+</span></button><div class="accordion-content"><div class="accordion-body">
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="comment">-- Procedure with input parameters</span>
+<span class="keyword">CREATE PROCEDURE</span> SP_GetOrdersByCustomer
+    @CustomerID <span class="type">BIGINT</span>,
+    @Status <span class="type">VARCHAR</span>(<span class="number">50</span>) = <span class="keyword">NULL</span>  <span class="comment">-- Optional with default</span>
+<span class="keyword">AS</span>
+<span class="keyword">BEGIN</span>
+    <span class="keyword">SELECT</span> o.*, c.NAME <span class="keyword">AS</span> CustomerName
+    <span class="keyword">FROM</span> TBL_ORDERS o
+    <span class="keyword">INNER JOIN</span> TBL_CUSTOMERS c <span class="keyword">ON</span> o.CUSTOMER_ID = c.CUSTOMER_ID
+    <span class="keyword">WHERE</span> o.CUSTOMER_ID = @CustomerID
+      <span class="keyword">AND</span> (@Status <span class="keyword">IS NULL OR</span> o.STATUS = @Status);
+<span class="keyword">END</span>;
+<span class="keyword">GO</span>
+
+<span class="comment">-- Call with parameters</span>
+<span class="keyword">EXEC</span> SP_GetOrdersByCustomer @CustomerID = <span class="number">1</span>;
+<span class="keyword">EXEC</span> SP_GetOrdersByCustomer @CustomerID = <span class="number">1</span>, @Status = <span class="string">'Pending'</span>;</code></pre></div></div>
+                    </div></div></div>
+                    <div class="accordion-item"><button class="accordion-header" aria-expanded="false"><span>Procedure with Output</span><span class="accordion-icon">+</span></button><div class="accordion-content"><div class="accordion-body">
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="comment">-- Procedure with output parameter</span>
+<span class="keyword">CREATE PROCEDURE</span> SP_CreateOrder
+    @CustomerID <span class="type">BIGINT</span>,
+    @EmployeeID <span class="type">BIGINT</span>,
+    @NewOrderID <span class="type">BIGINT</span> <span class="keyword">OUTPUT</span>
+<span class="keyword">AS</span>
+<span class="keyword">BEGIN</span>
+    <span class="keyword">INSERT INTO</span> TBL_ORDERS (CUSTOMER_ID, STATUS, EMPLOYEE_ID, ORDER_DATE)
+    <span class="keyword">VALUES</span> (@CustomerID, <span class="string">'Pending'</span>, @EmployeeID, <span class="function">GETDATE</span>());
+    
+    <span class="keyword">SET</span> @NewOrderID = <span class="function">SCOPE_IDENTITY</span>();
+<span class="keyword">END</span>;
+<span class="keyword">GO</span>
+
+<span class="comment">-- Call and capture output</span>
+<span class="keyword">DECLARE</span> @OrderID <span class="type">BIGINT</span>;
+<span class="keyword">EXEC</span> SP_CreateOrder @CustomerID = <span class="number">1</span>, @EmployeeID = <span class="number">2</span>, @NewOrderID = @OrderID <span class="keyword">OUTPUT</span>;
+<span class="keyword">PRINT</span> <span class="string">'Created Order ID: '</span> + <span class="function">CAST</span>(@OrderID <span class="keyword">AS</span> <span class="type">VARCHAR</span>);</code></pre></div></div>
+                    </div></div></div>
+                </div>
+            </div>
+
+            <!-- TRANSACTIONS -->
+            <div class="card">
+                <div class="card-header"><div class="card-icon">🔐</div><div><h3 class="card-title">Transactions</h3><p class="card-subtitle">All-or-nothing operations for data safety</p></div></div>
+                <p style="color:var(--text-secondary);margin-bottom:var(--space-lg)">Imagine transferring $100 between bank accounts. If the debit succeeds but credit fails, money vanishes! Transactions ensure BOTH happen or NEITHER happens.</p>
+                
+                <div class="concept-grid">
+                    <div class="concept-card"><h4>BEGIN TRANSACTION</h4><p>Start a transaction block</p></div>
+                    <div class="concept-card"><h4>COMMIT</h4><p>Save all changes permanently</p></div>
+                    <div class="concept-card"><h4>ROLLBACK</h4><p>Undo all changes since BEGIN</p></div>
+                    <div class="concept-card"><h4>SAVEPOINT</h4><p>Partial rollback point</p></div>
+                </div>
+
+                <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="comment">-- Basic transaction example</span>
+<span class="keyword">BEGIN TRANSACTION</span>;
+
+<span class="keyword">UPDATE</span> TBL_INVENTORIES 
+<span class="keyword">SET</span> QUANTITY = QUANTITY - <span class="number">10</span> 
+<span class="keyword">WHERE</span> PRODUCT_ID = <span class="number">1</span> <span class="keyword">AND</span> WAREHOUSE_ID = <span class="number">1</span>;
+
+<span class="keyword">INSERT INTO</span> TBL_ITEMS (ORDER_ID, PRODUCT_ID, QUANTITY, PRICE)
+<span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">29.99</span>);
+
+<span class="comment">-- If everything worked, save it</span>
+<span class="keyword">COMMIT</span>;
+
+<span class="comment">-- If something went wrong, undo everything</span>
+<span class="comment">-- ROLLBACK;</span></code></pre></div></div>
+
+                <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="comment">-- Transaction with savepoints</span>
+<span class="keyword">BEGIN TRANSACTION</span>;
+
+<span class="keyword">UPDATE</span> TBL_CUSTOMERS <span class="keyword">SET</span> CREDIT_LIMIT = <span class="number">600000</span> <span class="keyword">WHERE</span> CUSTOMER_ID = <span class="number">1</span>;
+<span class="keyword">SAVE TRANSACTION</span> CustomerUpdated;
+
+<span class="keyword">UPDATE</span> TBL_ORDERS <span class="keyword">SET</span> STATUS = <span class="string">'Approved'</span> <span class="keyword">WHERE</span> CUSTOMER_ID = <span class="number">1</span>;
+
+<span class="comment">-- Oops, only want to undo the orders update</span>
+<span class="keyword">ROLLBACK TRANSACTION</span> CustomerUpdated;
+
+<span class="comment">-- Customer update is kept, order update is undone</span>
+<span class="keyword">COMMIT</span>;</code></pre></div></div>
+            </div>
+
+            <!-- ERROR HANDLING -->
+            <div class="card">
+                <div class="card-header"><div class="card-icon">🛡️</div><div><h3 class="card-title">Error Handling</h3><p class="card-subtitle">TRY...CATCH for graceful failures</p></div></div>
+                <p style="color:var(--text-secondary);margin-bottom:var(--space-lg)">Don't let errors crash your operations! Catch them gracefully, log them, and respond appropriately.</p>
+                
+                <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="comment">-- Basic TRY...CATCH</span>
+<span class="keyword">BEGIN TRY</span>
+    <span class="keyword">INSERT INTO</span> TBL_PRODUCTS (PRODUCT_NAME, STANDARD_COST, LIST_PRICE, CATEGORY_ID)
+    <span class="keyword">VALUES</span> (<span class="string">'Test Product'</span>, <span class="number">10.00</span>, <span class="number">19.99</span>, <span class="number">999</span>);  <span class="comment">-- Invalid category!</span>
+<span class="keyword">END TRY</span>
+<span class="keyword">BEGIN CATCH</span>
+    <span class="keyword">PRINT</span> <span class="string">'Error: '</span> + <span class="function">ERROR_MESSAGE</span>();
+    <span class="keyword">PRINT</span> <span class="string">'Error Number: '</span> + <span class="function">CAST</span>(<span class="function">ERROR_NUMBER</span>() <span class="keyword">AS</span> <span class="type">VARCHAR</span>);
+    <span class="keyword">PRINT</span> <span class="string">'Line: '</span> + <span class="function">CAST</span>(<span class="function">ERROR_LINE</span>() <span class="keyword">AS</span> <span class="type">VARCHAR</span>);
+<span class="keyword">END CATCH</span>;</code></pre></div></div>
+
+                <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="comment">-- Transaction with error handling (production pattern)</span>
+<span class="keyword">CREATE PROCEDURE</span> SP_SafeOrderInsert
+    @CustomerID <span class="type">BIGINT</span>,
+    @ProductID <span class="type">BIGINT</span>,
+    @Quantity <span class="type">INT</span>
+<span class="keyword">AS</span>
+<span class="keyword">BEGIN</span>
+    <span class="keyword">SET NOCOUNT ON</span>;
+    
+    <span class="keyword">BEGIN TRY</span>
+        <span class="keyword">BEGIN TRANSACTION</span>;
+        
+        <span class="comment">-- Check inventory first</span>
+        <span class="keyword">DECLARE</span> @Stock <span class="type">INT</span>;
+        <span class="keyword">SELECT</span> @Stock = <span class="function">SUM</span>(QUANTITY) <span class="keyword">FROM</span> TBL_INVENTORIES <span class="keyword">WHERE</span> PRODUCT_ID = @ProductID;
+        
+        <span class="keyword">IF</span> @Stock < @Quantity
+            <span class="keyword">THROW</span> <span class="number">50001</span>, <span class="string">'Insufficient inventory'</span>, <span class="number">1</span>;
+        
+        <span class="comment">-- Create order and deduct inventory</span>
+        <span class="keyword">INSERT INTO</span> TBL_ORDERS (CUSTOMER_ID, STATUS, EMPLOYEE_ID, ORDER_DATE)
+        <span class="keyword">VALUES</span> (@CustomerID, <span class="string">'Processing'</span>, <span class="number">1</span>, <span class="function">GETDATE</span>());
+        
+        <span class="keyword">UPDATE</span> TBL_INVENTORIES 
+        <span class="keyword">SET</span> QUANTITY = QUANTITY - @Quantity 
+        <span class="keyword">WHERE</span> PRODUCT_ID = @ProductID;
+        
+        <span class="keyword">COMMIT</span>;
+        <span class="keyword">PRINT</span> <span class="string">'Order created successfully!'</span>;
+        
+    <span class="keyword">END TRY</span>
+    <span class="keyword">BEGIN CATCH</span>
+        <span class="keyword">IF</span> <span class="function">@@TRANCOUNT</span> > <span class="number">0</span>
+            <span class="keyword">ROLLBACK</span>;
+        
+        <span class="keyword">THROW</span>;  <span class="comment">-- Re-throw the error</span>
+    <span class="keyword">END CATCH</span>;
+<span class="keyword">END</span>;
+<span class="keyword">GO</span></code></pre></div></div>
+
+                <div class="quick-ref">
+                    <h3 class="quick-ref-title">🔧 Error Functions</h3>
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-item"><div class="quick-ref-label">ERROR_NUMBER()</div><div class="quick-ref-value">Error code</div></div>
+                        <div class="quick-ref-item"><div class="quick-ref-label">ERROR_MESSAGE()</div><div class="quick-ref-value">Error text</div></div>
+                        <div class="quick-ref-item"><div class="quick-ref-label">ERROR_SEVERITY()</div><div class="quick-ref-value">Severity level</div></div>
+                        <div class="quick-ref-item"><div class="quick-ref-label">ERROR_STATE()</div><div class="quick-ref-value">Error state</div></div>
+                        <div class="quick-ref-item"><div class="quick-ref-label">ERROR_LINE()</div><div class="quick-ref-value">Line number</div></div>
+                        <div class="quick-ref-item"><div class="quick-ref-label">ERROR_PROCEDURE()</div><div class="quick-ref-value">Procedure name</div></div>
+                    </div>
+                </div>
+            </div>
+
+            </div><!-- End section-content -->
+        </section>
+
+        <section class="tutorial-section" id="setup" data-reading-time="3">
+            <div class="section-header" id="setup-header">
+                <div class="section-number">5</div>
+                <h2 class="section-title">Database Setup</h2>
+                <div class="section-meta">
+                    <span class="reading-time"><span class="reading-time-icon">⏱️</span> 3 min read</span>
+                    <label class="section-complete">
+                        <input type="checkbox" class="complete-checkbox" data-section="setup" aria-label="Mark section as complete">
+                        <span class="complete-label">Complete</span>
+                    </label>
+                </div>
+                <button class="section-collapse-btn" aria-label="Collapse section" data-target="setup-content">▼</button>
+            </div>
+            <div class="section-content" id="setup-content">
             <p class="section-description">Create a new database from scratch — the foundation for all your tables.</p>
 
             <div class="info-box info-warning"><div class="info-box-icon">⚠️</div><div class="info-box-content"><h4>Before You Begin</h4><p>Make sure you have SQL Server Management Studio (SSMS) open and connected to your server. Don't have it? Download free from Microsoft's website first!</p></div></div>
@@ -904,8 +1322,20 @@ code{font-family:var(--font-mono)}
             </ol>
         </section>
 
-        <section class="tutorial-section" id="tables">
-            <div class="section-header"><div class="section-number">5</div><h2 class="section-title">Creating Tables</h2></div>
+                <section class="tutorial-section" id="tables" data-reading-time="5">
+            <div class="section-header" id="tables-header">
+                <div class="section-number">6</div>
+                <h2 class="section-title">Creating Tables</h2>
+                <div class="section-meta">
+                    <span class="reading-time"><span class="reading-time-icon">⏱️</span> 5 min read</span>
+                    <label class="section-complete">
+                        <input type="checkbox" class="complete-checkbox" data-section="tables" aria-label="Mark section as complete">
+                        <span class="complete-label">Complete</span>
+                    </label>
+                </div>
+                <button class="section-collapse-btn" aria-label="Collapse section" data-target="tables-content">▼</button>
+            </div>
+            <div class="section-content" id="tables-content">
             <p class="section-description">Create 8 tables in order — parent tables first, then child tables with foreign keys.</p>
 
             <div class="info-box info-note"><div class="info-box-icon">📌</div><div class="info-box-content"><h4>Build Foundation First!</h4><p>Create tables in order: Parents before Children. Why? Products need Categories to exist first — you can't link to something that doesn't exist yet!</p></div></div>
@@ -1152,11 +1582,253 @@ code{font-family:var(--font-mono)}
 <span class="keyword">INNER JOIN</span> TBL_PRODUCTS p <span class="keyword">ON</span> inv.PRODUCT_ID = p.PRODUCT_ID
 <span class="keyword">GROUP BY</span> w.WAREHOUSE_NAME
 <span class="keyword">ORDER BY</span> TotalValue <span class="keyword">DESC</span>;</code></pre></div></div>
+                        </div>
+        </section>
+
+        <!-- ===== BEST PRACTICES SECTION ===== -->
+        <section class="tutorial-section" id="best-practices" data-reading-time="5">
+            <div class="section-header" id="best-practices-header">
+                <div class="section-number">9</div>
+                <h2 class="section-title">Best Practices & Performance</h2>
+                <div class="section-meta">
+                    <span class="reading-time"><span class="reading-time-icon">⏱️</span> 5 min read</span>
+                    <label class="section-complete">
+                        <input type="checkbox" class="complete-checkbox" data-section="best-practices" aria-label="Mark section as complete">
+                        <span class="complete-label">Complete</span>
+                    </label>
+                </div>
+                <button class="section-collapse-btn" aria-label="Collapse section" data-target="best-practices-content">▼</button>
+            </div>
+            <div class="section-content" id="best-practices-content">
+            <p class="section-description">Avoid common pitfalls and write queries that fly. These tips separate beginners from professionals.</p>
+
+            <!-- PERFORMANCE TIPS -->
+            <div class="card">
+                <div class="card-header"><div class="card-icon">🚀</div><div><h3 class="card-title">Performance Tips</h3><p class="card-subtitle">Make your queries faster</p></div></div>
+                
+                <div class="feature-grid">
+                    <div class="feature-card"><div class="feature-icon">🎯</div><h3 class="feature-title">SELECT Only What You Need</h3><p class="feature-description">Never use SELECT * in production. Specify columns to reduce data transfer.</p></div>
+                    <div class="feature-card"><div class="feature-icon">📊</div><h3 class="feature-title">Index Wisely</h3><p class="feature-description">Index columns in WHERE and JOIN clauses. Check execution plans.</p></div>
+                    <div class="feature-card"><div class="feature-icon">🔢</div><h3 class="feature-title">Limit Results</h3><p class="feature-description">Use TOP or OFFSET-FETCH for pagination. Don't load 1M rows to show 10.</p></div>
+                    <div class="feature-card"><div class="feature-icon">🔍</div><h3 class="feature-title">Avoid Functions on Columns</h3><p class="feature-description">WHERE YEAR(date) = 2024 can't use indexes. Use date ranges instead.</p></div>
+                </div>
+
+                <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="comment">-- ❌ SLOW: Functions prevent index usage</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> TBL_ORDERS 
+<span class="keyword">WHERE</span> <span class="function">YEAR</span>(ORDER_DATE) = <span class="number">2024</span>;
+
+<span class="comment">-- ✅ FAST: Range comparison uses index</span>
+<span class="keyword">SELECT</span> ORDER_ID, STATUS, ORDER_DATE 
+<span class="keyword">FROM</span> TBL_ORDERS 
+<span class="keyword">WHERE</span> ORDER_DATE >= <span class="string">'2024-01-01'</span> 
+  <span class="keyword">AND</span> ORDER_DATE < <span class="string">'2025-01-01'</span>;
+
+<span class="comment">-- ❌ SLOW: Loads all data then filters in app</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> TBL_PRODUCTS;  <span class="comment">-- Filter in application code</span>
+
+<span class="comment">-- ✅ FAST: Filter on database side</span>
+<span class="keyword">SELECT</span> PRODUCT_ID, PRODUCT_NAME, LIST_PRICE 
+<span class="keyword">FROM</span> TBL_PRODUCTS 
+<span class="keyword">WHERE</span> CATEGORY_ID = <span class="number">1</span> 
+  <span class="keyword">AND</span> LIST_PRICE < <span class="number">50</span>
+<span class="keyword">ORDER BY</span> PRODUCT_NAME
+<span class="keyword">OFFSET</span> <span class="number">0</span> <span class="keyword">ROWS FETCH NEXT</span> <span class="number">20</span> <span class="keyword">ROWS ONLY</span>;</code></pre></div></div>
+
+                <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="comment">-- Check execution plan for a query</span>
+<span class="keyword">SET STATISTICS IO ON</span>;
+<span class="keyword">SET STATISTICS TIME ON</span>;
+
+<span class="keyword">SELECT</span> p.PRODUCT_NAME, c.CATEGORY_NAME
+<span class="keyword">FROM</span> TBL_PRODUCTS p
+<span class="keyword">INNER JOIN</span> TBL_PRODUCT_CATEGORIES c <span class="keyword">ON</span> p.CATEGORY_ID = c.CATEGORY_ID
+<span class="keyword">WHERE</span> p.LIST_PRICE > <span class="number">50</span>;
+
+<span class="keyword">SET STATISTICS IO OFF</span>;
+<span class="keyword">SET STATISTICS TIME OFF</span>;
+
+<span class="comment">-- Show graphical execution plan in SSMS: Ctrl+M before running</span></code></pre></div></div>
+            </div>
+
+            <!-- COMMON MISTAKES -->
+            <div class="card">
+                <div class="card-header"><div class="card-icon">⚠️</div><div><h3 class="card-title">Common Mistakes to Avoid</h3><p class="card-subtitle">Anti-patterns that cause bugs and slowdowns</p></div></div>
+                
+                <div class="accordion" id="mistakesAccordion">
+                    <div class="accordion-item active"><button class="accordion-header" aria-expanded="true"><span>🔴 Using SELECT * in Production</span><span class="accordion-icon">+</span></button><div class="accordion-content"><div class="accordion-body">
+                        <p style="color:var(--text-secondary);margin-bottom:var(--space-md)"><strong>Problem:</strong> Fetches unnecessary columns, breaks if schema changes, can't use covering indexes.</p>
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="comment">-- ❌ Bad</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> TBL_CUSTOMERS;
+
+<span class="comment">-- ✅ Good</span>
+<span class="keyword">SELECT</span> CUSTOMER_ID, NAME, CREDIT_LIMIT <span class="keyword">FROM</span> TBL_CUSTOMERS;</code></pre></div></div>
+                    </div></div></div>
+                    
+                    <div class="accordion-item"><button class="accordion-header" aria-expanded="false"><span>🔴 Not Using Parameterized Queries</span><span class="accordion-icon">+</span></button><div class="accordion-content"><div class="accordion-body">
+                        <p style="color:var(--text-secondary);margin-bottom:var(--space-md)"><strong>Problem:</strong> SQL injection attacks! Never concatenate user input into queries.</p>
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="comment">-- ❌ DANGEROUS: SQL Injection vulnerability</span>
+<span class="comment">-- query = "SELECT * FROM Users WHERE Name = '" + userInput + "'"</span>
+<span class="comment">-- If userInput = "'; DROP TABLE Users; --" ... disaster!</span>
+
+<span class="comment">-- ✅ Safe: Use parameters (in stored procedure or app)</span>
+<span class="keyword">CREATE PROCEDURE</span> SP_GetUser @Username <span class="type">VARCHAR</span>(<span class="number">50</span>)
+<span class="keyword">AS</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Users <span class="keyword">WHERE</span> Name = @Username;
+<span class="keyword">GO</span></code></pre></div></div>
+                    </div></div></div>
+                    
+                    <div class="accordion-item"><button class="accordion-header" aria-expanded="false"><span>🔴 Ignoring NULL Comparisons</span><span class="accordion-icon">+</span></button><div class="accordion-content"><div class="accordion-body">
+                        <p style="color:var(--text-secondary);margin-bottom:var(--space-md)"><strong>Problem:</strong> NULL is not equal to anything, not even itself! Use IS NULL, not = NULL.</p>
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="comment">-- ❌ Bad: This returns NOTHING (NULL ≠ NULL is unknown, not true)</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> TBL_CUSTOMERS <span class="keyword">WHERE</span> ADDRESS = <span class="keyword">NULL</span>;
+
+<span class="comment">-- ✅ Good: Use IS NULL / IS NOT NULL</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> TBL_CUSTOMERS <span class="keyword">WHERE</span> ADDRESS <span class="keyword">IS NULL</span>;
+
+<span class="comment">-- ✅ Coalesce for default values</span>
+<span class="keyword">SELECT</span> NAME, <span class="function">COALESCE</span>(ADDRESS, <span class="string">'No Address'</span>) <span class="keyword">AS</span> Address
+<span class="keyword">FROM</span> TBL_CUSTOMERS;</code></pre></div></div>
+                    </div></div></div>
+                    
+                    <div class="accordion-item"><button class="accordion-header" aria-expanded="false"><span>🔴 Missing WHERE on UPDATE/DELETE</span><span class="accordion-icon">+</span></button><div class="accordion-content"><div class="accordion-body">
+                        <p style="color:var(--text-secondary);margin-bottom:var(--space-md)"><strong>Problem:</strong> Forgetting WHERE updates/deletes ALL rows. Always test with SELECT first!</p>
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="comment">-- ❌ DISASTER: Deletes ALL customers!</span>
+<span class="keyword">DELETE FROM</span> TBL_CUSTOMERS;
+
+<span class="comment">-- ✅ Safe workflow:</span>
+<span class="comment">-- 1. First, SELECT to verify</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> TBL_CUSTOMERS <span class="keyword">WHERE</span> CUSTOMER_ID = <span class="number">1</span>;
+
+<span class="comment">-- 2. Then, change SELECT to DELETE</span>
+<span class="keyword">DELETE FROM</span> TBL_CUSTOMERS <span class="keyword">WHERE</span> CUSTOMER_ID = <span class="number">1</span>;</code></pre></div></div>
+                    </div></div></div>
+                    
+                    <div class="accordion-item"><button class="accordion-header" aria-expanded="false"><span>🔴 N+1 Query Problem</span><span class="accordion-icon">+</span></button><div class="accordion-content"><div class="accordion-body">
+                        <p style="color:var(--text-secondary);margin-bottom:var(--space-md)"><strong>Problem:</strong> Running a query inside a loop. Use JOINs or batch operations instead.</p>
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="comment">-- ❌ Bad: 1 query to get orders + N queries for customers</span>
+<span class="comment">-- foreach order in orders:</span>
+<span class="comment">--     SELECT * FROM Customers WHERE CustomerID = order.CustomerID</span>
+
+<span class="comment">-- ✅ Good: One query with JOIN</span>
+<span class="keyword">SELECT</span> o.*, c.NAME 
+<span class="keyword">FROM</span> TBL_ORDERS o
+<span class="keyword">INNER JOIN</span> TBL_CUSTOMERS c <span class="keyword">ON</span> o.CUSTOMER_ID = c.CUSTOMER_ID;</code></pre></div></div>
+                    </div></div></div>
+
+                    <div class="accordion-item"><button class="accordion-header" aria-expanded="false"><span>🔴 Not Using Transactions for Multi-Step Operations</span><span class="accordion-icon">+</span></button><div class="accordion-content"><div class="accordion-body">
+                        <p style="color:var(--text-secondary);margin-bottom:var(--space-md)"><strong>Problem:</strong> Partial updates leave data in inconsistent state if something fails.</p>
+                        <div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="comment">-- ❌ Bad: If second statement fails, inventory is wrong</span>
+<span class="keyword">UPDATE</span> Inventory <span class="keyword">SET</span> Qty = Qty - <span class="number">10</span> <span class="keyword">WHERE</span> ProductID = <span class="number">1</span>;
+<span class="keyword">INSERT INTO</span> OrderItems <span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="number">10</span>);  <span class="comment">-- Fails!</span>
+
+<span class="comment">-- ✅ Good: All or nothing</span>
+<span class="keyword">BEGIN TRANSACTION</span>;
+<span class="keyword">BEGIN TRY</span>
+    <span class="keyword">UPDATE</span> Inventory <span class="keyword">SET</span> Qty = Qty - <span class="number">10</span> <span class="keyword">WHERE</span> ProductID = <span class="number">1</span>;
+    <span class="keyword">INSERT INTO</span> OrderItems <span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="number">10</span>);
+    <span class="keyword">COMMIT</span>;
+<span class="keyword">END TRY</span>
+<span class="keyword">BEGIN CATCH</span>
+    <span class="keyword">ROLLBACK</span>;
+    <span class="keyword">THROW</span>;
+<span class="keyword">END CATCH</span>;</code></pre></div></div>
+                    </div></div></div>
+                </div>
+            </div>
+
+            <!-- NAMING CONVENTIONS -->
+            <div class="card">
+                <div class="card-header"><div class="card-icon">📝</div><div><h3 class="card-title">Naming Conventions</h3><p class="card-subtitle">Consistent naming = readable code</p></div></div>
+                
+                <table class="data-table">
+                    <thead><tr><th>Element</th><th>Convention</th><th>Example</th></tr></thead>
+                    <tbody>
+                        <tr><td>Tables</td><td>PascalCase, plural or TBL_ prefix</td><td><code>TBL_CUSTOMERS</code> or <code>Customers</code></td></tr>
+                        <tr><td>Columns</td><td>PascalCase or UPPER_SNAKE</td><td><code>CUSTOMER_ID</code>, <code>FirstName</code></td></tr>
+                        <tr><td>Primary Keys</td><td>PK_ prefix</td><td><code>PK_Customers</code></td></tr>
+                        <tr><td>Foreign Keys</td><td>FK_ prefix + tables</td><td><code>FK_Orders_Customers</code></td></tr>
+                        <tr><td>Indexes</td><td>IX_ prefix</td><td><code>IX_Products_CategoryID</code></td></tr>
+                        <tr><td>Views</td><td>VW_ prefix</td><td><code>VW_OrderSummary</code></td></tr>
+                        <tr><td>Stored Procs</td><td>SP_ prefix</td><td><code>SP_GetOrdersByDate</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            </div><!-- End section-content -->
+        </section>
+
+        <!-- ===== CHEAT SHEET SECTION ===== -->
+        <section class="tutorial-section" id="cheatsheet" data-reading-time="1">
+            <div class="section-header" id="cheatsheet-header">
+                <div class="section-number">📋</div>
+                <h2 class="section-title">SQL Cheat Sheet</h2>
+            </div>
+            <p class="section-description">Quick reference for common SQL commands. Download for offline use!</p>
+
+            <div class="card" style="text-align:center;padding:var(--space-2xl)">
+                <div style="font-size:4rem;margin-bottom:var(--space-lg)">📄</div>
+                <h3 style="margin-bottom:var(--space-md)">SQL Quick Reference Card</h3>
+                <p style="color:var(--text-secondary);margin-bottom:var(--space-xl)">All the essential commands in a printable format. Perfect for studying or keeping at your desk!</p>
+                <button class="btn btn-primary" id="downloadCheatSheet">⬇️ Download Cheat Sheet</button>
+            </div>
+
+            <div class="quick-ref">
+                <h3 class="quick-ref-title">🎯 Most Common Commands</h3>
+                <div class="quick-ref-grid">
+                    <div class="quick-ref-item"><div class="quick-ref-label">Select All</div><div class="quick-ref-value">SELECT * FROM table</div></div>
+                    <div class="quick-ref-item"><div class="quick-ref-label">Filter</div><div class="quick-ref-value">WHERE col = value</div></div>
+                    <div class="quick-ref-item"><div class="quick-ref-label">Sort</div><div class="quick-ref-value">ORDER BY col DESC</div></div>
+                    <div class="quick-ref-item"><div class="quick-ref-label">Limit</div><div class="quick-ref-value">TOP n / LIMIT n</div></div>
+                    <div class="quick-ref-item"><div class="quick-ref-label">Join</div><div class="quick-ref-value">INNER JOIN t2 ON</div></div>
+                    <div class="quick-ref-item"><div class="quick-ref-label">Group</div><div class="quick-ref-value">GROUP BY col</div></div>
+                    <div class="quick-ref-item"><div class="quick-ref-label">Count</div><div class="quick-ref-value">COUNT(*)</div></div>
+                    <div class="quick-ref-item"><div class="quick-ref-label">Sum</div><div class="quick-ref-value">SUM(column)</div></div>
+                    <div class="quick-ref-item"><div class="quick-ref-label">Average</div><div class="quick-ref-value">AVG(column)</div></div>
+                    <div class="quick-ref-item"><div class="quick-ref-label">Insert</div><div class="quick-ref-value">INSERT INTO t VALUES</div></div>
+                    <div class="quick-ref-item"><div class="quick-ref-label">Update</div><div class="quick-ref-value">UPDATE t SET col=val</div></div>
+                    <div class="quick-ref-item"><div class="quick-ref-label">Delete</div><div class="quick-ref-value">DELETE FROM t WHERE</div></div>
+                </div>
+            </div>
+
+            <div class="quick-ref" style="margin-top:var(--space-lg)">
+                <h3 class="quick-ref-title">🔗 JOIN Visual Guide</h3>
+                <div class="concept-grid">
+                    <div class="concept-card" style="text-align:center">
+                        <h4>INNER JOIN</h4>
+                        <p style="font-size:2rem">A ∩ B</p>
+                        <p>Only matching rows</p>
+                    </div>
+                    <div class="concept-card" style="text-align:center">
+                        <h4>LEFT JOIN</h4>
+                        <p style="font-size:2rem">A ← B</p>
+                        <p>All A + matching B</p>
+                    </div>
+                    <div class="concept-card" style="text-align:center">
+                        <h4>RIGHT JOIN</h4>
+                        <p style="font-size:2rem">A → B</p>
+                        <p>Matching A + all B</p>
+                    </div>
+                    <div class="concept-card" style="text-align:center">
+                        <h4>FULL JOIN</h4>
+                        <p style="font-size:2rem">A ∪ B</p>
+                        <p>All from both</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section class="tutorial-section" id="verify">
-            <div class="section-header"><div class="section-number">8</div><h2 class="section-title">Verification</h2></div>
+        <!-- ===== VERIFY SECTION ===== -->
+        <section class="tutorial-section" id="verify" data-reading-time="2">
+            <div class="section-header" id="verify-header">
+                <div class="section-number">✓</div>
+                <h2 class="section-title">Verification</h2>
+                <div class="section-meta">
+                    <span class="reading-time"><span class="reading-time-icon">⏱️</span> 2 min read</span>
+                    <label class="section-complete">
+                        <input type="checkbox" class="complete-checkbox" data-section="verify" aria-label="Mark section as complete">
+                        <span class="complete-label">Complete</span>
+                    </label>
+                </div>
+            </div>
             <p class="section-description">Confirm everything works with these verification queries.</p>
 
             <div class="card"><div class="card-header"><div class="card-icon">✅</div><div><h3 class="card-title">List All Tables</h3></div></div><div class="code-container"><div class="code-header"><div class="code-language"><span class="code-dot sql"></span>SQL</div><div class="code-actions"><button class="code-btn copy-btn">📋 Copy</button></div></div><div class="code-content"><pre><code><span class="keyword">SELECT</span> TABLE_NAME <span class="keyword">FROM</span> INFORMATION_SCHEMA.TABLES 
@@ -1254,12 +1926,14 @@ code{font-family:var(--font-mono)}
         <div class="footer-content">
             <div class="footer-logo">🗄️ SQL Database Tutorial</div>
             <p class="footer-text">From "what's a database?" to building your own — you've got this! Bookmark and revisit anytime.</p>
-            <div class="footer-links">
+                        <div class="footer-links">
                 <a href="#concepts">Concepts</a>
                 <a href="#modeling">Modeling</a>
                 <a href="#sql-ref">SQL Reference</a>
-                <a href="#setup">Setup</a>
+                <a href="#advanced">Advanced</a>
                 <a href="#queries">Queries</a>
+                <a href="#best-practices">Best Practices</a>
+                <a href="#cheatsheet">Cheat Sheet</a>
             </div>
         </div>
     </footer>
@@ -1490,8 +2164,8 @@ if(tocClose){tocClose.addEventListener('click',()=>{tocSidebar.classList.remove(
 tocList?.querySelectorAll('.toc-link').forEach(l=>l.onclick=()=>{tocSidebar?.classList.remove('visible');tocToggle?.classList.remove('active')});
 
 // Section Configuration
-const sections=['hero','concepts','modeling','sql-ref','setup','tables','data','queries','verify','complete-script'];
-const sectionNames={'hero':'Getting Started','concepts':'Fundamentals','modeling':'ER Modeling','sql-ref':'SQL Reference','setup':'Database Setup','tables':'Creating Tables','data':'Insert Data','queries':'Queries & Joins','verify':'Verification','complete-script':'Full Script'};
+const sections=['hero','concepts','modeling','sql-ref','advanced','setup','tables','data','queries','best-practices','cheatsheet','verify','complete-script'];
+const sectionNames={'hero':'Getting Started','concepts':'Fundamentals','modeling':'ER Modeling','sql-ref':'SQL Reference','advanced':'Advanced SQL','setup':'Database Setup','tables':'Creating Tables','data':'Insert Data','queries':'Queries & Joins','best-practices':'Best Practices','cheatsheet':'Cheat Sheet','verify':'Verification','complete-script':'Full Script'};
 const steps=$$('.progress-step');
 const navLinks=$$('.nav-links a');
 let currentSection='';
@@ -1577,6 +2251,125 @@ if(offline){const updateOnline=()=>offline.classList.toggle('visible',!navigator
 
 // Smooth scroll for anchor links
 $$('a[href^="#"]').forEach(a=>a.onclick=e=>{e.preventDefault();$(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'})});
+
+// Download Button
+// Cheat Sheet Download (generates text-based quick reference)
+$('#downloadCheatSheet')?.addEventListener('click',()=>{
+    const cheatSheet = `
+================================================================================
+                         SQL SERVER QUICK REFERENCE CARD
+================================================================================
+
+📊 SELECT STATEMENTS
+--------------------
+SELECT * FROM table_name;                    -- All columns
+SELECT col1, col2 FROM table_name;           -- Specific columns
+SELECT DISTINCT col FROM table_name;         -- Unique values only
+SELECT TOP 10 * FROM table_name;             -- First 10 rows
+SELECT * FROM t ORDER BY col DESC;           -- Sorted descending
+
+🔍 WHERE CLAUSES
+----------------
+WHERE col = 'value'                          -- Exact match
+WHERE col <> 'value'                         -- Not equal
+WHERE col > 10                               -- Greater than
+WHERE col BETWEEN 10 AND 20                  -- Range (inclusive)
+WHERE col IN ('a', 'b', 'c')                 -- Match any in list
+WHERE col LIKE 'A%'                          -- Starts with A
+WHERE col LIKE '%A'                          -- Ends with A
+WHERE col LIKE '%A%'                         -- Contains A
+WHERE col IS NULL                            -- Is null
+WHERE col IS NOT NULL                        -- Is not null
+WHERE cond1 AND cond2                        -- Both conditions
+WHERE cond1 OR cond2                         -- Either condition
+
+📈 AGGREGATE FUNCTIONS
+----------------------
+COUNT(*)                                     -- Count rows
+COUNT(DISTINCT col)                          -- Count unique values
+SUM(col)                                     -- Sum of values
+AVG(col)                                     -- Average
+MIN(col)                                     -- Minimum
+MAX(col)                                     -- Maximum
+
+📊 GROUPING
+-----------
+GROUP BY col                                 -- Group by column
+HAVING COUNT(*) > 5                          -- Filter groups
+
+🔗 JOINS
+--------
+INNER JOIN t2 ON t1.col = t2.col            -- Only matches
+LEFT JOIN t2 ON t1.col = t2.col             -- All from left + matches
+RIGHT JOIN t2 ON t1.col = t2.col            -- All from right + matches
+FULL OUTER JOIN t2 ON t1.col = t2.col       -- All from both
+
+✏️ INSERT / UPDATE / DELETE
+----------------------------
+INSERT INTO t (c1, c2) VALUES (v1, v2);      -- Insert row
+UPDATE t SET c1 = v1 WHERE condition;        -- Update rows
+DELETE FROM t WHERE condition;               -- Delete rows
+
+🏗️ CREATE / ALTER / DROP
+-------------------------
+CREATE TABLE t (col TYPE CONSTRAINTS);       -- Create table
+ALTER TABLE t ADD col TYPE;                  -- Add column
+ALTER TABLE t DROP COLUMN col;               -- Remove column
+DROP TABLE t;                                -- Delete table
+TRUNCATE TABLE t;                            -- Delete all rows (fast)
+
+🔐 TRANSACTIONS
+---------------
+BEGIN TRANSACTION;                           -- Start transaction
+COMMIT;                                      -- Save changes
+ROLLBACK;                                    -- Undo changes
+
+⚡ INDEXES
+----------
+CREATE INDEX idx ON t(col);                  -- Create index
+CREATE UNIQUE INDEX idx ON t(col);           -- Unique index
+DROP INDEX idx ON t;                         -- Remove index
+
+👁️ VIEWS
+--------
+CREATE VIEW v AS SELECT...;                  -- Create view
+DROP VIEW v;                                 -- Remove view
+
+📦 STORED PROCEDURES
+--------------------
+CREATE PROCEDURE sp @param TYPE AS BEGIN... END;
+EXEC sp @param = value;
+
+🛡️ ERROR HANDLING
+------------------
+BEGIN TRY ... END TRY
+BEGIN CATCH ... END CATCH
+ERROR_MESSAGE()                              -- Get error message
+@@ERROR                                      -- Last error number
+
+📋 CONSTRAINTS
+--------------
+PRIMARY KEY                                  -- Unique identifier
+FOREIGN KEY ... REFERENCES                   -- Link to another table
+NOT NULL                                     -- Required field
+UNIQUE                                       -- No duplicates
+CHECK (condition)                            -- Validation rule
+DEFAULT value                                -- Default value
+
+================================================================================
+                    Generated from SQL Database Tutorial
+================================================================================
+`;
+    const blob = new Blob([cheatSheet], {type:'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'SQL_CheatSheet.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('✓ Cheat Sheet Downloaded!');
+    announce('Cheat sheet downloaded');
+});
 
 // Download Button
 $('#downloadBtn')?.addEventListener('click',()=>{
