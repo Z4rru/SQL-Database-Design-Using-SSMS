@@ -33,6 +33,7 @@
     --radius-sm:.375rem;--radius-md:.5rem;--radius-lg:.75rem;--radius-xl:1rem;--radius-full:9999px;
     --transition-fast:.15s ease;--transition-base:.25s ease;
     --font-sans:'Inter',system-ui,-apple-system,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,monospace;
+    --toc-width:280px;--code-line-num-width:3rem;
 }
 [data-theme="light"]{--bg-primary:#f7fafc;--bg-secondary:#edf2f7;--bg-tertiary:#e2e8f0;--bg-card:#fff;--text-primary:#1a202c;--text-secondary:#374151;--text-muted:#4b5563;--border-color:#e2e8f0}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -196,6 +197,96 @@ code{font-family:var(--font-mono)}
 .notation-example{display:flex;align-items:center;gap:var(--space-lg);padding:var(--space-md);background:var(--bg-secondary);border-radius:var(--radius-md);margin:var(--space-sm) 0}
 .notation-symbol{font-size:1.5rem;min-width:60px;text-align:center}
 .notation-desc{font-size:.9rem;color:var(--text-secondary)}
+
+/* Table of Contents */
+.toc-sidebar{position:fixed;right:var(--space-xl);top:100px;width:var(--toc-width);max-height:calc(100vh - 140px);background:var(--bg-card);border:1px solid var(--border-color);border-radius:var(--radius-xl);padding:var(--space-lg);overflow-y:auto;z-index:99;transform:translateX(calc(100% + var(--space-xl)));transition:transform .3s ease;scrollbar-width:thin}
+.toc-sidebar.visible{transform:translateX(0)}
+.toc-toggle{position:fixed;right:var(--space-xl);top:100px;width:44px;height:44px;background:var(--bg-card);border:1px solid var(--border-color);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:100;font-size:1.2rem;transition:var(--transition-base)}
+.toc-toggle:hover{background:var(--primary);border-color:var(--primary)}
+.toc-toggle.active{right:calc(var(--toc-width) + var(--space-xl) + var(--space-md))}
+.toc-title{font-size:.875rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--space-md);display:flex;align-items:center;justify-content:space-between}
+.toc-close{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1.2rem;padding:var(--space-xs)}
+.toc-list{list-style:none}
+.toc-item{margin-bottom:var(--space-xs)}
+.toc-link{display:flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-md);color:var(--text-secondary);font-size:.85rem;border-radius:var(--radius-md);transition:var(--transition-fast);text-decoration:none}
+.toc-link:hover,.toc-link.active{background:rgba(102,126,234,.1);color:var(--primary)}
+.toc-link.completed{color:var(--success)}
+.toc-link.completed::before{content:'✓';margin-right:var(--space-xs)}
+.toc-time{font-size:.7rem;color:var(--text-muted);margin-left:auto}
+.toc-progress{height:3px;background:var(--border-color);border-radius:var(--radius-full);margin-top:var(--space-md);overflow:hidden}
+.toc-progress-bar{height:100%;background:linear-gradient(90deg,var(--primary),var(--accent));transition:width .3s ease}
+@media(max-width:1400px){.toc-sidebar,.toc-toggle{display:none}}
+
+/* Breadcrumbs */
+.breadcrumbs{display:flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) 0;margin-bottom:var(--space-lg);font-size:.85rem;color:var(--text-muted);flex-wrap:wrap}
+.breadcrumb-item{display:flex;align-items:center;gap:var(--space-sm)}
+.breadcrumb-item a{color:var(--text-secondary);transition:var(--transition-fast)}
+.breadcrumb-item a:hover{color:var(--primary)}
+.breadcrumb-separator{color:var(--border-color)}
+.breadcrumb-current{color:var(--primary);font-weight:500}
+
+/* Search Results */
+.search-results{margin-top:var(--space-lg);max-height:300px;overflow-y:auto}
+.search-result-item{padding:var(--space-md);background:var(--bg-secondary);border-radius:var(--radius-md);margin-bottom:var(--space-sm);cursor:pointer;transition:var(--transition-fast)}
+.search-result-item:hover{background:var(--bg-tertiary);border-left:3px solid var(--primary)}
+.search-result-title{font-weight:600;margin-bottom:var(--space-xs)}
+.search-result-excerpt{font-size:.85rem;color:var(--text-muted)}
+.search-result-excerpt mark{background:rgba(102,126,234,.3);color:var(--primary);padding:0 2px;border-radius:2px}
+.search-no-results{text-align:center;color:var(--text-muted);padding:var(--space-xl)}
+
+/* Reading Time & Section Meta */
+.section-meta{display:flex;align-items:center;gap:var(--space-lg);margin-bottom:var(--space-md);flex-wrap:wrap}
+.reading-time{display:flex;align-items:center;gap:var(--space-xs);font-size:.85rem;color:var(--text-muted)}
+.reading-time-icon{font-size:1rem}
+
+/* Mark as Complete */
+.section-complete{display:flex;align-items:center;gap:var(--space-sm);margin-left:auto}
+.complete-checkbox{width:20px;height:20px;accent-color:var(--success);cursor:pointer}
+.complete-label{font-size:.85rem;color:var(--text-muted);cursor:pointer}
+.section-header.completed .section-number{background:linear-gradient(135deg,var(--success),#059669)}
+.section-header.completed .section-title{color:var(--success)}
+
+/* Code Line Numbers */
+.code-with-lines .code-content{padding-left:calc(var(--code-line-num-width) + var(--space-lg))}
+.code-with-lines pre{counter-reset:line}
+.code-with-lines pre code{display:block}
+.code-with-lines .code-line{display:block;position:relative}
+.code-with-lines .code-line::before{counter-increment:line;content:counter(line);position:absolute;left:calc(-1 * var(--code-line-num-width) - var(--space-md));width:var(--code-line-num-width);text-align:right;color:var(--text-muted);font-size:.75rem;user-select:none;opacity:.5}
+.line-numbers-toggle{font-size:.75rem;padding:var(--space-xs) var(--space-sm)}
+
+/* Syntax Theme Toggle */
+[data-code-theme="light"] .code-container{background:#fafafa;border-color:#e1e4e8}
+[data-code-theme="light"] .code-header{background:rgba(0,0,0,.03)}
+[data-code-theme="light"] .keyword{color:#d73a49}
+[data-code-theme="light"] .function{color:#6f42c1}
+[data-code-theme="light"] .string{color:#22863a}
+[data-code-theme="light"] .number{color:#005cc5}
+[data-code-theme="light"] .comment{color:#6a737d}
+[data-code-theme="light"] .type{color:#e36209}
+[data-code-theme="light"] .table-name{color:#d73a49}
+[data-code-theme="light"] pre,.code-content code{color:#24292e}
+
+/* Collapsible Sections */
+.section-collapse-btn{background:none;border:none;color:var(--text-muted);cursor:pointer;padding:var(--space-xs);font-size:1.2rem;transition:var(--transition-fast);margin-left:var(--space-sm)}
+.section-collapse-btn:hover{color:var(--primary)}
+.section-collapse-btn.collapsed{transform:rotate(-90deg)}
+.section-content{transition:max-height .4s ease,opacity .3s ease;overflow:hidden}
+.section-content.collapsed{max-height:0!important;opacity:0;margin:0;padding:0}
+
+/* Section Fade-in Animation */
+.tutorial-section{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.tutorial-section.visible{opacity:1;transform:translateY(0)}
+
+/* Nav Link Active State (Scroll Spy) */
+.nav-links a.scroll-active{color:var(--primary);background:rgba(102,126,234,.15)}
+
+/* Loading Skeleton */
+.skeleton{background:linear-gradient(90deg,var(--bg-secondary) 25%,var(--bg-tertiary) 50%,var(--bg-secondary) 75%);background-size:200% 100%;animation:skeleton-loading 1.5s infinite}
+@keyframes skeleton-loading{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.skeleton-text{height:1em;border-radius:var(--radius-sm);margin-bottom:var(--space-sm)}
+.skeleton-title{height:2em;width:60%;border-radius:var(--radius-md);margin-bottom:var(--space-md)}
+.skeleton-block{height:200px;border-radius:var(--radius-lg)}
+
 .footer{background:var(--bg-secondary);border-top:1px solid var(--border-color);padding:var(--space-3xl) var(--space-xl);margin-top:var(--space-3xl)}
 .footer-content{max-width:1000px;margin:0 auto;text-align:center}
 .footer-logo{font-size:1.4rem;font-weight:700;margin-bottom:var(--space-md)}
@@ -214,7 +305,7 @@ code{font-family:var(--font-mono)}
 @media(max-width:1024px){.nav-links{display:none}.mobile-menu-btn{display:block}}
 @media(max-width:768px){:root{--space-xl:1.5rem;--space-2xl:2rem;--space-3xl:3rem}.hero-stats{flex-direction:column;gap:var(--space-lg)}.section-header{flex-direction:column;text-align:center}.step-item{padding-left:2.5rem;margin-left:.5rem}.step-item::before{width:2rem;height:2rem;left:-1rem;font-size:.75rem}.hero-actions{flex-direction:column}.btn{width:100%;justify-content:center}.data-table{font-size:.75rem}.data-table th,.data-table td{padding:var(--space-xs) var(--space-sm)}}
 @media(max-width:480px){.code-header{flex-direction:column;gap:var(--space-sm);align-items:flex-start}.erd-diagram,.feature-grid{grid-template-columns:1fr}}
-@media print{.navbar,.progress-container,.back-to-top,.code-actions,.theme-toggle,.keyboard-hint,.reading-progress{display:none!important}body{background:#fff;color:#000}.code-container{border:1px solid #ccc}pre{white-space:pre-wrap}}
+@media print{.navbar,.progress-container,.back-to-top,.code-actions,.theme-toggle,.keyboard-hint,.reading-progress,.toc-sidebar,.toc-toggle,.section-complete,.section-collapse-btn,.breadcrumbs,.search-modal,.mobile-nav,.bg-pattern{display:none!important}body{background:#fff;color:#000;font-size:11pt;line-height:1.5}h1,h2,h3{page-break-after:avoid;color:#000}.tutorial-section{page-break-inside:avoid;opacity:1!important;transform:none!important;margin-bottom:2rem}.code-container{border:1px solid #ccc;page-break-inside:avoid;background:#f5f5f5!important}pre{white-space:pre-wrap;font-size:9pt}.code-header{background:#eee!important;border-bottom:1px solid #ccc}.card{border:1px solid #ddd;box-shadow:none;page-break-inside:avoid}.data-table{font-size:9pt}.data-table th,.data-table td{border:1px solid #ccc;padding:4px 8px}.info-box{border:1px solid #ccc;background:#f9f9f9!important}.hero{min-height:auto;padding:2rem}a[href]::after{content:" (" attr(href) ")";font-size:9pt;color:#666}a[href^="#"]::after{content:""}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.bg-pattern::before{animation:none}.hero-badge-dot{animation:none}.hero-title-gradient{animation:none}}
     </style>
 </head>
@@ -236,8 +327,9 @@ code{font-family:var(--font-mono)}
                 <li role="none"><a href="#setup" role="menuitem">Tutorial</a></li>
                 <li role="none"><a href="#queries" role="menuitem">Queries</a></li>
             </ul>
-            <div class="nav-actions">
+                        <div class="nav-actions">
                 <button class="search-toggle" id="searchToggle" aria-label="Search" title="Search (Ctrl+K)">🔍</button>
+                <button class="theme-toggle" id="codeThemeToggle" aria-label="Toggle code theme" title="Toggle code syntax theme" style="font-size:.9rem">🎨</button>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">🌙</button>
                 <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
             </div>
@@ -255,12 +347,13 @@ code{font-family:var(--font-mono)}
         <a href="#complete-script">📄 Full Script</a>
     </div>
 
-        <div class="search-modal" id="searchModal" role="dialog" aria-label="Search tutorial" aria-modal="true">
+            <div class="search-modal" id="searchModal" role="dialog" aria-label="Search tutorial" aria-modal="true">
         <div class="search-box" role="document">
             <label for="searchInput" class="sr-only">Search tutorial content</label>
-            <input type="text" class="search-input" id="searchInput" placeholder="Search tutorial..." autocomplete="off">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search SQL commands, concepts, tables..." autocomplete="off">
+            <div class="search-results" id="searchResults" aria-live="polite"></div>
             <button type="button" class="search-close-btn sr-only" id="searchCloseBtn">Close search</button>
-            <p class="search-hint" id="searchHint">Press <span class="kbd">ESC</span> to close or <span class="kbd">Tab</span> to navigate</p>
+            <p class="search-hint" id="searchHint">Press <span class="kbd">ESC</span> to close • <span class="kbd">↑↓</span> navigate • <span class="kbd">Enter</span> select</p>
         </div>
     </div>
 
@@ -276,6 +369,30 @@ code{font-family:var(--font-mono)}
             <div class="progress-step" data-section="queries" role="listitem" aria-label="Queries"><span class="progress-step-label">Queries</span></div>
         </div>
     </nav>
+
+        <!-- Table of Contents Toggle -->
+    <button class="toc-toggle" id="tocToggle" aria-label="Toggle table of contents" title="Table of Contents">📑</button>
+    
+    <!-- Table of Contents Sidebar -->
+    <aside class="toc-sidebar" id="tocSidebar" aria-label="Table of contents">
+        <div class="toc-title">
+            <span>📚 Contents</span>
+            <button class="toc-close" id="tocClose" aria-label="Close table of contents">×</button>
+        </div>
+        <div class="toc-progress"><div class="toc-progress-bar" id="tocProgressBar" style="width:0%"></div></div>
+        <ul class="toc-list" id="tocList">
+            <li class="toc-item"><a href="#hero" class="toc-link active" data-section="hero">🏠 Start<span class="toc-time">1 min</span></a></li>
+            <li class="toc-item"><a href="#concepts" class="toc-link" data-section="concepts">1. Fundamentals<span class="toc-time">5 min</span></a></li>
+            <li class="toc-item"><a href="#modeling" class="toc-link" data-section="modeling">2. ER Modeling<span class="toc-time">4 min</span></a></li>
+            <li class="toc-item"><a href="#sql-ref" class="toc-link" data-section="sql-ref">3. SQL Reference<span class="toc-time">6 min</span></a></li>
+            <li class="toc-item"><a href="#setup" class="toc-link" data-section="setup">4. Database Setup<span class="toc-time">3 min</span></a></li>
+            <li class="toc-item"><a href="#tables" class="toc-link" data-section="tables">5. Creating Tables<span class="toc-time">5 min</span></a></li>
+            <li class="toc-item"><a href="#data" class="toc-link" data-section="data">6. Insert Data<span class="toc-time">3 min</span></a></li>
+            <li class="toc-item"><a href="#queries" class="toc-link" data-section="queries">7. Queries & Joins<span class="toc-time">5 min</span></a></li>
+            <li class="toc-item"><a href="#verify" class="toc-link" data-section="verify">8. Verification<span class="toc-time">2 min</span></a></li>
+            <li class="toc-item"><a href="#complete-script" class="toc-link" data-section="complete-script">📋 Full Script<span class="toc-time">1 min</span></a></li>
+        </ul>
+    </aside>
 
     <section class="hero" id="hero">
         <div class="hero-content">
@@ -294,10 +411,29 @@ code{font-family:var(--font-mono)}
         </div>
     </section>
 
-    <main class="main-content" id="main" tabindex="-1">
+        <main class="main-content" id="main" tabindex="-1">
 
-        <section class="tutorial-section" id="concepts">
-            <div class="section-header"><div class="section-number">1</div><h2 class="section-title">Relational Database Fundamentals</h2></div>
+        <!-- Breadcrumbs -->
+        <nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+            <span class="breadcrumb-item"><a href="#hero">🏠 Home</a></span>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-item breadcrumb-current" id="currentBreadcrumb">Getting Started</span>
+        </nav>
+
+                <section class="tutorial-section" id="concepts" data-reading-time="5">
+            <div class="section-header" id="concepts-header">
+                <div class="section-number">1</div>
+                <h2 class="section-title">Relational Database Fundamentals</h2>
+                <div class="section-meta">
+                    <span class="reading-time"><span class="reading-time-icon">⏱️</span> 5 min read</span>
+                    <label class="section-complete">
+                        <input type="checkbox" class="complete-checkbox" data-section="concepts" aria-label="Mark section as complete">
+                        <span class="complete-label">Complete</span>
+                    </label>
+                </div>
+                <button class="section-collapse-btn" aria-label="Collapse section" data-target="concepts-content">▼</button>
+            </div>
+            <div class="section-content" id="concepts-content">
             <p class="section-description">Think of a database like a super-organized filing cabinet. Instead of folders, you have <strong>tables</strong>. Instead of papers, you have <strong>rows of information</strong>. The magic? Everything connects together so you can find anything instantly.</p>
 
             <div class="feature-grid">
@@ -370,12 +506,25 @@ code{font-family:var(--font-mono)}
                         <tr><td><strong>JOIN</strong></td><td>⨝</td><td>Combine on common values</td><td><code>JOIN ON</code></td></tr>
                         <tr><td><strong>DIVIDE</strong></td><td>÷</td><td>Values in all of B</td><td><code>NOT EXISTS</code></td></tr>
                     </tbody>
-                </table>
+                                </table>
             </div>
+            </div><!-- End section-content -->
         </section>
 
-        <section class="tutorial-section" id="modeling">
-            <div class="section-header"><div class="section-number">2</div><h2 class="section-title">ER Modeling & Normalization</h2></div>
+        <section class="tutorial-section" id="modeling" data-reading-time="4">
+            <div class="section-header" id="modeling-header">
+                <div class="section-number">2</div>
+                <h2 class="section-title">ER Modeling & Normalization</h2>
+                <div class="section-meta">
+                    <span class="reading-time"><span class="reading-time-icon">⏱️</span> 4 min read</span>
+                    <label class="section-complete">
+                        <input type="checkbox" class="complete-checkbox" data-section="modeling" aria-label="Mark section as complete">
+                        <span class="complete-label">Complete</span>
+                    </label>
+                </div>
+                <button class="section-collapse-btn" aria-label="Collapse section" data-target="modeling-content">▼</button>
+            </div>
+            <div class="section-content" id="modeling-content">
             <p class="section-description">Design databases visually with Entity-Relationship Diagrams, then optimize structure through normalization.</p>
 
             <div class="card">
@@ -956,56 +1105,365 @@ if('serviceWorker'in navigator)'requestIdleCallback'in window?requestIdleCallbac
 // ARIA Announce helper
 const announce=(msg,priority='polite')=>{const el=$(`#ariaLive${priority==='assertive'?'Assertive':''}`);if(el){el.textContent='';setTimeout(()=>el.textContent=msg,100)}};
 
-const html=document.documentElement,themeToggle=$('#themeToggle'),savedTheme=localStorage.getItem('theme');
+// Storage helpers with error handling
+const storage={
+    get:(k,d=null)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch{return d}},
+    set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}}
+};
+
+// Theme Toggle
+const html=document.documentElement,themeToggle=$('#themeToggle'),savedTheme=storage.get('theme');
 if(savedTheme){html.dataset.theme=savedTheme;themeToggle.textContent=savedTheme==='dark'?'🌙':'☀️'}
 else if(!matchMedia('(prefers-color-scheme:dark)').matches){html.dataset.theme='light';themeToggle.textContent='☀️'}
-themeToggle.onclick=()=>{const t=html.dataset.theme==='light'?'dark':'light';html.dataset.theme=t;localStorage.setItem('theme',t);themeToggle.textContent=t==='dark'?'🌙':'☀️';announce(`Theme changed to ${t} mode`)};
+themeToggle.onclick=()=>{const t=html.dataset.theme==='light'?'dark':'light';html.dataset.theme=t;storage.set('theme',t);themeToggle.textContent=t==='dark'?'🌙':'☀️';announce(`Theme changed to ${t} mode`)};
 
+// Code Theme Toggle (if element exists)
+const codeThemeToggle=$('#codeThemeToggle');
+if(codeThemeToggle){
+    const savedCodeTheme=storage.get('codeTheme','dark');
+    html.dataset.codeTheme=savedCodeTheme;
+    codeThemeToggle.onclick=()=>{const t=html.dataset.codeTheme==='dark'?'light':'dark';html.dataset.codeTheme=t;storage.set('codeTheme',t);announce(`Code theme changed to ${t}`)};
+}
+
+// Navbar & Scroll Progress
 const navbar=$('#navbar'),mobileNav=$('#mobileNav'),mobileBtn=$('#mobileMenuBtn');
 addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',scrollY>50);$('#readingProgress').style.width=`${scrollY/(document.body.scrollHeight-innerHeight)*100}%`},{passive:true});
 mobileBtn.onclick=()=>{const a=mobileNav.classList.toggle('active');mobileBtn.setAttribute('aria-expanded',a);mobileBtn.textContent=a?'✕':'☰';announce(a?'Menu opened':'Menu closed')};
 mobileNav.querySelectorAll('a').forEach(a=>a.onclick=()=>{mobileNav.classList.remove('active');mobileBtn.textContent='☰'});
 
-// Search Modal with Focus Trap
-const searchModal=$('#searchModal'),searchInput=$('#searchInput'),searchToggle=$('#searchToggle'),searchCloseBtn=$('#searchCloseBtn');
+// Search Modal with Focus Trap and Results
+const searchModal=$('#searchModal'),searchInput=$('#searchInput'),searchToggle=$('#searchToggle'),searchCloseBtn=$('#searchCloseBtn'),searchResults=$('#searchResults');
+let searchIndex=[];
 let lastFocusedElement=null;
-const openSearch=()=>{lastFocusedElement=document.activeElement;searchModal.classList.add('active');searchInput.focus();announce('Search dialog opened')};
-const closeSearch=()=>{searchModal.classList.remove('active');if(lastFocusedElement)lastFocusedElement.focus();announce('Search dialog closed')};
+
+// Build search index from sections
+const buildSearchIndex=()=>{searchIndex=[];$$('.tutorial-section').forEach(s=>{const title=s.querySelector('.section-title')?.textContent||'';const content=s.textContent.substring(0,500);const id=s.id;searchIndex.push({id,title,content:content.toLowerCase(),excerpt:content.substring(0,150)})})};
+
+// Perform search and display results
+const performSearch=(query)=>{
+    if(!searchResults)return;
+    if(!query.trim()){searchResults.innerHTML='';return}
+    const q=query.toLowerCase();
+    const results=searchIndex.filter(i=>i.title.toLowerCase().includes(q)||i.content.includes(q)).slice(0,5);
+    if(results.length===0){
+        searchResults.innerHTML='<div class="search-no-results">No results found for "'+query+'"</div>';
+        return;
+    }
+    searchResults.innerHTML=results.map((r,i)=>`<div class="search-result-item" data-href="#${r.id}" tabindex="0" ${i===0?'data-selected':''}>
+        <div class="search-result-title">${r.title}</div>
+        <div class="search-result-excerpt">${r.excerpt.replace(new RegExp(query,'gi'),m=>`<mark>${m}</mark>`)}...</div>
+    </div>`).join('');
+};
+
+const openSearch=()=>{
+    buildSearchIndex();
+    lastFocusedElement=document.activeElement;
+    searchModal.classList.add('active');
+    searchInput.focus();
+    announce('Search dialog opened');
+};
+
+const closeSearch=()=>{
+    searchModal.classList.remove('active');
+    if(searchResults)searchResults.innerHTML='';
+    searchInput.value='';
+    if(lastFocusedElement)lastFocusedElement.focus();
+    announce('Search dialog closed');
+};
+
 searchToggle.onclick=openSearch;
 if(searchCloseBtn)searchCloseBtn.onclick=closeSearch;
 searchModal.onclick=e=>{if(e.target===searchModal)closeSearch()};
-// Focus trap for search modal
-searchModal.addEventListener('keydown',e=>{if(!searchModal.classList.contains('active'))return;const focusable=searchModal.querySelectorAll('input,button:not(.sr-only),[tabindex]:not([tabindex="-1"])');const first=focusable[0],last=focusable[focusable.length-1]||searchCloseBtn;if(e.key==='Tab'){if(e.shiftKey&&document.activeElement===first){e.preventDefault();(last||searchCloseBtn).focus()}else if(!e.shiftKey&&(document.activeElement===last||document.activeElement===searchCloseBtn)){e.preventDefault();first.focus()}}});
-addEventListener('keydown',e=>{if(e.ctrlKey&&e.key==='k'){e.preventDefault();openSearch()}if(e.key==='Escape'&&searchModal.classList.contains('active'))closeSearch()});
+if(searchInput)searchInput.oninput=e=>performSearch(e.target.value);
+if(searchResults)searchResults.onclick=e=>{const item=e.target.closest('.search-result-item');if(item){closeSearch();location.hash=item.dataset.href}};
 
-$$('.copy-btn').forEach(b=>b.onclick=async()=>{const c=b.closest('.code-container').querySelector('pre').textContent;try{await navigator.clipboard.writeText(c);const t=b.textContent;b.textContent='✅ Copied!';b.classList.add('copied');b.setAttribute('aria-label','Code copied to clipboard');announce('Code copied to clipboard');setTimeout(()=>{b.textContent=t;b.classList.remove('copied');b.setAttribute('aria-label','Copy code')},2e3)}catch{b.textContent='❌ Failed';announce('Failed to copy code','assertive')}});
+// Focus trap for search modal
+searchModal.addEventListener('keydown',e=>{
+    if(!searchModal.classList.contains('active'))return;
+    const focusable=searchModal.querySelectorAll('input,button:not(.sr-only),[tabindex]:not([tabindex="-1"])');
+    const first=focusable[0],last=focusable[focusable.length-1]||searchCloseBtn;
+    if(e.key==='Tab'){
+        if(e.shiftKey&&document.activeElement===first){e.preventDefault();(last||searchCloseBtn).focus()}
+        else if(!e.shiftKey&&(document.activeElement===last||document.activeElement===searchCloseBtn)){e.preventDefault();first.focus()}
+    }
+});
+
+// Global keyboard shortcuts
+addEventListener('keydown',e=>{
+    if(e.ctrlKey&&e.key==='k'){e.preventDefault();openSearch()}
+    if(e.key==='Escape'&&searchModal.classList.contains('active'))closeSearch();
+    // Arrow navigation in search results
+    if(searchModal.classList.contains('active')&&searchResults&&(e.key==='ArrowDown'||e.key==='ArrowUp')){
+        e.preventDefault();
+        const items=[...searchResults.querySelectorAll('.search-result-item')];
+        if(items.length===0)return;
+        const current=searchResults.querySelector('[data-selected]');
+        const idx=items.indexOf(current);
+        let newIdx=e.key==='ArrowDown'?(idx+1)%items.length:(idx-1+items.length)%items.length;
+        items.forEach(i=>i.removeAttribute('data-selected'));
+        items[newIdx]?.setAttribute('data-selected','');
+        items[newIdx]?.focus();
+    }
+    if(e.key==='Enter'&&searchModal.classList.contains('active')){
+        const selected=searchResults?.querySelector('[data-selected]');
+        if(selected){closeSearch();location.hash=selected.dataset.href}
+    }
+});
+
+// Copy Button with ARIA feedback
+$$('.copy-btn').forEach(b=>b.onclick=async()=>{
+    const c=b.closest('.code-container').querySelector('pre').textContent;
+    try{
+        await navigator.clipboard.writeText(c);
+        const t=b.textContent;
+        b.textContent='✅ Copied!';
+        b.classList.add('copied');
+        b.setAttribute('aria-label','Code copied to clipboard');
+        announce('Code copied to clipboard');
+        setTimeout(()=>{b.textContent=t;b.classList.remove('copied');b.setAttribute('aria-label','Copy code')},2e3);
+    }catch{
+        b.textContent='❌ Failed';
+        announce('Failed to copy code','assertive');
+    }
+});
 
 // Tab functionality with keyboard support
-const activateTab=(tab,tablist)=>{const tabs=tablist.querySelectorAll('[role="tab"]');const panels=tab.closest('.tabs-container').querySelectorAll('[role="tabpanel"]');tabs.forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false');t.setAttribute('tabindex','-1')});panels.forEach(p=>p.classList.remove('active'));tab.classList.add('active');tab.setAttribute('aria-selected','true');tab.setAttribute('tabindex','0');const panel=tab.closest('.tabs-container').querySelector(`#${tab.dataset.tab}`);if(panel){panel.classList.add('active');announce(`${tab.textContent} tab selected`)}};
-$$('.tabs-header').forEach(tablist=>{tablist.addEventListener('click',e=>{if(e.target.matches('[role="tab"]'))activateTab(e.target,tablist)});tablist.addEventListener('keydown',e=>{if(!e.target.matches('[role="tab"]'))return;const tabs=[...tablist.querySelectorAll('[role="tab"]')];const idx=tabs.indexOf(e.target);let newIdx=idx;if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();newIdx=(idx+1)%tabs.length}else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();newIdx=(idx-1+tabs.length)%tabs.length}else if(e.key==='Home'){e.preventDefault();newIdx=0}else if(e.key==='End'){e.preventDefault();newIdx=tabs.length-1}if(newIdx!==idx){tabs[newIdx].focus();activateTab(tabs[newIdx],tablist)}})});
+const activateTab=(tab,tablist)=>{
+    const tabs=tablist.querySelectorAll('[role="tab"]');
+    const panels=tab.closest('.tabs-container').querySelectorAll('[role="tabpanel"]');
+    tabs.forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false');t.setAttribute('tabindex','-1')});
+    panels.forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    tab.setAttribute('aria-selected','true');
+    tab.setAttribute('tabindex','0');
+    const panel=tab.closest('.tabs-container').querySelector(`#${tab.dataset.tab}`);
+    if(panel){panel.classList.add('active');announce(`${tab.textContent} tab selected`)}
+};
 
-$$('.accordion-header').forEach(h=>{const panel=h.nextElementSibling;const id=`accordion-panel-${Math.random().toString(36).substr(2,9)}`;if(panel){panel.id=id;h.setAttribute('aria-controls',id)}h.onclick=()=>{const i=h.parentElement,w=i.classList.contains('active');i.parentElement.querySelectorAll('.accordion-item').forEach(x=>{x.classList.remove('active');x.querySelector('.accordion-header').setAttribute('aria-expanded','false')});if(!w){i.classList.add('active');h.setAttribute('aria-expanded','true');announce(`${h.textContent.trim()} section expanded`)}else{announce(`${h.textContent.trim()} section collapsed`)}}});
+$$('.tabs-header').forEach(tablist=>{
+    tablist.addEventListener('click',e=>{if(e.target.matches('[role="tab"]'))activateTab(e.target,tablist)});
+    tablist.addEventListener('keydown',e=>{
+        if(!e.target.matches('[role="tab"]'))return;
+        const tabs=[...tablist.querySelectorAll('[role="tab"]')];
+        const idx=tabs.indexOf(e.target);
+        let newIdx=idx;
+        if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();newIdx=(idx+1)%tabs.length}
+        else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();newIdx=(idx-1+tabs.length)%tabs.length}
+        else if(e.key==='Home'){e.preventDefault();newIdx=0}
+        else if(e.key==='End'){e.preventDefault();newIdx=tabs.length-1}
+        if(newIdx!==idx){tabs[newIdx].focus();activateTab(tabs[newIdx],tablist)}
+    });
+});
 
-const backTop=$('#backToTop');let ticking=false;addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{backTop.classList.toggle('visible',scrollY>500);ticking=false});ticking=true}},{passive:true});backTop.onclick=()=>{scrollTo({top:0,behavior:'smooth'});announce('Scrolled to top')};
+// Accordion with ARIA
+$$('.accordion-header').forEach(h=>{
+    const panel=h.nextElementSibling;
+    const id=`accordion-panel-${Math.random().toString(36).substr(2,9)}`;
+    if(panel){panel.id=id;h.setAttribute('aria-controls',id)}
+    h.onclick=()=>{
+        const i=h.parentElement,w=i.classList.contains('active');
+        i.parentElement.querySelectorAll('.accordion-item').forEach(x=>{
+            x.classList.remove('active');
+            x.querySelector('.accordion-header')?.setAttribute('aria-expanded','false');
+        });
+        if(!w){
+            i.classList.add('active');
+            h.setAttribute('aria-expanded','true');
+            announce(`${h.textContent.trim()} section expanded`);
+        }else{
+            announce(`${h.textContent.trim()} section collapsed`);
+        }
+    };
+});
 
-// Update progress steps with aria-current
-const secs=['hero','concepts','modeling','sql-ref','setup','tables','data','queries','verify'],steps=$$('.progress-step');
+// Back to Top Button
+const backTop=$('#backToTop');
+let ticking=false;
+addEventListener('scroll',()=>{
+    if(!ticking){
+        requestAnimationFrame(()=>{backTop.classList.toggle('visible',scrollY>500);ticking=false});
+        ticking=true;
+    }
+},{passive:true});
+backTop.onclick=()=>{scrollTo({top:0,behavior:'smooth'});announce('Scrolled to top')};
+
+// Table of Contents (if elements exist)
+const tocSidebar=$('#tocSidebar'),tocToggle=$('#tocToggle'),tocClose=$('#tocClose'),tocList=$('#tocList'),tocProgressBar=$('#tocProgressBar');
+if(tocToggle){
+    tocToggle.addEventListener('click',()=>{
+        const v=tocSidebar.classList.toggle('visible');
+        tocToggle.classList.toggle('active',v);
+        announce(v?'Table of contents opened':'Table of contents closed');
+    });
+}
+if(tocClose){
+    tocClose.addEventListener('click',()=>{tocSidebar.classList.remove('visible');tocToggle?.classList.remove('active')});
+}
+tocList?.querySelectorAll('.toc-link').forEach(l=>l.onclick=()=>{tocSidebar?.classList.remove('visible');tocToggle?.classList.remove('active')});
+
+// Section Configuration
+const sections=['hero','concepts','modeling','sql-ref','setup','tables','data','queries','verify','complete-script'];
+const sectionNames={'hero':'Getting Started','concepts':'Fundamentals','modeling':'ER Modeling','sql-ref':'SQL Reference','setup':'Database Setup','tables':'Creating Tables','data':'Insert Data','queries':'Queries & Joins','verify':'Verification','complete-script':'Full Script'};
+const steps=$$('.progress-step');
+const navLinks=$$('.nav-links a');
 let currentSection='';
-const updateProgress=()=>{const p=scrollY+200;secs.forEach((id,i)=>{const s=$(`#${id}`);if(s&&p>=s.offsetTop&&p<s.offsetTop+s.offsetHeight){if(currentSection!==id){currentSection=id;steps.forEach((x,j)=>{x.classList.remove('active');x.classList.toggle('completed',j<i);x.removeAttribute('aria-current');x.setAttribute('aria-label',x.querySelector('.progress-step-label').textContent+(j<i?' - Completed':''))});if(steps[i]){steps[i].classList.add('active');steps[i].setAttribute('aria-current','step');steps[i].setAttribute('aria-label',steps[i].querySelector('.progress-step-label').textContent+' - Current section')}}}})};
-addEventListener('scroll',updateProgress,{passive:true});
-steps.forEach(s=>{s.setAttribute('tabindex','0');s.setAttribute('role','button');s.onclick=()=>{const section=$(`#${s.dataset.section}`);if(section){section.scrollIntoView({behavior:'smooth'});announce(`Navigated to ${s.querySelector('.progress-step-label').textContent}`)}};s.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();s.click()}}});
 
+// Completed Sections Persistence
+const completedSections=storage.get('completedSections',{});
 
+// Restore completed sections on load
+Object.keys(completedSections).forEach(s=>{
+    if(completedSections[s]){
+        const cb=$(`.complete-checkbox[data-section="${s}"]`);
+        if(cb)cb.checked=true;
+        const header=$(`#${s}-header`);
+        if(header)header.classList.add('completed');
+        const tocLink=$(`.toc-link[data-section="${s}"]`);
+        if(tocLink)tocLink.classList.add('completed');
+    }
+});
 
-const offline=$('#offlineNotice'),updateOnline=()=>offline.classList.toggle('visible',!navigator.onLine);
-addEventListener('online',updateOnline);addEventListener('offline',updateOnline);updateOnline();
+// Section Complete Checkboxes
+$$('.complete-checkbox').forEach(cb=>{
+    cb.onchange=()=>{
+        const s=cb.dataset.section;
+        completedSections[s]=cb.checked;
+        storage.set('completedSections',completedSections);
+        const header=$(`#${s}-header`);
+        if(header)header.classList.toggle('completed',cb.checked);
+        const tocLink=$(`.toc-link[data-section="${s}"]`);
+        if(tocLink)tocLink.classList.toggle('completed',cb.checked);
+        announce(cb.checked?`${sectionNames[s]||s} marked complete`:`${sectionNames[s]||s} unmarked`);
+    };
+});
 
-$$('a[href^="#"]').forEach(a=>a.onclick=e=>{e.preventDefault();const t=$(a.getAttribute('href'));t?.scrollIntoView({behavior:'smooth'})});
+// Collapsible Sections
+$$('.section-collapse-btn').forEach(btn=>{
+    btn.onclick=()=>{
+        const targetId=btn.dataset.target;
+        const content=$(`#${targetId}`);
+        if(content){
+            const collapsed=content.classList.toggle('collapsed');
+            btn.classList.toggle('collapsed',collapsed);
+            btn.textContent=collapsed?'▶':'▼';
+            announce(collapsed?'Section collapsed':'Section expanded');
+        }
+    };
+});
 
-$('#downloadBtn')?.addEventListener('click',()=>{const c=$('#fullScript').textContent;const b=new Blob([c],{type:'text/plain'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='database_script.sql';a.click();URL.revokeObjectURL(u)});
+// Section Fade-in Observer
+const sectionObserver=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.1,rootMargin:'-50px'});
+$$('.tutorial-section').forEach(s=>sectionObserver.observe(s));
 
-const navLinks=$$('.nav-links a');const updateNav=()=>{const p=scrollY+150;secs.forEach((id,i)=>{const s=$(`#${id}`);if(s&&p>=s.offsetTop&&p<s.offsetTop+s.offsetHeight){navLinks.forEach(l=>l.classList.remove('active'));if(navLinks[i-1])navLinks[i-1].classList.add('active')}})};
-addEventListener('scroll',updateNav);
-    </script>
+// Scroll Spy & Progress Update
+const updateScrollSpy=()=>{
+    const p=scrollY+200;
+    let activeIdx=0;
+    
+    sections.forEach((id,i)=>{
+        const s=$(`#${id}`);
+        if(s&&p>=s.offsetTop)activeIdx=i;
+    });
+    
+    const activeSection=sections[activeIdx];
+    
+    if(currentSection!==activeSection){
+        currentSection=activeSection;
+        
+        // Update progress steps
+        steps.forEach((x,j)=>{
+            x.classList.remove('active');
+            x.classList.toggle('completed',j<activeIdx);
+            x.removeAttribute('aria-current');
+            const label=x.querySelector('.progress-step-label');
+            if(label)x.setAttribute('aria-label',label.textContent+(j<activeIdx?' - Completed':''));
+        });
+        if(steps[activeIdx]){
+            steps[activeIdx].classList.add('active');
+            steps[activeIdx].setAttribute('aria-current','step');
+            const label=steps[activeIdx].querySelector('.progress-step-label');
+            if(label)steps[activeIdx].setAttribute('aria-label',label.textContent+' - Current section');
+        }
+        
+        // Update nav links (scroll spy)
+        navLinks.forEach(l=>{
+            l.classList.remove('active','scroll-active');
+            if(l.getAttribute('href')===`#${activeSection}`)l.classList.add('scroll-active');
+        });
+        
+        // Update TOC
+        tocList?.querySelectorAll('.toc-link').forEach(l=>{
+            l.classList.remove('active');
+            if(l.dataset.section===activeSection)l.classList.add('active');
+        });
+        
+        // Update breadcrumb
+        const bc=$('#currentBreadcrumb');
+        if(bc)bc.textContent=sectionNames[activeSection]||'Getting Started';
+        
+        // Update TOC progress bar
+        const progress=((activeIdx+1)/sections.length)*100;
+        if(tocProgressBar)tocProgressBar.style.width=`${progress}%`;
+    }
+    
+    // Save scroll position
+    storage.set('scrollPosition',scrollY);
+};
+
+addEventListener('scroll',updateScrollSpy,{passive:true});
+
+// Restore scroll position on load
+const savedScroll=storage.get('scrollPosition',0);
+if(savedScroll>0)setTimeout(()=>scrollTo(0,savedScroll),100);
+
+// Progress step clicks
+steps.forEach(s=>{
+    s.setAttribute('tabindex','0');
+    s.setAttribute('role','button');
+    s.onclick=()=>{
+        const section=$(`#${s.dataset.section}`);
+        if(section){
+            section.scrollIntoView({behavior:'smooth'});
+            announce(`Navigated to ${s.querySelector('.progress-step-label')?.textContent||''}`);
+        }
+    };
+    s.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();s.click()}};
+});
+
+// Initialize section visibility
+updateScrollSpy();
+setTimeout(()=>$$('.tutorial-section').forEach(s=>s.classList.add('visible')),100);
+
+// Offline Notice
+const offline=$('#offlineNotice');
+if(offline){
+    const updateOnline=()=>offline.classList.toggle('visible',!navigator.onLine);
+    addEventListener('online',updateOnline);
+    addEventListener('offline',updateOnline);
+    updateOnline();
+}
+
+// Smooth scroll for all anchor links
+$$('a[href^="#"]').forEach(a=>a.onclick=e=>{
+    e.preventDefault();
+    const t=$(a.getAttribute('href'));
+    t?.scrollIntoView({behavior:'smooth'});
+});
+
+// Download Button
+$('#downloadBtn')?.addEventListener('click',()=>{
+    const code=$('#fullScript')?.textContent||'';
+    const blob=new Blob([code],{type:'text/sql'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;
+    a.download='DB_OrderManagement.sql';
+    a.click();
+    URL.revokeObjectURL(url);
+    announce('SQL file downloaded');
+});
+</script>
 </body>
-</html> 
+</html>
